@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    # The public site (site/) and brand assets are static — they must never trigger the library's
+    # build/test/corpus pipeline. Changes touching ONLY these paths skip CI entirely (it's just a site).
+    paths-ignore:
+      - 'site/**'
+      - 'assets/**'
+  pull_request:
+    paths-ignore:
+      - 'site/**'
+      - 'assets/**'
+
+# Actions are pinned to full commit SHAs (supply-chain hardening); the trailing "# vX" comment is the
+# human-readable version. Dependabot (github-actions, monthly) bumps both the SHA and the comment.
+
+permissions:
+  contents: read
+  pull-requests: read # dorny/paths-filter lists a PR's changed files via the PR API (read-only)
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
+      - run: pnpm run format:check
+      - run: pnpm run typecheck
+      - run: pnpm run test
+      - run: pnpm run build
+      - run: pnpm run smoke
+
+  # Golden-corpus integration tests slim REAL files through the full pipeline — minutes, not seconds, and
+  # encoder-deterministic, so one Node version is enough. Kept off the PR matrix above to keep the fast gate
+  # fast; runs in parallel as its own job. The heavy part is the PDF golden corpus (a real 9 MB / 224-image
+  # deck ≈ the whole job's wall-clock); the image/svg/cli corpora finish underneath it in ~3-4 min. So the PDF
+  # deck is PATH-GATED: it runs only when the PDF path or core could be affected (or on main, the authoritative
+  # check). Every PR still runs the fast corpora, and the CLI folder corpus exercises the PDF ADAPTER
+  # end-to-end regardless — only the deep 224-image regression sweep is conditional.
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: dorny/paths-filter@d1c1ffe0248fe513906c8e24db8ea791d46f8590 # v3
+        id: changes
+        with:
+          filters: |
+            pdf:
+              - 'packages/pdf/**'
+              - 'packages/core/**'
+              - 'pnpm-lock.yaml'
+              - '.github/workflows/ci.yml'
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # Fast corpora (image / svg / cli) — always. The CLI folder corpus covers the PDF adapter end-to-end.
+      # `--filter` is a turbo flag (not a package-script arg), so call turbo directly rather than the wrapper.
+      - run: pnpm exec turbo run test:integration --filter='!@onadiet/pdf'
+      # The full PDF golden corpus (9 MB / 224-image deck) — only when the PDF path/core changed, or on main.
+      - name: PDF golden corpus (path-gated)
+        if: steps.changes.outputs.pdf == 'true' || github.ref == 'refs/heads/main'
+        run: pnpm exec turbo run test:integration --filter='@onadiet/pdf'

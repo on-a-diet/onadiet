@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Test / coverage
+coverage/
+.vitest/
+
+# Env & secrets (commit .env.example only)
+.env
+.env.*
+!.env.example
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.log
+
+# Tooling caches
+.turbo/
+.eslintcache
+
+# Scratch: sample files used while testing compression (never commit heavy binaries)
+/scratch/
+*.diet.pdf
+*.diet.png
+*.diet.jpg

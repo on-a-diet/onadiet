@@ -1,0 +1,12 @@
+{
+  "//": "Resolver-only tsconfig for dependency-cruiser. Maps workspace packages to their SOURCE (not the built dist, which is excluded from the cruise) so cross-package edges are real and the pure-core rule can see them. Not used by tsc/tsup.",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "@onadiet/*": ["packages/*/src"],
+      "onadiet": ["packages/cli/src"]
+    }
+  }
+}
