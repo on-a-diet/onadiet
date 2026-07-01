@@ -1,0 +1,3 @@
+# Treat PDFs as binary — never EOL-normalize or attempt a text diff on them (the golden-corpus fixtures
+# under packages/pdf/tests/integration/corpus/ are binary blobs).
+*.pdf binary

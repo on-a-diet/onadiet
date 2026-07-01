@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "ignoreDeprecations": "6.0"
+  },
+  // tsup points every package's DTS build at this file (for `ignoreDeprecations`). Without an `exclude`,
+  // TS defaults its file list to `**/*` from this tsconfig's dir (the repo root) — so each package's DTS
+  // program enumerates EVERY sibling's `dist/*.d.ts` as a root file. That races the concurrent `clean: true`
+  // builds (turbo runs pdf/image/cli in parallel): one build wipes its `dist/` while another is mid-read →
+  // "File not found". Excluding built output + deps scopes each DTS build to source, killing the race.
+  "exclude": ["**/dist", "**/node_modules"]
+}

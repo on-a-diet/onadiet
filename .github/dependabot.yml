@@ -1,0 +1,51 @@
+version: 2
+# Tuned for LOW email noise: monthly is Dependabot's least-frequent interval; combined with grouping (one PR
+# per ecosystem), a 30-day cooldown (batch a month of releases into a single settled bump), and a 1-PR limit,
+# that's at most ~1 PR per ecosystem per month — and usually far fewer. For a truly custom (e.g. quarterly)
+# cadence, switch to Renovate (see docs/99-ROADMAP.md).
+updates:
+  # npm deps — monthly + grouped, minimal noise
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    # Supply-chain cooldown — let new releases settle (30d) before we pick them up, which also batches a
+    # month's churn into one PR. (pnpm's minimumReleaseAge is a no-op on the pinned pnpm 9.x; see .npmrc.)
+    cooldown:
+      default-days: 30
+    open-pull-requests-limit: 1
+    # Dependabot does NOT understand pnpm catalogs: it rewrites a `catalog:` ref in package.json into a
+    # version, which then mismatches the lockfile and fails `pnpm install --frozen-lockfile`. So it's scoped
+    # off every catalog-managed tool version (those live in pnpm-workspace.yaml and are bumped by hand); it
+    # still manages the real, non-catalog runtime deps (sharp, pdf-lib) here and GitHub Actions below.
+    # (Renovate has first-class pnpm-catalog support and is the better long-term option — see 99-ROADMAP.)
+    ignore:
+      - dependency-name: typescript
+      - dependency-name: typescript-eslint
+      - dependency-name: '@types/node'
+      - dependency-name: eslint
+      - dependency-name: '@eslint/js'
+      - dependency-name: prettier
+      - dependency-name: tsup
+      - dependency-name: vite
+      - dependency-name: vitest
+      - dependency-name: turbo
+      - dependency-name: dependency-cruiser
+      - dependency-name: '@changesets/cli'
+      - dependency-name: husky
+      - dependency-name: lint-staged
+    groups:
+      npm-all:
+        patterns: ['*']
+
+  # GitHub Actions — monthly + grouped
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 30
+    open-pull-requests-limit: 1
+    groups:
+      actions-all:
+        patterns: ['*']
