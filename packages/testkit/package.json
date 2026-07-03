@@ -1,0 +1,26 @@
+{
+  "name": "@onadiet/testkit",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Internal test utilities: seam conformance suites + deterministic raster fixtures shared across packages. Source-only, never built or published.",
+  "license": "Apache-2.0",
+  "author": "Sharvil Kadam",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@onadiet/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "vitest": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
