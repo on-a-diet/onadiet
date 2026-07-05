@@ -1,0 +1,73 @@
+{
+  "name": "@onadiet/pdf",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "onadiet PDF adapter: detect · weigh · slim PDFs by re-encoding embedded images (pdf-lib + sharp/mozjpeg). Permissive-only, standard formats out.",
+  "keywords": [
+    "compress-pdf",
+    "pdf-compression",
+    "optimize-pdf",
+    "shrink-pdf",
+    "pdf",
+    "pdf-lib",
+    "local",
+    "no-upload",
+    "onadiet"
+  ],
+  "license": "Apache-2.0",
+  "author": "Sharvil Kadam",
+  "engines": {
+    "node": ">=22"
+  },
+  "sideEffects": false,
+  "homepage": "https://github.com/on-a-diet/onadiet/tree/main/packages/pdf",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/on-a-diet/onadiet.git",
+    "directory": "packages/pdf"
+  },
+  "bugs": {
+    "url": "https://github.com/on-a-diet/onadiet/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepack": "pnpm run build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:integration": "vitest run --config vitest.integration.config.ts"
+  },
+  "dependencies": {
+    "@onadiet/core": "workspace:*",
+    "pdf-lib": "^1.17.1",
+    "sharp": "^0.34.4"
+  },
+  "devDependencies": {
+    "@onadiet/testkit": "workspace:*",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}

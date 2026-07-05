@@ -1,0 +1,76 @@
+{
+  "name": "@onadiet/image",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "onadiet image adapter: detect · weigh · slim standalone images (JPEG/PNG/WebP/AVIF) by re-encoding, downscaling, and optional format-switch (sharp/libvips). Permissive-only.",
+  "keywords": [
+    "compress-image",
+    "image-compression",
+    "optimize-image",
+    "shrink-image",
+    "jpeg",
+    "png",
+    "webp",
+    "avif",
+    "sharp",
+    "local",
+    "no-upload",
+    "onadiet"
+  ],
+  "license": "Apache-2.0",
+  "author": "Sharvil Kadam",
+  "engines": {
+    "node": ">=22"
+  },
+  "sideEffects": false,
+  "homepage": "https://github.com/on-a-diet/onadiet/tree/main/packages/image",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/on-a-diet/onadiet.git",
+    "directory": "packages/image"
+  },
+  "bugs": {
+    "url": "https://github.com/on-a-diet/onadiet/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepack": "pnpm run build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:perf": "vitest run --config vitest.perf.config.ts"
+  },
+  "dependencies": {
+    "@onadiet/core": "workspace:*",
+    "sharp": "^0.34.4"
+  },
+  "devDependencies": {
+    "@onadiet/testkit": "workspace:*",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}

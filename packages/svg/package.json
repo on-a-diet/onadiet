@@ -1,0 +1,72 @@
+{
+  "name": "@onadiet/svg",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "onadiet SVG adapter: detect · weigh · slim SVG vector files losslessly-to-aggressively via svgo (strip editor cruft, collapse, reduce precision). Permissive-only, no rasterization.",
+  "keywords": [
+    "compress-svg",
+    "optimize-svg",
+    "minify-svg",
+    "svg",
+    "svgo",
+    "vector",
+    "local",
+    "no-upload",
+    "onadiet"
+  ],
+  "license": "Apache-2.0",
+  "author": "Sharvil Kadam",
+  "engines": {
+    "node": ">=22"
+  },
+  "sideEffects": false,
+  "homepage": "https://github.com/on-a-diet/onadiet/tree/main/packages/svg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/on-a-diet/onadiet.git",
+    "directory": "packages/svg"
+  },
+  "bugs": {
+    "url": "https://github.com/on-a-diet/onadiet/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "prepack": "pnpm run build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:integration": "vitest run --config vitest.integration.config.ts"
+  },
+  "dependencies": {
+    "@onadiet/core": "workspace:*",
+    "svgo": "^4.0.2"
+  },
+  "devDependencies": {
+    "@onadiet/testkit": "workspace:*",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}
