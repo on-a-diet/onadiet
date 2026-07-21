@@ -5,7 +5,7 @@ PDFs, images, and folders to fit under a size limit, **on your machine, with no 
 default, with an honest before/after receipt. **Engine built through v0.4** — PDF, image, SVG, and folder
 slimming all work (detect · weigh · plan · slim · verify · report), driven end-to-end against real-file golden
 corpora, with v0.4 engine-hardening done. **Published to npm + open-source:** all five packages are live at
-`0.1.0` (unscoped `onadiet` + `@onadiet/{core,pdf,image,svg}`), the repo is public at `on-a-diet/onadiet`,
+`0.1.1` (unscoped `onadiet` + `@onadiet/{core,pdf,image,svg}`), the repo is public at `on-a-diet/onadiet`,
 and the marketing site is live at [onadiet.pages.dev](https://onadiet.pages.dev). **Remaining distribution:**
 a Homebrew tap, a Claude Code Skill, and the hardened publish workflow (OIDC Trusted Publishing +
 `--provenance`).
