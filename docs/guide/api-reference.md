@@ -31,7 +31,7 @@ Stability markers below say what's safe to depend on:
 
 | Package              | Install _(once published)_         | Role                                                                                                                                                        |
 | -------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`onadiet`**        | `npm i -g onadiet` · `npx onadiet` | The `diet` CLI (bin: `diet`, alias `onadiet`). Also exposes a testable `run(argv, ports)` core.                                                             |
+| **`onadiet`**        | `npm i -g onadiet` · `npx onadiet` | The `diet` CLI (bin: `diet`, alias `onadiet`). **Re-exports the full `@onadiet/core` API**; also exposes a testable `run(argv, ports)` core.                |
 | **`@onadiet/core`**  | `npm i @onadiet/core`              | The **pure engine** — no I/O, clock, or randomness. Types, diet plans, typed errors, size math, the seam interfaces, the dual-constraint size search, SSIM. |
 | **`@onadiet/pdf`**   | `npm i @onadiet/pdf`               | PDF `FormatAdapter` — re-encodes embedded JPEG images (pdf-lib + sharp/mozjpeg).                                                                            |
 | **`@onadiet/image`** | `npm i @onadiet/image`             | Standalone-image `FormatAdapter` — JPEG/PNG/WebP/AVIF re-encode, downscale, optional format switch (sharp/libvips).                                         |
@@ -179,7 +179,9 @@ result.output ? save(result.output) : keepOriginal(result.outcome)
 
 ### `onadiet` — the CLI as a library · **advanced**
 
-For embedding the CLI (e.g. tests):
+The flagship also **re-exports the entire [`@onadiet/core`](#onadietcore) API** — so
+`import { resolvePlan, parseSize, DIET_PLANS, OnadietError, type SlimRequest } from 'onadiet'` works with no
+separate `@onadiet/core` install (the engine is bundled into `onadiet`). For embedding the CLI (e.g. tests):
 
 - **`run(argv: readonly string[], ports: CliPorts): Promise<RunResult>`** — parse + dispatch + write; **always resolves** (never rejects). `RunResult` = `{ code: number; output: string }`.
 - **`nodePorts: CliPorts`** — the real Node fs implementation. Inject your own `CliPorts` to run hermetically.
