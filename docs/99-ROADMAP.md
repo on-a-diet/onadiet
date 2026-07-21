@@ -294,6 +294,12 @@ runs **sequentially** today — so parallelism is the top bulk lever.
 Video/audio/Office (plugins), zip archives, MCP server, and — deliberately, only if earned — the
 **franchise** rungs below; the shared engine makes these the _same_ machinery.
 
+**Adoption tracking (maintainer-side, no in-tool telemetry):** gauge whether onadiet is landing from
+**public signals only** — npm dependents + download trend, GitHub stars / non-maintainer issues + PRs /
+traffic, and privacy-first site analytics — **never** by phoning home from the tool (that would break the
+no-uploads promise). The plan + the hard no-telemetry rule live in
+[adoption-tracking.md](./adoption-tracking.md).
+
 **Separate research track (not core, not near-term):** a **likely closed-source** "smart PDF optimizer"
 that would beat naive encoder use at the same quality and plug into onadiet as an optional **premium
 adapter** (open-core) — always emitting standard formats, never a new codec. Kept out of the OSS core.
