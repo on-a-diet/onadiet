@@ -14,13 +14,13 @@ One witty command, safe by default, and it tells you exactly what it did._
 ![Status: pre-release](https://img.shields.io/badge/status-pre--release%20%C2%B7%20npm%20pending-blue)
 [![CI](https://github.com/on-a-diet/onadiet/actions/workflows/ci.yml/badge.svg)](https://github.com/on-a-diet/onadiet/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
+[![Website](https://img.shields.io/badge/site-onadiet.pages.dev-2ea44f)](https://onadiet.pages.dev)
 
 </div>
 
 > [!NOTE]
 > **Pre-release: the engine works; npm publish is the next milestone.** PDF, image, SVG, and folder slimming
-> are built and working — driven end-to-end against real-file golden corpora (measured results below) and
-> tagged **v0.3.x** on GitHub, with v0.4 engine-hardening (bounded memory, cancellation, a `--fast` path,
+> are built and working — driven end-to-end against real-file golden corpora (measured results below), with v0.4 engine-hardening (bounded memory, cancellation, a `--fast` path,
 > concurrent format search) done. It's **not on npm yet** — publish + Homebrew + a Claude Code Skill are next;
 > until then, build from source. See [docs/99-ROADMAP.md](./docs/99-ROADMAP.md).
 

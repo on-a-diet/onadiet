@@ -12,7 +12,7 @@ default, and it tells you exactly what it did._
 > [!NOTE]
 > **Pre-release: the engine works; npm publish is next.** `diet` slims PDFs, images, SVGs, and folders
 > end-to-end today (hit a target size, hold a quality floor, honest receipts) — proven against real-file
-> golden corpora and tagged **v0.3.x** on GitHub. It's **not on npm yet**, so `npm i -g onadiet` /
+> golden corpora. It's **not on npm yet**, so `npm i -g onadiet` /
 > `brew install onadiet` don't work until the publish milestone — build from
 > [the repo](https://github.com/on-a-diet/onadiet) for now.
 

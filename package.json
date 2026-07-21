@@ -6,7 +6,7 @@
   "description": "Put your files on a diet — a local CLI + library that shrinks PDFs, images, and folders under a size limit, no upload, safe by default. Monorepo root.",
   "license": "Apache-2.0",
   "author": "Sharvil Kadam",
-  "homepage": "https://github.com/on-a-diet/onadiet",
+  "homepage": "https://onadiet.pages.dev",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/on-a-diet/onadiet.git"

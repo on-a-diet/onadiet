@@ -7,8 +7,24 @@
     <title>onadiet — put your files on a diet</title>
     <meta
       name="description"
-      content="Shrink PDFs, images, and folders under a size limit — locally, no upload, safe by default, with an honest before/after receipt. A CLI and an embeddable engine. Measured, never estimated."
+      content="Shrink PDFs, images, and folders under a size limit — locally, no upload, safe by default, with a real before/after receipt. A CLI and an embeddable engine. Measured, never estimated."
     />
+    <link rel="canonical" href="https://onadiet.pages.dev/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://onadiet.pages.dev/" />
+    <meta property="og:title" content="onadiet — put your files on a diet" />
+    <meta
+      property="og:description"
+      content="Shrink PDFs, images, and folders under a size limit — locally, no upload, safe by default, with an honest before/after receipt."
+    />
+    <meta property="og:image" content="https://onadiet.pages.dev/assets/onadiet-mark.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="onadiet — put your files on a diet" />
+    <meta
+      name="twitter:description"
+      content="Shrink PDFs, images, and folders under a size limit — locally, no upload, safe by default, with an honest before/after receipt."
+    />
+    <meta name="twitter:image" content="https://onadiet.pages.dev/assets/onadiet-mark.png" />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
     <!-- Set the theme before first paint (no flash). Dark by default. -->
     <script>
@@ -66,7 +82,12 @@
               />
             </svg>
           </button>
-          <a class="ghbtn" href="https://github.com/on-a-diet/onadiet">
+          <a
+            class="ghbtn"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/on-a-diet/onadiet"
+          >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
               <path
                 d="M8 0C3.6 0 0 3.6 0 8a8 8 0 0 0 5.5 7.6c.4 0 .5-.2.5-.4v-1.4c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9.9 2.3.7 0-.5.3-.9.5-1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.1 1.9.1 2 .5.6.8 1.3.8 2.2 0 3.1-1.9 3.8-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.2.5.5.4A8 8 0 0 0 16 8c0-4.4-3.6-8-8-8Z"
@@ -84,8 +105,9 @@
           <div class="eyebrow"><span class="dot"></span> local · no upload · honest receipts</div>
           <h1>Put your files<br />on a <span class="u">diet.</span></h1>
           <p class="lede">
-            Shrink PDFs, images, and whole folders under a size limit — <b>on your machine</b>, safe
-            by default, with an honest before/after receipt. One command, or an engine you embed.
+            <b>The honest way to shrink a file.</b> Shrink PDFs, images, and whole folders under a
+            size limit — <b>on your machine</b>, safe by default, with an honest before/after
+            receipt. One command, or an engine you embed.
           </p>
           <div class="cta">
             <div class="cmd">
@@ -233,7 +255,11 @@
             <b>AVIF</b> (which browsers can't encode) — and it can
             <b>keep your original format</b> (a PNG stays a PNG, a JPEG a JPEG) or switch to a
             smaller one when that wins, plus it does PDFs and whole folders.
-            <a style="color: var(--red-ink)" href="https://github.com/on-a-diet/onadiet"
+            <a
+              style="color: var(--red-ink)"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet"
               ><b>Download the open-source library →</b></a
             >
             Same promise everywhere: nothing is uploaded.
@@ -431,6 +457,8 @@ result.output          <span class="cm">// a smaller file — measured</span>
                 <a
                   class="mono"
                   style="color: var(--red-ink)"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   href="https://github.com/on-a-diet/onadiet/tree/main/examples/worker-offload"
                   >worker-offload pattern</a
                 >
@@ -575,7 +603,7 @@ result.output          <span class="cm">// a smaller file — measured</span>
         <div class="wrap">
           <div class="sec-head">
             <div class="kicker">Why onadiet</div>
-            <h2>The honest way to shrink a file.</h2>
+            <h2>Not an upload form. Not a pile of flags.</h2>
             <p>
               The alternatives are a stranger's upload form or a pile of memorized Ghostscript
               flags. onadiet is neither.
@@ -685,6 +713,8 @@ result.output          <span class="cm">// a smaller file — measured</span>
             reference in the
             <a
               style="color: var(--red-ink)"
+              target="_blank"
+              rel="noopener noreferrer"
               href="https://github.com/on-a-diet/onadiet/tree/main/docs"
               >docs</a
             >.
@@ -697,8 +727,8 @@ result.output          <span class="cm">// a smaller file — measured</span>
         <div class="wrap">
           <h2>Weigh in.</h2>
           <p class="lede" style="margin: 16px auto 0">
-            Pre-release — built, tagged, and proven against real files. Not on npm <em>yet</em>;
-            build from source while publish lands.
+            Pre-release — built and proven against real files. Not on npm <em>yet</em>; build from
+            source while publish lands.
           </p>
           <div class="cmd">
             <code><span class="pk">git</span> clone github.com/on-a-diet/onadiet</code>
@@ -731,13 +761,28 @@ result.output          <span class="cm">// a smaller file — measured</span>
             <h4>Resources</h4>
             <a href="#numbers">Benchmarks</a><a href="#embed">Embed</a
             ><a href="#plans">Diet plans</a>
-            <a href="https://github.com/on-a-diet/onadiet/blob/main/docs/99-ROADMAP.md">Roadmap</a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/docs/99-ROADMAP.md"
+              >Roadmap</a
+            >
           </div>
           <div>
             <h4>Project</h4>
-            <a href="https://github.com/on-a-diet/onadiet">Repository</a>
-            <a href="https://github.com/on-a-diet/onadiet/releases">Releases</a>
-            <a href="https://github.com/on-a-diet/onadiet/blob/main/LICENSE"
+            <a target="_blank" rel="noopener noreferrer" href="https://github.com/on-a-diet/onadiet"
+              >Repository</a
+            >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/releases"
+              >Releases</a
+            >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/LICENSE"
               >License · Apache-2.0</a
             >
             <span style="display: block; color: var(--faint); font-size: 13px; padding: 4px 0"
@@ -746,11 +791,24 @@ result.output          <span class="cm">// a smaller file — measured</span>
           </div>
           <div>
             <h4>Community</h4>
-            <a href="https://github.com/on-a-diet/onadiet/discussions">Discussions</a>
-            <a href="https://github.com/on-a-diet/onadiet/blob/main/CONTRIBUTING.md"
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/discussions"
+              >Discussions</a
+            >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/CONTRIBUTING.md"
               >Contributing</a
             >
-            <a href="https://github.com/on-a-diet/onadiet/security/policy">Security</a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/security/policy"
+              >Security</a
+            >
           </div>
         </div>
         <div class="foot-note">
