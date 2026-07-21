@@ -54,7 +54,7 @@ The creature does the eating; the label proves it was honest.
   motion is `aria-hidden`.
 - **No CDN / external fonts / remote images** — everything self-contained.
 - **Logo front and center** — the mascot leads the hero + sits in the header (returns home) + is the favicon.
-- **Honest copy** — a truthful status badge (**`npm · v0.1.0`**, early/`0.x`); every perf
+- **Honest copy** — a truthful status badge (**`npm · v0.1.1`**, early/`0.x`); every perf
   claim carries **measured numbers + method** (the benchmarks are real: SpaceX 9 MB deck, NASA photo corpus,
   the `test:perf` latency numbers).
 
