@@ -4,8 +4,11 @@ onadiet is an open-source, local file-optimization tool that "puts your files on
 PDFs, images, and folders to fit under a size limit, **on your machine, with no uploads**, safe by
 default, with an honest before/after receipt. **Engine built through v0.4** — PDF, image, SVG, and folder
 slimming all work (detect · weigh · plan · slim · verify · report), driven end-to-end against real-file golden
-corpora, with v0.4 engine-hardening done. **Not yet published to npm** — that's
-the next milestone (distribution: publish + Homebrew + Skill).
+corpora, with v0.4 engine-hardening done. **Published to npm + open-source:** all five packages are live at
+`0.1.0` (unscoped `onadiet` + `@onadiet/{core,pdf,image,svg}`), the repo is public at `on-a-diet/onadiet`,
+and the marketing site is live at [onadiet.pages.dev](https://onadiet.pages.dev). **Remaining distribution:**
+a Homebrew tap, a Claude Code Skill, and the hardened publish workflow (OIDC Trusted Publishing +
+`--provenance`).
 
 Open-source project in the `on-a-diet` GitHub org; license is **Apache-2.0** (deliberate OSS choice).
 Commit under your GitHub **noreply** email — the public history carries no personal address.

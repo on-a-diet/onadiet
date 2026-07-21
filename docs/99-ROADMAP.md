@@ -34,8 +34,8 @@ validation against measured results) built — a real 9 MB / 224-image deck driv
 dedicated `test:integration` job; the plan floors were confirmed to bind monotonically and stand as-is. The
 step-6 adversarial-review gate ran (4 lenses; findings fixed in-phase) and the measured benchmark table is
 published in the README. **v0.1 is done** — the PDF-to-a-target wedge works end-to-end,
-safely, with honest receipts. Per decision #9 the npm publish (with provenance) waits for v0.4; package
-versions stay `0.0.0`.
+safely, with honest receipts. Per decision #9 the npm publish waited for the distribution milestone;
+versions stayed `0.0.0` until the coordinated `0.1.0` first release (now shipped — see [Status](#status)).
 
 **v0.2 — standalone images & SVG, DONE.** Shipped across four PRs: the raster path
 `@onadiet/image` (JPEG/PNG/WebP/AVIF, the format-switch lever, content heuristic, SSIM floors) (#18); the
@@ -62,6 +62,20 @@ form of the locked "uniform quality" decision (the fine-grained cross-format lev
 if the coarse fit proves too loose). Honesty guards from the review gate: the fit is re-asserted on the
 _written_ tree (a TOCTOU change surfaces as an `overran` result, exit 1, never a false "fit"), and an
 explicit `--plan` with `--to-total` is a usage error (the budget owns the dial).
+
+**v0.4 — engine hardening + public launch, DONE (remaining distribution in flight).** The performance
+pillar was hardened (bounded memory + fail-fast `--max-input` / temp-file output streaming, an opt-in
+`--fast` fixed-quality path, cancellation via `AbortSignal` / `--timeout`, and a local `test:perf` harness
+with published numbers — see [Performance](#performance-cross-cutting)); release-prep landed (per-package
+keywords, the two missing adapter READMEs, the canonical API reference). **Then the project went public and
+shipped:** open-source at `on-a-diet/onadiet` (Apache-2.0, noreply-only history, leak-scan gate) with **all
+five packages live on npm at `0.1.0`** (unscoped `onadiet` + `@onadiet/{core,pdf,image,svg}`, one
+coordinated first release), and the marketing site live at
+[onadiet.pages.dev](https://onadiet.pages.dev) (Cloudflare Pages, auto-deploy — homepage demo + measured
+benchmarks, a Why/comparison page, a Docs/usage page). _(The repo sits at `0.1.1`, a README-refresh patch
+staged for publish.)_ **Remaining distribution:** a Homebrew tap, a Claude Code Skill wrapping the CLI, and
+the hardened publish workflow (OIDC Trusted Publishing + `--provenance` + automated `changeset publish`) —
+the `0.1.0` release was published by hand.
 
 ## Decisions locked
 
@@ -214,10 +228,15 @@ version machinery now runs. `changeset status` confirms the accumulated v0.4 cha
 - [x] **Release-readiness (standards) pass:** per-package `engines`/`bugs`/`sideEffects`, tsup target →
       node22, CI actions SHA-pinned, README CI badge + build-from-source (#40); the mandated **API reference**
       at [docs/guide/api-reference.md](guide/api-reference.md); `testkit` + `examples` READMEs added.
-- [ ] Homebrew formula (`brew install onadiet`) + npm publish (unscoped `onadiet` CLI, bin `diet`; scoped
-      `@onadiet/*` engine + adapters) + the publish workflow (OIDC + `--provenance` + `changeset publish`).
+- [x] **npm publish — done.** All five packages published at `0.1.0` (unscoped `onadiet` CLI, bin `diet`;
+      scoped `@onadiet/{core,pdf,image,svg}`) as one coordinated first release — run manually with
+      `changeset publish`.
+- [ ] Homebrew formula (`brew install onadiet`) + the hardened publish workflow (OIDC Trusted Publishing +
+      `--provenance` + automated `changeset publish`) — the `0.1.0` release was published by hand.
 - [ ] A Claude Code **Skill** wrapping the CLI (the agent channel; MCP is a later thin wrapper).
-- [ ] Docs site + intent pages (compress-pdf-locally, no-upload).
+- [x] **Marketing site — live** at [onadiet.pages.dev](https://onadiet.pages.dev) (Cloudflare Pages,
+      auto-deploy): homepage with on-device demo + measured benchmarks, a Why/comparison page, and a
+      Docs/usage page. SEO intent pages (compress-pdf-locally, no-upload) still to come.
 
 ## Performance (cross-cutting)
 
