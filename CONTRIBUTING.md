@@ -11,6 +11,7 @@ report it privately — see [SECURITY.md](./SECURITY.md), not a public issue.
 - [The bar](#the-bar)
 - [Layout](#layout)
 - [Conventions](#conventions)
+- [Releasing](#releasing)
 
 ## Setup
 
@@ -54,3 +55,9 @@ Adapters depend on `@onadiet/core`, never the reverse (enforced by `.dependency-
 - **Branch** off `main` (`feature/`/`fix/`/`chore/`); **squash-merge**; delete the branch after. Conventional
   commits; never `--no-verify`; never `Co-Authored-By`.
 - **Keep [`docs/99-ROADMAP.md`](./docs/99-ROADMAP.md) current** with every meaningful change.
+
+## Releasing
+
+Releases are **automated** — Changesets + npm OIDC trusted publishing, behind a human approval gate. You
+don't publish by hand; just add a changeset in your PR (`pnpm changeset`). The full flow (and the one-time
+setup) is in [RELEASING.md](./RELEASING.md).
