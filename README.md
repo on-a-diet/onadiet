@@ -11,7 +11,7 @@ One witty command, safe by default, and it tells you exactly what it did._
 
 **Files first — then your Docker images, repos, databases, models, and tokens.** _One verb, everything smaller._
 
-![Status: pre-release](https://img.shields.io/badge/status-pre--release%20%C2%B7%20npm%20pending-blue)
+[![npm version](https://img.shields.io/npm/v/onadiet?color=2ea44f)](https://www.npmjs.com/package/onadiet)
 [![CI](https://github.com/on-a-diet/onadiet/actions/workflows/ci.yml/badge.svg)](https://github.com/on-a-diet/onadiet/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 [![Website](https://img.shields.io/badge/site-onadiet.pages.dev-2ea44f)](https://onadiet.pages.dev)
@@ -19,10 +19,9 @@ One witty command, safe by default, and it tells you exactly what it did._
 </div>
 
 > [!NOTE]
-> **Pre-release: the engine works; npm publish is the next milestone.** PDF, image, SVG, and folder slimming
+> **On npm now — `npm i -g onadiet` (or `npx onadiet`).** PDF, image, SVG, and folder slimming
 > are built and working — driven end-to-end against real-file golden corpora (measured results below), with v0.4 engine-hardening (bounded memory, cancellation, a `--fast` path,
-> concurrent format search) done. It's **not on npm yet** — publish + Homebrew + a Claude Code Skill are next;
-> until then, build from source. See [docs/99-ROADMAP.md](./docs/99-ROADMAP.md).
+> concurrent format search) done. It's **early (`0.x`)** — the API may still move; Homebrew + a Claude Code Skill are next. See [docs/99-ROADMAP.md](./docs/99-ROADMAP.md).
 
 ## Table of contents
 
@@ -174,9 +173,9 @@ diet checkup                        # is the kitchen stocked? (which codecs/engi
 Everything speaks `--json` for scripts and AI agents. Safe by default: never overwrites, skips anything
 it would make _bigger_, writes atomically, and warns loudly before anything irreversible.
 
-### Build from source (today)
+### Build from source
 
-Not on npm yet — until the first publish, run it from a clone (needs **Node ≥ 22** and **pnpm**):
+Prefer to hack on it? Run it from a clone (needs **Node ≥ 22** and **pnpm**):
 
 ```bash
 git clone https://github.com/on-a-diet/onadiet

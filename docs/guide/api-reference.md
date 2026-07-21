@@ -5,7 +5,7 @@
 > runtime environment. Kept in sync **in the same change** as anything that adds, renames, or removes a
 > public export, config field, CLI flag, or error code.
 
-**Status:** pre-release (`0.x`), not yet on npm — build from source (see the [root README](../../README.md)).
+**Status:** on npm (`v0.1.0`) — early (`0.x`); the surface below is what is safe to depend on.
 Stability markers below say what's safe to depend on:
 
 - **public** — stable, intended for consumers.

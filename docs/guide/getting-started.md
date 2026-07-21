@@ -2,7 +2,7 @@
 
 `onadiet` puts your files on a diet — it shrinks PDFs, images, and whole folders to fit under a size limit, on your machine, with no uploads, safe by default, and with an honest before/after receipt. This guide takes you from install to the everyday commands.
 
-> **Status:** pre-release (`0.x`), not yet on npm — build from source (see the [root README](../../README.md)).
+> **Status:** on npm (`v0.1.0`) — early (`0.x`), the API may still move.
 
 ## Table of contents
 
@@ -41,7 +41,7 @@ npm i -g onadiet            # global install; then just `diet …`
 
 In code instead of the terminal: `npm i @onadiet/core`.
 
-While `onadiet` is pre-release, install it by building from source — see the [root README](../../README.md).
+Install from npm: `npm i -g onadiet` (or `npx onadiet`). To hack on onadiet itself, build from source — see the [root README](../../README.md).
 
 ## The 60-second first run
 

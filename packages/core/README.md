@@ -2,10 +2,10 @@
 
 The **pure engine** behind [onadiet](https://github.com/on-a-diet/onadiet) — _put your files on a diet._
 
-> **Pre-release.** The engine is built and working — this package holds the pure pipeline seams + helpers, and
+> **Early (`0.x`).** The engine is built and working — this package holds the pure pipeline seams + helpers, and
 > the format adapters ([`@onadiet/pdf`](https://www.npmjs.com/package/@onadiet/pdf), `@onadiet/image`,
 > `@onadiet/svg`) implement the target-size search against real-file golden corpora.
-> Not yet on npm — publish is the next milestone. See the
+> On npm: `npm i @onadiet/core`. See the
 > [API reference](https://github.com/on-a-diet/onadiet/blob/main/docs/guide/api-reference.md) and
 > [roadmap](https://github.com/on-a-diet/onadiet/blob/main/docs/99-ROADMAP.md).
 
