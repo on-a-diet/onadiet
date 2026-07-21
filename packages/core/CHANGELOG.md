@@ -1,5 +1,13 @@
 # @onadiet/core
 
+## 0.1.1
+
+### Patch Changes
+
+- docs: package READMEs now reflect the public npm release (`0.1.0` shipped) — install with `npm i -g onadiet`
+  (or `npm i @onadiet/…`), with the honest `0.x`/early framing kept. No code changes; this patch exists to
+  refresh the npm package pages, which were published from the pre-release READMEs.
+
 ## 0.1.0
 
 ### Minor Changes

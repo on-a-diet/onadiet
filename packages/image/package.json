@@ -1,6 +1,6 @@
 {
   "name": "@onadiet/image",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "onadiet image adapter: detect · weigh · slim standalone images (JPEG/PNG/WebP/AVIF) by re-encoding, downscaling, and optional format-switch (sharp/libvips). Permissive-only.",
   "keywords": [
