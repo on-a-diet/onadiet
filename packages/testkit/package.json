@@ -1,6 +1,6 @@
 {
   "name": "@onadiet/testkit",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "description": "Internal test utilities: seam conformance suites + deterministic raster fixtures shared across packages. Source-only, never built or published.",

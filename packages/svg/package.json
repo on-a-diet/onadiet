@@ -1,6 +1,6 @@
 {
   "name": "@onadiet/svg",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "description": "onadiet SVG adapter: detect · weigh · slim SVG vector files losslessly-to-aggressively via svgo (strip editor cruft, collapse, reduce precision). Permissive-only, no rasterization.",
   "keywords": [

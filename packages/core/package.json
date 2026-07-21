@@ -1,6 +1,6 @@
 {
   "name": "@onadiet/core",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "sideEffects": false,
   "description": "onadiet core: the pure engine — detect · weigh · plan · slim · verify · report, the FormatAdapter / QualityMetric / SizeSearch seams, diet plans, size parsing. No I/O.",

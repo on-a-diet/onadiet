@@ -1,6 +1,6 @@
 {
   "name": "onadiet",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "sideEffects": false,
   "description": "Put your files on a diet — the `diet` CLI. Shrink PDFs, images, and folders under a size limit, locally, no upload, safe by default.",

@@ -1,6 +1,6 @@
 {
   "name": "@onadiet/pdf",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "description": "onadiet PDF adapter: detect · weigh · slim PDFs by re-encoding embedded images (pdf-lib + sharp/mozjpeg). Permissive-only, standard formats out.",
   "keywords": [
