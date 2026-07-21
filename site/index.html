@@ -50,8 +50,8 @@
           <a class="hide-sm" href="#try">Try it</a>
           <a class="hide-sm" href="#numbers">Benchmarks</a>
           <a class="hide-sm" href="#embed">Embed</a>
-          <a class="hide-sm" href="#vision">Vision</a>
-          <a class="hide-sm" href="#docs">Docs</a>
+          <a class="hide-sm" href="why.html">Why</a>
+          <a class="hide-sm" href="docs.html">Docs</a>
           <button class="iconbtn" id="theme" aria-label="Toggle light / dark theme" type="button">
             <svg
               id="moon"
@@ -353,6 +353,11 @@
             <b>Images too:</b> a real photo (JPEG) → ~55% smaller at SSIM 0.94; a flat graphic (PNG)
             → <b>8 KB, ~99% smaller</b> via an automatic switch to AVIF. Every figure is
             reproducible with <span class="mono">pnpm run test:perf</span> — no estimates.
+          </p>
+          <p class="method" style="margin-top: 16px">
+            <a class="btn-link" href="why.html"
+              >See how onadiet compares to TinyPNG &amp; others →</a
+            >
           </p>
         </div>
       </section>
@@ -709,15 +714,9 @@ result.output          <span class="cm">// a smaller file — measured</span>
             </table>
           </div>
           <p class="method">
-            Everything speaks <span class="mono">--json</span> for scripts and agents. Full
-            reference in the
-            <a
-              style="color: var(--red-ink)"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://github.com/on-a-diet/onadiet/tree/main/docs"
-              >docs</a
-            >.
+            Everything speaks <span class="mono">--json</span> for scripts and agents. See the
+            <a style="color: var(--red-ink)" href="docs.html">full usage &amp; API reference</a> —
+            every command, flag, and the four ways to run onadiet.
           </p>
         </div>
       </section>
@@ -727,18 +726,11 @@ result.output          <span class="cm">// a smaller file — measured</span>
         <div class="wrap">
           <h2>Weigh in.</h2>
           <p class="lede" style="margin: 16px auto 0">
-            On npm now — built and proven against real files. Install with
-            <code>npm i -g onadiet</code>.
+            On npm now — built and proven against real files. One line to install:
           </p>
           <div class="cmd">
-            <code><span class="pk">git</span> clone github.com/on-a-diet/onadiet</code>
-            <button
-              class="copy"
-              type="button"
-              data-cmd="git clone https://github.com/on-a-diet/onadiet"
-            >
-              copy
-            </button>
+            <code><span class="pk">npm</span> i -g onadiet</code>
+            <button class="copy" type="button" data-cmd="npm i -g onadiet">copy</button>
           </div>
         </div>
       </section>
@@ -760,7 +752,8 @@ result.output          <span class="cm">// a smaller file — measured</span>
           <div>
             <h4>Resources</h4>
             <a href="#numbers">Benchmarks</a><a href="#embed">Embed</a
-            ><a href="#plans">Diet plans</a>
+            ><a href="#plans">Diet plans</a><a href="why.html">Why onadiet</a
+            ><a href="docs.html">Docs</a>
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -785,8 +778,11 @@ result.output          <span class="cm">// a smaller file — measured</span>
               href="https://github.com/on-a-diet/onadiet/blob/main/LICENSE"
               >License · Apache-2.0</a
             >
-            <span style="display: block; color: var(--faint); font-size: 13px; padding: 4px 0"
-              >npm — <em>coming with publish</em></span
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.npmjs.com/package/onadiet"
+              >npm — onadiet</a
             >
           </div>
           <div>

@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Why onadiet — local, honest file compression</title>
+    <meta
+      name="description"
+      content="Why choose onadiet over TinyPNG, Squoosh, ImageOptim, or Ghostscript: 100% local (nothing uploaded), hits a target file size, one tool for PDFs, images, and folders — with an honest measured before/after receipt. Free and open-source."
+    />
+    <link rel="canonical" href="https://onadiet.pages.dev/why.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://onadiet.pages.dev/why.html" />
+    <meta property="og:title" content="Why onadiet — local, honest file compression" />
+    <meta
+      property="og:description"
+      content="No uploads, no guesswork. onadiet is 100% local, hits a target size, does PDFs + images + folders in one tool, and prints an honest measured receipt. Compared, honestly, with TinyPNG, Squoosh, ImageOptim, and Ghostscript."
+    />
+    <meta property="og:image" content="https://onadiet.pages.dev/assets/onadiet-mark.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Why onadiet — local, honest file compression" />
+    <meta
+      name="twitter:description"
+      content="No uploads, no guesswork. onadiet is 100% local, hits a target size, does PDFs + images + folders in one tool, and prints an honest measured receipt."
+    />
+    <meta name="twitter:image" content="https://onadiet.pages.dev/assets/onadiet-mark.png" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <!-- Set the theme before first paint (no flash). Dark by default. -->
+    <script>
+      try {
+        var t = localStorage.getItem('onadiet-theme')
+        document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark')
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark')
+      }
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <div class="wrap bar">
+        <a class="brand" href="index.html" aria-label="onadiet home">
+          <span class="mark sm"><img src="assets/onadiet-mark.png" alt="" /></span>
+          <span class="wm">on<b>a</b>diet</span>
+        </a>
+        <span class="badge">npm · v0.1.0</span>
+        <div class="spacer"></div>
+        <nav class="nav-links">
+          <a class="hide-sm" href="index.html#try">Try it</a>
+          <a class="hide-sm" href="index.html#numbers">Benchmarks</a>
+          <a class="hide-sm" href="index.html#embed">Embed</a>
+          <a class="hide-sm" href="why.html" aria-current="page">Why</a>
+          <a class="hide-sm" href="docs.html">Docs</a>
+          <button class="iconbtn" id="theme" aria-label="Toggle light / dark theme" type="button">
+            <svg
+              id="moon"
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+            </svg>
+            <svg
+              id="sun"
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+              style="display: none"
+            >
+              <circle cx="12" cy="12" r="4.5" />
+              <path
+                d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"
+              />
+            </svg>
+          </button>
+          <a
+            class="ghbtn"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/on-a-diet/onadiet"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path
+                d="M8 0C3.6 0 0 3.6 0 8a8 8 0 0 0 5.5 7.6c.4 0 .5-.2.5-.4v-1.4c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9.9 2.3.7 0-.5.3-.9.5-1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.1 1.9.1 2 .5.6.8 1.3.8 2.2 0 3.1-1.9 3.8-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.2.5.5.4A8 8 0 0 0 16 8c0-4.4-3.6-8-8-8Z"
+              />
+            </svg>
+            <span class="hide-sm">GitHub</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- HERO / INTRO -->
+      <div class="wrap why-hero">
+        <div class="eyebrow"><span class="dot"></span> why onadiet · local · honest · one tool</div>
+        <h1>No uploads.<br />No guesswork.<br />Just <span class="u">smaller.</span></h1>
+        <p class="lede">
+          <b>Every other way to shrink a file</b> asks you to hand it to a stranger's server, or to
+          memorize a pile of Ghostscript flags. onadiet is neither: <b>100% local</b>, it hits a
+          <b>target size</b> (<span class="mono">--to 5mb</span>, not just "compress"),
+          <b>one tool</b> for PDFs, images, and folders — with an
+          <b>honest measured</b> before/after receipt held to a quality floor. Free and open-source,
+          Apache-2.0.
+        </p>
+        <div class="cta">
+          <div class="cmd">
+            <code
+              ><span class="pk">npx</span> onadiet report.pdf
+              <span style="color: var(--ash)">--to 5mb</span></code
+            >
+            <button class="copy" type="button" data-cmd="npx onadiet report.pdf --to 5mb">
+              copy
+            </button>
+          </div>
+          <a class="btn-link" href="index.html#try">Try the live demo →</a>
+        </div>
+        <div class="trust">
+          <span>🔒 <b>100% local</b> — no network calls</span>
+          <span>✓ <b>Free &amp; open-source</b> — Apache-2.0</span>
+          <span>📏 <b>Measured</b>, never estimated</span>
+        </div>
+      </div>
+
+      <!-- DIFFERENTIATORS -->
+      <section id="diff">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="kicker">The differentiators</div>
+            <h2>What makes onadiet different.</h2>
+            <p>
+              The alternatives are excellent at their one thing (we concede exactly where, below) —
+              but <b>no other tool does all of this at once</b>, locally, with numbers it actually
+              measured.
+            </p>
+          </div>
+          <div class="grid3">
+            <div class="fcard">
+              <div class="ic">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+                </svg>
+              </div>
+              <h3>100% local, no upload</h3>
+              <p>
+                Nothing is uploaded — no account, no cloud, no network calls. Your file never leaves
+                your machine, and the live demo's gauge proves every
+                <span class="mono">fetch</span>/<span class="mono">XHR</span> stays at zero.
+              </p>
+            </div>
+            <div class="fcard">
+              <div class="ic">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 1v3M12 20v3M1 12h3M20 12h3" />
+                </svg>
+              </div>
+              <h3>Hits a target size</h3>
+              <p>
+                Ask for a goal weight — <span class="mono">--to 5mb</span> — not just "compress".
+                onadiet runs a size search to land under the limit while holding the quality floor,
+                or <b>refuses honestly</b> instead of returning garbage.
+              </p>
+            </div>
+            <div class="fcard">
+              <div class="ic">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M12 2 2 7l10 5 10-5-10-5Z" />
+                  <path d="m2 17 10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+              </div>
+              <h3>One tool, every format</h3>
+              <p>
+                PDFs, images, SVGs, and whole folders — one command, one library.
+                <span class="mono">diet ./photos --to-total 25mb</span> puts a directory under a
+                budget with the structure preserved.
+              </p>
+            </div>
+            <div class="fcard">
+              <div class="ic">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M3 3v18h18" />
+                  <path d="m7 14 3-3 4 4 5-6" />
+                </svg>
+              </div>
+              <h3>Honest measured receipt</h3>
+              <p>
+                Every saving is measured on the output and held to a perceptual floor (SSIM). It
+                reports the real delta and the codec it chose — or keeps your original. A saving it
+                didn't measure is a bug.
+              </p>
+            </div>
+            <div class="fcard">
+              <div class="ic">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="m8 6-6 6 6 6" />
+                  <path d="m16 6 6 6-6 6" />
+                </svg>
+              </div>
+              <h3>An embeddable engine</h3>
+              <p>
+                The same engine imports as <span class="mono">@onadiet/core</span> — embed it on a
+                server hot path (<b>~9× lower</b> per-call latency with
+                <span class="mono">--fast</span>), gate CI with
+                <span class="mono">diet check</span>, or wrap it as an agent Skill.
+              </p>
+            </div>
+            <div class="fcard">
+              <div class="ic">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              </div>
+              <h3>Safe by default</h3>
+              <p>
+                Never overwrites your original, never writes a <em>bigger</em> file, writes
+                atomically — and refuses to silently break a signed or form PDF rather than corrupt
+                it.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPARISON TABLE -->
+      <section id="compare">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="kicker">Head to head</div>
+            <h2>onadiet vs. the usual suspects.</h2>
+            <p>
+              An honest matrix — where each tool wins is called out right after it. onadiet's column
+              is highlighted; every ✓ here is something it actually ships today.
+            </p>
+          </div>
+          <div class="tablewrap">
+            <table
+              class="cmp"
+              aria-label="onadiet compared with TinyPNG, Squoosh, ImageOptim, and Ghostscript"
+            >
+              <thead>
+                <tr>
+                  <th scope="col">Capability</th>
+                  <th scope="col" class="us">
+                    <span class="who">onadiet<span class="sub">local CLI + library</span></span>
+                  </th>
+                  <th scope="col">
+                    <span class="who">TinyPNG<span class="sub">web / API</span></span>
+                  </th>
+                  <th scope="col">
+                    <span class="who">Squoosh<span class="sub">Google web app</span></span>
+                  </th>
+                  <th scope="col">
+                    <span class="who">ImageOptim<span class="sub">Mac app</span></span>
+                  </th>
+                  <th scope="col">
+                    <span class="who">Ghostscript<span class="sub">CLI flags</span></span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">
+                    Runs locally · nothing uploaded
+                    <span class="rsub">your file stays on your machine</span>
+                  </th>
+                  <td class="us"><span class="mk y" role="img" aria-label="Yes">✓</span></td>
+                  <td>
+                    <span class="mk n" role="img" aria-label="No">✗</span>
+                    <span class="cnote">uploads to their servers</span>
+                  </td>
+                  <td>
+                    <span class="mk y" role="img" aria-label="Yes">✓</span>
+                    <span class="cnote">in-browser</span>
+                  </td>
+                  <td><span class="mk y" role="img" aria-label="Yes">✓</span></td>
+                  <td><span class="mk y" role="img" aria-label="Yes">✓</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    Hit a target file size
+                    <span class="rsub"
+                      ><code class="mono">--to 5mb</code>, not just "compress"</span
+                    >
+                  </th>
+                  <td class="us">
+                    <span class="mk y" role="img" aria-label="Yes">✓</span>
+                    <span class="cnote">size search</span>
+                  </td>
+                  <td>
+                    <span class="mk n" role="img" aria-label="No">✗</span>
+                    <span class="cnote">one-shot</span>
+                  </td>
+                  <td>
+                    <span class="mk n" role="img" aria-label="No">✗</span>
+                    <span class="cnote">manual sliders</span>
+                  </td>
+                  <td><span class="mk n" role="img" aria-label="No">✗</span></td>
+                  <td>
+                    <span class="mk n" role="img" aria-label="No">✗</span>
+                    <span class="cnote">trial &amp; error</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    PDFs + images + folders — one tool
+                    <span class="rsub">not five separate tools</span>
+                  </th>
+                  <td class="us"><span class="mk y" role="img" aria-label="Yes">✓</span></td>
+                  <td>
+                    <span class="mk p" role="img" aria-label="Partial">~</span>
+                    <span class="cnote">images; PDF is a separate paid product</span>
+                  </td>
+                  <td>
+                    <span class="mk p" role="img" aria-label="Partial">~</span>
+                    <span class="cnote">one image at a time</span>
+                  </td>
+                  <td>
+                    <span class="mk p" role="img" aria-label="Partial">~</span>
+                    <span class="cnote">images only</span>
+                  </td>
+                  <td>
+                    <span class="mk p" role="img" aria-label="Partial">~</span>
+                    <span class="cnote">PDFs; images via flags</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    Honest measured receipt + quality floor
+                    <span class="rsub">real before/after, held to SSIM</span>
+                  </th>
+                  <td class="us"><span class="mk y" role="img" aria-label="Yes">✓</span></td>
+                  <td><span class="mk n" role="img" aria-label="No">✗</span></td>
+                  <td><span class="mk n" role="img" aria-label="No">✗</span></td>
+                  <td><span class="mk n" role="img" aria-label="No">✗</span></td>
+                  <td><span class="mk n" role="img" aria-label="No">✗</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    Safe by default
+                    <span class="rsub">never overwrite / never bigger; refuses signed PDFs</span>
+                  </th>
+                  <td class="us"><span class="mk y" role="img" aria-label="Yes">✓</span></td>
+                  <td><span class="mk n" role="img" aria-label="No">✗</span></td>
+                  <td>
+                    <span class="mk n" role="img" aria-label="No">✗</span>
+                    <span class="cnote">manual save</span>
+                  </td>
+                  <td>
+                    <span class="mk n" role="img" aria-label="No">✗</span>
+                    <span class="cnote">edits in place</span>
+                  </td>
+                  <td>
+                    <span class="mk n" role="img" aria-label="No">✗</span>
+                    <span class="cnote">you manage paths</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    Embeddable library · CI gate · scriptable
+                    <span class="rsub">import it, or fail a build on budget</span>
+                  </th>
+                  <td class="us"><span class="mk y" role="img" aria-label="Yes">✓</span></td>
+                  <td>
+                    <span class="mk p" role="img" aria-label="Partial">~</span>
+                    <span class="cnote">paid API</span>
+                  </td>
+                  <td><span class="mk n" role="img" aria-label="No">✗</span></td>
+                  <td><span class="mk n" role="img" aria-label="No">✗</span></td>
+                  <td>
+                    <span class="mk p" role="img" aria-label="Partial">~</span>
+                    <span class="cnote">scriptable via flags</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    Free &amp; open-source
+                    <span class="rsub">no paywall, inspectable</span>
+                  </th>
+                  <td class="us">
+                    <span class="mk y" role="img" aria-label="Yes">✓</span>
+                    <span class="cnote">Apache-2.0</span>
+                  </td>
+                  <td>
+                    <span class="mk p" role="img" aria-label="Partial">~</span>
+                    <span class="cnote">freemium / paid API</span>
+                  </td>
+                  <td><span class="mk y" role="img" aria-label="Yes">✓</span></td>
+                  <td><span class="mk y" role="img" aria-label="Yes">✓</span></td>
+                  <td>
+                    <span class="mk y" role="img" aria-label="Yes">✓</span>
+                    <span class="cnote">AGPL</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="method">
+            <b>Where they shine — honestly.</b> <b>TinyPNG</b>'s PNG quantization and clean API are
+            genuinely excellent. <b>Squoosh</b> is a lovely, free in-browser tool with superb manual
+            codec controls. <b>ImageOptim</b> is a delightful drag-and-drop Mac GUI. And
+            <b>Ghostscript</b> is battle-tested and immensely powerful. onadiet's angle is
+            different: a <b>target-size search</b>, <b>one tool</b> across PDFs, images, and
+            folders, <b>honest measured receipts</b> held to an SSIM floor, <b>fully local</b>,
+            <b>embeddable</b> on a hot path, and <b>safe by default</b>.
+          </p>
+        </div>
+      </section>
+
+      <!-- BENCHMARKS — real, measured numbers (reused from the home page) -->
+      <section id="numbers">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="kicker">Measured, not promised</div>
+            <h2>Real files. Real savings. Every number measured on the output.</h2>
+            <p>
+              These are the same figures from the home page's benchmarks — proven against a
+              genuinely public <b>9 MB SpaceX IPO-roadshow deck</b> (60 pages, 224 images) in the
+              golden-corpus test suite. Ask for a plan, or a target size — if it can't hit the
+              target above the quality floor, it <b>refuses honestly</b> instead of returning
+              garbage.
+            </p>
+          </div>
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Plan</th>
+                  <th>Quality floor</th>
+                  <th class="num">9.0 MB →</th>
+                  <th style="width: 38%">Reduction</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="plan">cleanse</td>
+                  <td class="mono" style="color: var(--ash)">lossless</td>
+                  <td class="num">9.0 MB</td>
+                  <td>
+                    <div class="barcell">
+                      <div class="minibar"><i style="width: 2%"></i></div>
+                      <span class="mono">0%</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="plan">lowcarb</td>
+                  <td class="mono">SSIM 0.96</td>
+                  <td class="num">8.1 MB</td>
+                  <td>
+                    <div class="barcell">
+                      <div class="minibar"><i style="width: 10%"></i></div>
+                      <span class="mono">~10%</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="plan">balanced</td>
+                  <td class="mono">SSIM 0.90</td>
+                  <td class="num">4.8 MB</td>
+                  <td>
+                    <div class="barcell">
+                      <div class="minibar"><i style="width: 47%"></i></div>
+                      <span class="mono">~47%</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="plan">keto</td>
+                  <td class="mono">SSIM 0.80</td>
+                  <td class="num">3.7 MB</td>
+                  <td>
+                    <div class="barcell">
+                      <div class="minibar"><i style="width: 59%"></i></div>
+                      <span class="mono">~59%</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="plan">crash</td>
+                  <td class="mono" style="color: var(--ash)">floorless</td>
+                  <td class="num">3.3 MB</td>
+                  <td>
+                    <div class="barcell">
+                      <div class="minibar"><i style="width: 64%"></i></div>
+                      <span class="mono">~64%</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="method">
+            <b>Images too:</b> a real photo (a NASA public-domain image, JPEG) → ~55% smaller at
+            SSIM 0.94; a flat graphic (PNG) → <b>8 KB, ~99% smaller</b> via an automatic switch to
+            AVIF. Every figure is reproducible with <span class="mono">pnpm run test:perf</span> —
+            no estimates.
+          </p>
+        </div>
+      </section>
+
+      <!-- FINAL CTA -->
+      <section class="final">
+        <div class="wrap">
+          <h2>Weigh in.</h2>
+          <p class="lede" style="margin: 16px auto 0">
+            On npm now — early and <span class="mono">0.x</span>, built and proven against real
+            files. Install it globally, or run it once with <code>npx</code>.
+          </p>
+          <div class="ctacmds">
+            <div class="cmd">
+              <code><span class="pk">npm</span> i -g onadiet</code>
+              <button class="copy" type="button" data-cmd="npm i -g onadiet">copy</button>
+            </div>
+            <div class="cmd">
+              <code
+                ><span class="pk">npx</span> onadiet report.pdf
+                <span style="color: var(--ash)">--to 5mb</span></code
+              >
+              <button class="copy" type="button" data-cmd="npx onadiet report.pdf --to 5mb">
+                copy
+              </button>
+            </div>
+          </div>
+          <div class="ctalinks">
+            <a class="btn-link" href="index.html#try">Try the live demo →</a>
+            <a
+              class="btn-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet"
+              >Star it on GitHub →</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="fgrid">
+          <div>
+            <a
+              class="brand"
+              href="index.html"
+              style="margin-bottom: 12px"
+              aria-label="onadiet home"
+            >
+              <span class="mark sm"><img src="assets/onadiet-mark.png" alt="" /></span>
+              <span class="wm">on<b style="color: var(--red)">a</b>diet</span>
+            </a>
+            <p class="fbrand">
+              Put your files on a diet — locally, safe by default, with an honest before/after
+              receipt. Apache-2.0.
+            </p>
+          </div>
+          <div>
+            <h4>Resources</h4>
+            <a href="why.html" aria-current="page">Why onadiet</a
+            ><a href="index.html#numbers">Benchmarks</a><a href="index.html#embed">Embed</a
+            ><a href="index.html#plans">Diet plans</a><a href="docs.html">Docs</a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/docs/99-ROADMAP.md"
+              >Roadmap</a
+            >
+          </div>
+          <div>
+            <h4>Project</h4>
+            <a target="_blank" rel="noopener noreferrer" href="https://github.com/on-a-diet/onadiet"
+              >Repository</a
+            >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/releases"
+              >Releases</a
+            >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/LICENSE"
+              >License · Apache-2.0</a
+            >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.npmjs.com/package/onadiet"
+              >npm · onadiet</a
+            >
+          </div>
+          <div>
+            <h4>Community</h4>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/discussions"
+              >Discussions</a
+            >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/CONTRIBUTING.md"
+              >Contributing</a
+            >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/security/policy"
+              >Security</a
+            >
+          </div>
+        </div>
+        <div class="foot-note">
+          <span>© 2026 Sharvil Kadam</span><span>·</span><span>Built local. No uploads, ever.</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

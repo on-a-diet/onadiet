@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>onadiet docs — install, commands & the library</title>
+    <meta
+      name="description"
+      content="Install onadiet and learn every command, flag, and diet plan — the diet CLI, the @onadiet/core library, the CI gate, and the agent Skill. Local, no upload, safe by default, with measured receipts."
+    />
+    <link rel="canonical" href="https://onadiet.pages.dev/docs.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://onadiet.pages.dev/docs.html" />
+    <meta property="og:title" content="onadiet docs — install, commands & the library" />
+    <meta
+      property="og:description"
+      content="The onadiet usage hub: install, every command and flag, the five diet plans, four surfaces, and honest exit codes. Local, no upload, safe by default."
+    />
+    <meta property="og:image" content="https://onadiet.pages.dev/assets/onadiet-mark.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="onadiet docs — install, commands & the library" />
+    <meta
+      name="twitter:description"
+      content="The onadiet usage hub: install, every command and flag, the five diet plans, four surfaces, and honest exit codes. Local, no upload, safe by default."
+    />
+    <meta name="twitter:image" content="https://onadiet.pages.dev/assets/onadiet-mark.png" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <!-- Set the theme before first paint (no flash). Dark by default. -->
+    <script>
+      try {
+        var t = localStorage.getItem('onadiet-theme')
+        document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark')
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark')
+      }
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <div class="wrap bar">
+        <a class="brand" href="index.html" aria-label="onadiet home">
+          <span class="mark sm"><img src="assets/onadiet-mark.png" alt="" /></span>
+          <span class="wm">on<b>a</b>diet</span>
+        </a>
+        <span class="badge">npm · v0.1.0</span>
+        <div class="spacer"></div>
+        <nav class="nav-links">
+          <a class="hide-sm" href="index.html#try">Try it</a>
+          <a class="hide-sm" href="index.html#numbers">Benchmarks</a>
+          <a class="hide-sm" href="index.html#embed">Embed</a>
+          <a class="hide-sm" href="why.html">Why</a>
+          <a class="hide-sm" href="docs.html" aria-current="page">Docs</a>
+          <button class="iconbtn" id="theme" aria-label="Toggle light / dark theme" type="button">
+            <svg
+              id="moon"
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+            </svg>
+            <svg
+              id="sun"
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+              style="display: none"
+            >
+              <circle cx="12" cy="12" r="4.5" />
+              <path
+                d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"
+              />
+            </svg>
+          </button>
+          <a
+            class="ghbtn"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/on-a-diet/onadiet"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path
+                d="M8 0C3.6 0 0 3.6 0 8a8 8 0 0 0 5.5 7.6c.4 0 .5-.2.5-.4v-1.4c-2 .4-2.5-.5-2.7-1 0-.1-.5-.9-.8-1-.3-.2-.7-.6 0-.6.6 0 1 .6 1.2.8.7 1.2 1.9.9 2.3.7 0-.5.3-.9.5-1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1 0-.2-.3-1 .1-2 0 0 .7-.3 2.2.7a7.4 7.4 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.4 1.1.1 1.9.1 2 .5.6.8 1.3.8 2.2 0 3.1-1.9 3.8-3.6 4 .3.2.5.7.5 1.4v2.2c0 .2.2.5.5.4A8 8 0 0 0 16 8c0-4.4-3.6-8-8-8Z"
+              />
+            </svg>
+            <span class="hide-sm">GitHub</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- DOCS HERO -->
+      <div class="wrap doc-hero">
+        <div class="eyebrow"><span class="dot"></span> docs · usage hub</div>
+        <h1>Everything to put your files <span class="u">on a diet.</span></h1>
+        <p class="lede">
+          <b>onadiet</b> is a local, no-upload CLI and library that shrinks PDFs, images, SVGs, and
+          whole folders under a size limit — <b>on your machine</b>, safe by default, with an honest
+          measured receipt. This is the usage hub: install, every command and flag, the five plans,
+          the four surfaces, and honest exit codes.
+        </p>
+        <div class="cta">
+          <div class="cmd">
+            <code><span class="pk">npm</span> i -g onadiet</code>
+            <button class="copy" type="button" data-cmd="npm i -g onadiet">copy</button>
+          </div>
+          <a class="btn-link" href="#install">Install options ↓</a>
+        </div>
+        <nav class="jumpnav" aria-label="On this page">
+          <a href="#install">Install</a>
+          <a href="#commands">Commands</a>
+          <a href="#flags">Flags</a>
+          <a href="#plans">Plans</a>
+          <a href="#surfaces">Four surfaces</a>
+          <a href="#codes">Exit &amp; error codes</a>
+          <a href="#guides">Guides</a>
+        </nav>
+      </div>
+
+      <!-- INSTALL -->
+      <section id="install">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="kicker">Install</div>
+            <h2>On npm now — pick how you want it.</h2>
+            <p>
+              The CLI ships as the <b>unscoped</b> <span class="mono">onadiet</span> package (binary
+              <span class="mono">diet</span>, alias <span class="mono">onadiet</span>); the engine
+              and adapters are scoped <span class="mono">@onadiet/*</span>. Published to
+              <b>npm at v0.1.0</b> — early (<span class="mono">0.x</span>), so the surface may still
+              move. Requires Node <span class="mono">&gt;=22</span>.
+            </p>
+          </div>
+          <div class="cmdrows">
+            <div class="cmdrow">
+              <div class="cmdcap">
+                <b>Global install</b> — then just type <span class="mono">diet</span> anywhere.
+              </div>
+              <div class="cmd">
+                <code><span class="pk">npm</span> i -g onadiet</code>
+                <button class="copy" type="button" data-cmd="npm i -g onadiet">copy</button>
+              </div>
+            </div>
+            <div class="cmdrow">
+              <div class="cmdcap">
+                <b>No install</b> — a one-off run with <span class="mono">npx</span>.
+              </div>
+              <div class="cmd">
+                <code
+                  ><span class="pk">npx</span> onadiet report.pdf
+                  <span style="color: var(--ash)">--to 5mb</span></code
+                >
+                <button class="copy" type="button" data-cmd="npx onadiet report.pdf --to 5mb">
+                  copy
+                </button>
+              </div>
+            </div>
+            <div class="cmdrow">
+              <div class="cmdcap">
+                <b>As a library</b> — the pure engine for your own code (see
+                <a class="mono" style="color: var(--red-ink)" href="#surfaces"
+                  >the library surface</a
+                >).
+              </div>
+              <div class="cmd">
+                <code><span class="pk">npm</span> i @onadiet/core</code>
+                <button class="copy" type="button" data-cmd="npm i @onadiet/core">copy</button>
+              </div>
+            </div>
+          </div>
+          <p class="method">
+            <b>Build from source</b> to hack on onadiet itself: clone the repo and run
+            <span class="mono">install → lint → typecheck → test → build</span> with no manual setup
+            — see the
+            <a
+              style="color: var(--red-ink)"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet"
+              >repository on GitHub</a
+            >.
+          </p>
+        </div>
+      </section>
+
+      <!-- COMMANDS -->
+      <section id="commands">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="kicker">Commands</div>
+            <h2>One hero command, four sub-verbs.</h2>
+            <p>
+              The bare <span class="mono">diet &lt;path&gt;</span> is the hero — it slims a file or
+              a folder. The sub-verbs cover everything around it. Every command speaks
+              <span class="mono">--json</span> for scripts and agents (a stable object on stdout,
+              logs on stderr).
+            </p>
+          </div>
+          <div class="tablewrap docs">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 34%">Command</th>
+                  <th>What it does</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="mono" style="color: var(--red-ink)">diet &lt;file&gt;</td>
+                  <td>
+                    Slim a file (the default command) →
+                    <span class="mono">&lt;name&gt;.diet.&lt;ext&gt;</span>. Default plan
+                    <span class="mono">balanced</span>.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono" style="color: var(--red-ink)">diet &lt;dir&gt;</td>
+                  <td>
+                    Slim a folder → <span class="mono">&lt;dir&gt;.diet/</span>, structure
+                    preserved; unknown files copied through.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono" style="color: var(--red-ink)">diet weigh &lt;path&gt;</td>
+                  <td>Step on the scale — what it weighs and what's heavy. <b>No writes.</b></td>
+                </tr>
+                <tr>
+                  <td class="mono" style="color: var(--red-ink)">diet plan &lt;path&gt;</td>
+                  <td>Dry-run — the same computation as slim, but <b>writes nothing</b>.</td>
+                </tr>
+                <tr>
+                  <td class="mono" style="color: var(--red-ink)">diet check &lt;path&gt;</td>
+                  <td>
+                    CI gate — pass/fail a <span class="mono">--max</span> /
+                    <span class="mono">--max-total</span> budget with honest exit codes.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono" style="color: var(--red-ink)">diet checkup</td>
+                  <td>
+                    Is the kitchen stocked? Which local engines are available (a static report
+                    today).
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="method">
+            <b>Dry-run is the <span class="mono">plan</span> verb</b> — there is no
+            <span class="mono">--dry-run</span> flag. There is no
+            <span class="mono">--version</span> flag either;
+            <span class="mono">diet --help</span> (<span class="mono">-h</span>) prints usage.
+          </p>
+
+          <div class="cmdrows" style="margin-top: 26px">
+            <div class="cmdcap"><b>Real examples</b> — copy and run:</div>
+            <div class="cmdwrap">
+              <div class="cmd">
+                <code
+                  ><span class="pk">diet</span> report.pdf
+                  <span style="color: var(--ash)">--to 5mb</span></code
+                >
+                <button class="copy" type="button" data-cmd="diet report.pdf --to 5mb">copy</button>
+              </div>
+              <div class="cmd">
+                <code
+                  ><span class="pk">diet</span> ./photos
+                  <span style="color: var(--ash)">--to-each 500kb --out ./slim</span></code
+                >
+                <button
+                  class="copy"
+                  type="button"
+                  data-cmd="diet ./photos --to-each 500kb --out ./slim"
+                >
+                  copy
+                </button>
+              </div>
+              <div class="cmd">
+                <code><span class="pk">diet</span> weigh brochure.pdf</code>
+                <button class="copy" type="button" data-cmd="diet weigh brochure.pdf">copy</button>
+              </div>
+              <div class="cmd">
+                <code
+                  ><span class="pk">diet</span> plan invoice.pdf
+                  <span style="color: var(--ash)">--to 5mb --json</span></code
+                >
+                <button class="copy" type="button" data-cmd="diet plan invoice.pdf --to 5mb --json">
+                  copy
+                </button>
+              </div>
+              <div class="cmd">
+                <code
+                  ><span class="pk">diet</span> check ./public
+                  <span style="color: var(--ash)">--max 2mb --max-total 25mb</span></code
+                >
+                <button
+                  class="copy"
+                  type="button"
+                  data-cmd="diet check ./public --max 2mb --max-total 25mb"
+                >
+                  copy
+                </button>
+              </div>
+              <div class="cmd">
+                <code><span class="pk">diet</span> checkup</code>
+                <button class="copy" type="button" data-cmd="diet checkup">copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FLAGS -->
+      <section id="flags">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="kicker">Flags</div>
+            <h2>The options, and exactly what they do.</h2>
+            <p>
+              Targets share one vocabulary — the slim verbs aim <em>toward</em> a size with the
+              <span class="mono">--to*</span> family, and <span class="mono">check</span> fails a
+              budget with <span class="mono">--max*</span>. Sizes accept decimal and binary units
+              (<span class="mono">5mb</span>, <span class="mono">500kb</span>,
+              <span class="mono">2.5 MiB</span>, bare bytes), case-insensitive.
+            </p>
+          </div>
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 26%">Flag(s)</th>
+                  <th style="width: 18%">Value</th>
+                  <th>Means</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="mono">--to · --under · --goal</td>
+                  <td class="mono">size</td>
+                  <td>Whole-file byte target (single file). On a folder → usage error.</td>
+                </tr>
+                <tr>
+                  <td class="mono">--to-each</td>
+                  <td class="mono">size</td>
+                  <td>Folder: cap <b>every</b> recognized file at this size (per-file).</td>
+                </tr>
+                <tr>
+                  <td class="mono">--to-total</td>
+                  <td class="mono">size</td>
+                  <td>
+                    Folder: whole-tree budget — sweeps for the gentlest plan that fits (so drop
+                    <span class="mono">--plan</span>).
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono">--plan</td>
+                  <td class="mono">cleanse | balanced | lowcarb | keto | crash</td>
+                  <td>Quality plan (default <span class="mono">balanced</span>).</td>
+                </tr>
+                <tr>
+                  <td class="mono">--format</td>
+                  <td class="mono">keep | auto | jpeg | png | webp | avif</td>
+                  <td>
+                    Image output format (default <span class="mono">keep</span>; ignored for PDFs).
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono">--fast</td>
+                  <td class="mono">—</td>
+                  <td>
+                    Encode once at the plan's nominal quality; skip the size search. Cannot combine
+                    with a byte target.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono">--max-input</td>
+                  <td class="mono">size</td>
+                  <td>
+                    Skip / reject any input larger than this — a stat-based memory guard, before the
+                    file is read.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono">--timeout</td>
+                  <td class="mono">ms</td>
+                  <td>
+                    Abort a run longer than this (one deadline for the whole run); exits
+                    <span class="mono">2</span>.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono">--concurrency · --jobs</td>
+                  <td class="mono">n | auto</td>
+                  <td>
+                    Folder parallelism (<span class="mono">0</span>/<span class="mono">auto</span> →
+                    <span class="mono">min(cores−1, 8)</span>).
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono">--out</td>
+                  <td class="mono">dir</td>
+                  <td>
+                    Output directory (default: the sibling <span class="mono">.diet</span> path).
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono">--force · --allow-signed</td>
+                  <td class="mono">—</td>
+                  <td>
+                    Proceed on a signed PDF <b>and</b> drop the quality floor (<span class="mono"
+                      >floor = 0</span
+                    >).
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono">--include · --exclude</td>
+                  <td class="mono">globs</td>
+                  <td>Folder: only / skip files matching comma-separated globs (exclude wins).</td>
+                </tr>
+                <tr>
+                  <td class="mono">--json</td>
+                  <td class="mono">—</td>
+                  <td>Emit a stable JSON object on stdout (logs stay on stderr).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="method">
+            For the everyday flags in prose see the
+            <a
+              style="color: var(--red-ink)"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/docs/guide/cli.md"
+              >CLI guide</a
+            >; for the exhaustive table with defaults, the
+            <a
+              style="color: var(--red-ink)"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/docs/guide/api-reference.md"
+              >API reference</a
+            >.
+          </p>
+        </div>
+      </section>
+
+      <!-- PLANS -->
+      <section id="plans">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="kicker">The five diet plans</div>
+            <h2>Pick how hard to cut — quality is a contract, not a guess.</h2>
+            <p>
+              <span class="mono">--plan</span> picks intent, not raw quality knobs. Every plan holds
+              a measured perceptual floor (SSIM), so <span class="mono">lowcarb</span> stays
+              visually lossless and only <span class="mono">crash</span> accepts visible loss. If a
+              target can't be met above the floor, <span class="mono">diet</span> refuses honestly
+              rather than returning garbage.
+            </p>
+          </div>
+          <div class="menu">
+            <div class="plan-card">
+              <div class="nm">cleanse</div>
+              <div class="fl">lossless</div>
+              <p>Flush the junk only — zero quality loss.</p>
+            </div>
+            <div class="plan-card">
+              <div class="nm">balanced</div>
+              <div class="fl">SSIM 0.90</div>
+              <p>Meaningful slimming, low surprise. The default.</p>
+            </div>
+            <div class="plan-card">
+              <div class="nm">lowcarb</div>
+              <div class="fl">SSIM 0.96</div>
+              <p>Trim what the eye won't miss.</p>
+            </div>
+            <div class="plan-card">
+              <div class="nm">keto</div>
+              <div class="fl">SSIM 0.80</div>
+              <p>Cut hard — downsample &amp; format-switch.</p>
+            </div>
+            <div class="plan-card">
+              <div class="nm">crash</div>
+              <div class="fl">floorless</div>
+              <p>Smallest possible; you accept visible loss.</p>
+            </div>
+          </div>
+          <p class="method">
+            <b>Honest caveat:</b> <span class="mono">cleanse</span> is a no-op for PDFs and images
+            today — lossless re-optimization isn't wired yet, so it keeps the original (only SVG
+            <span class="mono">cleanse</span> does real, lossless work). The aggressive plans use
+            only the in-house permissive <span class="mono">sharp</span>/<span class="mono"
+              >mozjpeg</span
+            >
+            path; copyleft engines are never bundled.
+          </p>
+        </div>
+      </section>
+
+      <!-- FOUR SURFACES -->
+      <section id="surfaces">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="kicker">One engine, four surfaces</div>
+            <h2>The same measured engine, wherever you need it.</h2>
+            <p>
+              onadiet is one honest engine behind four front doors — the CLI you type, an importable
+              library for your hot path, a CI byte-budget gate, and (next) an agent Skill. Same
+              rules everywhere: local, measured, keeps your original.
+            </p>
+          </div>
+          <div class="surfaces">
+            <div class="panel surface">
+              <div class="dhead">1 · CLI</div>
+              <h3>One command.</h3>
+              <p>
+                Point <span class="mono">diet</span> at a file and it writes a sibling
+                <span class="mono">.diet</span> file — your original untouched, never a bigger
+                output, written atomically.
+              </p>
+              <div class="cmd">
+                <code
+                  ><span class="pk">diet</span> report.pdf
+                  <span style="color: var(--ash)">--to 5mb</span></code
+                >
+                <button class="copy" type="button" data-cmd="diet report.pdf --to 5mb">copy</button>
+              </div>
+            </div>
+
+            <div class="panel surface">
+              <div class="dhead">2 · Library</div>
+              <h3>An engine for your code.</h3>
+              <p>
+                Import an adapter and slim bytes in / bytes out — no cross-call state, safe per
+                request. The flagship <span class="mono">onadiet</span> also re-exports the whole
+                <span class="mono">@onadiet/core</span> API, so no separate install is needed.
+              </p>
+              <div class="code">
+                <div class="cbar"><i></i><i></i><i></i><span>slim.ts</span></div>
+                <pre><span class="kw">import</span> { imageAdapter } <span class="kw">from</span> <span class="st">'@onadiet/image'</span>
+
+<span class="cm">// no cross-call state — safe to call per request</span>
+<span class="kw">const</span> { output, outcome } = <span class="kw">await</span> imageAdapter.slim(bytes, { plan: <span class="st">'balanced'</span> })
+
+output               <span class="cm">// a smaller file (Uint8Array) — measured</span>
+  ? save(output)
+  : keep(outcome)    <span class="cm">// honest: kept original / infeasible</span>
+
+<span class="cm">// helpers come straight off the flagship, too:</span>
+<span class="kw">import</span> { resolvePlan, parseSize } <span class="kw">from</span> <span class="st">'onadiet'</span></pre>
+              </div>
+            </div>
+
+            <div class="panel surface">
+              <div class="dhead">3 · CI gate</div>
+              <h3>Fail the build on bloat.</h3>
+              <p>
+                <span class="mono">diet check</span> weighs a path against a budget and writes
+                nothing — exit <span class="mono">0</span> under budget,
+                <span class="mono">1</span> over. Add <span class="mono">--json</span> so a step
+                reads exactly what's over.
+              </p>
+              <div class="cmd">
+                <code
+                  ><span class="pk">diet</span> check ./assets
+                  <span style="color: var(--ash)">--max-total 10mb</span></code
+                >
+                <button class="copy" type="button" data-cmd="diet check ./assets --max-total 10mb">
+                  copy
+                </button>
+              </div>
+            </div>
+
+            <div class="panel surface">
+              <div class="dhead">4 · Agent Skill<span class="tag">planned</span></div>
+              <h3>The same binary, for agents.</h3>
+              <p>
+                A Claude Code Skill wrapping the CLI — no separate server. It's the
+                <b>next milestone</b> (shipping with distribution: publish · Homebrew · Skill), not
+                shipped yet. The intended loop, all local and deterministic:
+              </p>
+              <div class="code">
+                <div class="cbar"><i></i><i></i><i></i><span>agent-loop (planned)</span></div>
+                <pre><span class="cm"># 1 · see the problem (size + causes)</span>
+diet weigh big-deck.pdf <span class="kw">--json</span>
+<span class="cm"># 2 · fix it</span>
+diet big-deck.pdf --to 10mb <span class="kw">--json</span>
+<span class="cm"># 3 · read the receipt → real saving, or honest "infeasible"</span></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXIT + ERROR CODES -->
+      <section id="codes">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="kicker">Exit &amp; error codes</div>
+            <h2>Honest codes so scripts and CI can branch.</h2>
+            <p>
+              The bin sets <span class="mono">process.exitCode</span> (it never calls
+              <span class="mono">process.exit()</span>), so piped output is never truncated. In
+              code, every engine failure is an <span class="mono">OnadietError</span> carrying a
+              typed <span class="mono">code</span> — branch on the <span class="mono">code</span>,
+              never on message strings.
+            </p>
+          </div>
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 14%">Exit</th>
+                  <th>Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="mono num">0</td>
+                  <td>
+                    Success — slim / weigh / plan OK, <span class="mono">check</span> PASS, folder
+                    budget fit.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono num">1</td>
+                  <td>
+                    Target or gate failed — infeasible target, <span class="mono">check</span> FAIL,
+                    folder <span class="mono">--to-total</span> overran.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono num">2</td>
+                  <td>
+                    Processing error — encrypted/unsupported input, aborted
+                    <span class="mono">--timeout</span>, read/write failure,
+                    <span class="mono">--max-input</span> exceeded.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono num">3</td>
+                  <td>
+                    Invalid usage — bad flags, unknown plan, invalid size, folder given a bare
+                    <span class="mono">--to</span>, <span class="mono">check</span> with no budget.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono num">4</td>
+                  <td>
+                    Unsafe operation blocked — signed PDF without <span class="mono">--force</span>,
+                    would overwrite the original, <span class="mono">--out</span> a symlink or
+                    inside the input tree.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tablewrap" style="margin-top: 18px">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 30%">Error code</th>
+                  <th>When</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="mono">INVALID_SIZE</td>
+                  <td>
+                    Unparseable size / unknown unit; invalid byte count; bad
+                    <span class="mono">floor</span>/<span class="mono">targetBytes</span>.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono">UNKNOWN_PLAN</td>
+                  <td>Plan name not one of the five diet plans.</td>
+                </tr>
+                <tr>
+                  <td class="mono">UNSUPPORTED_INPUT</td>
+                  <td>
+                    Not a supported image/PDF/SVG; undecodable bytes; animated/multi-frame image; no
+                    candidate format could encode.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono">SIGNED_PDF</td>
+                  <td>
+                    PDF is signed and <span class="mono">allowSigned</span> isn't set (use
+                    <span class="mono">--force</span>).
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono">ENCRYPTED_PDF</td>
+                  <td>PDF is encrypted / password-protected.</td>
+                </tr>
+                <tr>
+                  <td class="mono">TARGET_INFEASIBLE</td>
+                  <td>
+                    Can't reach the target above the floor (loosen the floor / use
+                    <span class="mono">keto</span>/<span class="mono">crash</span>) or it's
+                    structurally impossible.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="mono">ABORTED</td>
+                  <td>The signal aborted (cancellation / timeout) mid-slim — nothing written.</td>
+                </tr>
+                <tr>
+                  <td class="mono">NOT_IMPLEMENTED</td>
+                  <td>Reserved — declared and handled, but not thrown by any current path.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEEPER GUIDES -->
+      <section id="guides">
+        <div class="wrap">
+          <div class="sec-head">
+            <div class="kicker">Deeper guides</div>
+            <h2>Go deeper — the full guides on GitHub.</h2>
+            <p>
+              The reference above is the quick tour. Each guide below goes deep on one topic; the
+              <b>API reference</b> is the canonical, evergreen public surface.
+            </p>
+          </div>
+          <div class="grid3">
+            <a
+              class="fcard guide-card"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/docs/guide/getting-started.md"
+            >
+              <h3>Getting started <span class="arw" aria-hidden="true">→</span></h3>
+              <p>Install to first run in 60 seconds, and the everyday commands.</p>
+            </a>
+            <a
+              class="fcard guide-card"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/docs/guide/cli.md"
+            >
+              <h3>CLI reference <span class="arw" aria-hidden="true">→</span></h3>
+              <p>Every command, target, option, exit code, and safety rule in prose.</p>
+            </a>
+            <a
+              class="fcard guide-card"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/docs/guide/api-reference.md"
+            >
+              <h3>API reference <span class="arw" aria-hidden="true">→</span></h3>
+              <p>The canonical public surface — CLI, library, config schema, error codes.</p>
+            </a>
+            <a
+              class="fcard guide-card"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/docs/guide/pdf.md"
+            >
+              <h3>PDF <span class="arw" aria-hidden="true">→</span></h3>
+              <p>How PDFs are slimmed, what's touched, and the signed/encrypted guards.</p>
+            </a>
+            <a
+              class="fcard guide-card"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/docs/guide/images.md"
+            >
+              <h3>Images <span class="arw" aria-hidden="true">→</span></h3>
+              <p>JPEG/PNG/WebP/AVIF re-encode, downscale, and format switching.</p>
+            </a>
+            <a
+              class="fcard guide-card"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/docs/guide/folders.md"
+            >
+              <h3>Folders <span class="arw" aria-hidden="true">→</span></h3>
+              <p>Per-file caps vs. whole-tree budgets, globs, structure, and manifests.</p>
+            </a>
+            <a
+              class="fcard guide-card"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/docs/guide/performance.md"
+            >
+              <h3>Performance <span class="arw" aria-hidden="true">→</span></h3>
+              <p>
+                The <span class="mono">--fast</span> path, concurrency, memory, and the worker
+                offload.
+              </p>
+            </a>
+          </div>
+          <p class="method">
+            Prefer to read it all in one place? Browse the
+            <a
+              style="color: var(--red-ink)"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/tree/main/docs"
+              >full docs tree on GitHub</a
+            >.
+          </p>
+        </div>
+      </section>
+
+      <!-- FINAL CTA -->
+      <section class="final">
+        <div class="wrap">
+          <h2>Weigh in.</h2>
+          <p class="lede" style="margin: 16px auto 0">
+            On npm now — built and proven against real files. Install with
+            <code>npm i -g onadiet</code>.
+          </p>
+          <div class="cmd">
+            <code><span class="pk">npx</span> onadiet report.pdf --to 5mb</code>
+            <button class="copy" type="button" data-cmd="npx onadiet report.pdf --to 5mb">
+              copy
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="fgrid">
+          <div>
+            <a
+              class="brand"
+              href="index.html"
+              style="margin-bottom: 12px"
+              aria-label="onadiet home"
+            >
+              <span class="mark sm"><img src="assets/onadiet-mark.png" alt="" /></span>
+              <span class="wm">on<b style="color: var(--red)">a</b>diet</span>
+            </a>
+            <p class="fbrand">
+              Put your files on a diet — locally, safe by default, with an honest before/after
+              receipt. Apache-2.0.
+            </p>
+          </div>
+          <div>
+            <h4>Resources</h4>
+            <a href="docs.html" aria-current="page">Docs</a><a href="why.html">Why onadiet</a
+            ><a href="index.html#numbers">Benchmarks</a><a href="index.html#embed">Embed</a
+            ><a href="index.html#plans">Diet plans</a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/docs/99-ROADMAP.md"
+              >Roadmap</a
+            >
+          </div>
+          <div>
+            <h4>Project</h4>
+            <a target="_blank" rel="noopener noreferrer" href="https://github.com/on-a-diet/onadiet"
+              >Repository</a
+            >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.npmjs.com/package/onadiet"
+              >npm — onadiet</a
+            >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/releases"
+              >Releases</a
+            >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/LICENSE"
+              >License · Apache-2.0</a
+            >
+          </div>
+          <div>
+            <h4>Community</h4>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/discussions"
+              >Discussions</a
+            >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/blob/main/CONTRIBUTING.md"
+              >Contributing</a
+            >
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/on-a-diet/onadiet/security/policy"
+              >Security</a
+            >
+          </div>
+        </div>
+        <div class="foot-note">
+          <span>© 2026 Sharvil Kadam</span><span>·</span><span>Built local. No uploads, ever.</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

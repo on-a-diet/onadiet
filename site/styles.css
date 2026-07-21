@@ -1091,3 +1091,250 @@ footer a:hover {
     transition: none !important;
   }
 }
+
+/* ─────────────────────────── Subpages: why.html + docs.html ─────────────────────────── */
+html {
+  scroll-padding-top: 80px;
+}
+.nav-links a[aria-current='page'] {
+  color: var(--ink);
+  border-bottom: 2px solid var(--red);
+  padding-bottom: 2px;
+}
+footer a[aria-current='page'] {
+  color: var(--ink);
+}
+
+/* why.html — hero, comparison matrix, CTA */
+.why-hero {
+  padding: 62px 0 24px;
+}
+.why-hero h1 {
+  font-size: clamp(34px, 5.6vw, 62px);
+  max-width: 15ch;
+}
+.why-hero h1 .u {
+  color: var(--red);
+}
+.why-hero .lede {
+  max-width: 60ch;
+}
+.cmp {
+  min-width: 760px;
+}
+.cmp th,
+.cmp td {
+  text-align: center;
+  vertical-align: top;
+}
+.cmp thead th:first-child,
+.cmp tbody th {
+  text-align: left;
+}
+.cmp tbody th {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--ink);
+  max-width: 26ch;
+}
+.cmp tbody th .rsub {
+  display: block;
+  font-weight: 400;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+  margin-top: 3px;
+}
+.cmp .who {
+  font-family: var(--mono);
+  font-weight: 750;
+  font-size: 13.5px;
+}
+.cmp .who .sub {
+  display: block;
+  font-weight: 400;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-top: 3px;
+}
+.cmp .us {
+  background: color-mix(in srgb, var(--red) 8%, transparent);
+}
+.cmp thead .us .who {
+  color: var(--red-ink);
+}
+.mk {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 1;
+}
+.mk.y {
+  color: var(--good);
+  background: color-mix(in srgb, var(--good) 15%, transparent);
+}
+.mk.n,
+.mk.p {
+  color: var(--ash);
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+}
+.cnote {
+  display: block;
+  font-size: 11px;
+  color: var(--faint);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+.ctacmds {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.ctalinks {
+  margin-top: 24px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* docs.html — hero, on-this-page jump bar, command chips, surfaces, guide cards */
+.doc-hero {
+  padding: 60px 0 8px;
+}
+.doc-hero h1 {
+  font-size: clamp(34px, 5.2vw, 58px);
+  margin-top: 14px;
+}
+.doc-hero .lede {
+  max-width: 60ch;
+}
+.jumpnav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 26px;
+}
+.jumpnav::before {
+  content: 'On this page';
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-right: 4px;
+}
+.jumpnav a {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ash);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 13px;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+.jumpnav a:hover {
+  color: var(--ink);
+  border-color: color-mix(in srgb, var(--red) 45%, var(--line));
+  background: color-mix(in srgb, var(--red) 7%, transparent);
+}
+.cmdrows {
+  display: grid;
+  gap: 16px;
+}
+.cmdrow {
+  display: grid;
+  gap: 8px;
+}
+.cmdcap {
+  color: var(--ash);
+  font-size: 13.5px;
+}
+.cmdcap b {
+  color: var(--ink);
+}
+.cmdwrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.cmdrows .cmd,
+.cmdwrap .cmd,
+.surface .cmd {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.surfaces {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.surface {
+  display: flex;
+  flex-direction: column;
+}
+.surface h3 {
+  font-size: 16.5px;
+  margin-top: 2px;
+}
+.surface p {
+  color: var(--ash);
+  font-size: 14px;
+  margin: 8px 0 14px;
+}
+.surface .cmd,
+.surface .code {
+  margin-top: auto;
+}
+.surface .tag {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 999px;
+  color: var(--red-ink);
+  border: 1px solid color-mix(in srgb, var(--red) 40%, var(--line));
+  margin-left: 8px;
+  vertical-align: 1px;
+}
+.guide-card {
+  display: block;
+  text-decoration: none;
+}
+.guide-card h3 {
+  font-size: 15.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.guide-card .arw {
+  color: var(--red-ink);
+  transition: transform 0.15s ease;
+}
+.guide-card:hover .arw {
+  transform: translateX(3px);
+}
+@media (max-width: 860px) {
+  .surfaces {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jumpnav a,
+  .guide-card .arw {
+    transition: none;
+  }
+}
