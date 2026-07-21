@@ -137,7 +137,7 @@ contract-signed.pdf   ✋ skipped
 
 Other honest outcomes: _"kept original — already smaller than any candidate we tried"_ (skip-if-larger),
 and everything writes to a temp file then atomic-renames, so a crash never leaves a half-written file.
-Your originals are never overwritten unless you pass `--in-place` (and even then `--backup` keeps a copy).
+Your originals are never overwritten — output always goes to a sibling `<name>.diet.<ext>` (or your `--out` directory).
 
 ## Folders
 

@@ -413,7 +413,7 @@ removed a dead `exists` port; DRY'd the verb list. +tests: real atomic-write + `
 the pure arg parser, JSON receipts for every verb, and the infeasible→exit-1 / kept-original→exit-0 paths.
 **Deferred (documented, not in v0.1):**
 
-- _minor_ · Flags `--in-place` / `--backup` / `--overwrite` / `--min-savings` / `--quiet` / `--verbose` and the glob filters (`--include`/`--exclude`/`--keep-tree`/`--copy-unknown`) from [03-CLI](./guide/cli.md) aren't implemented. Default safe behavior (write `*.diet.pdf`, never touch the original) covers the wedge. → post-v0.1.
+- _resolved_ · The CLI-spec flags that were never implemented are no longer documented — cli.md / getting-started.md / folders.md now match the parser. The glob filters (`--include` / `--exclude` / `--copy-unknown` / `--no-copy-unknown`) **shipped** in v0.3. `--in-place` / `--backup` / `--overwrite` / `--keep-tree` are **abandoned by design** — they conflict with the safe-by-default invariants (never touch the original; folder output is always a new tree; structure always preserved). `--min-savings` / `--quiet` / `--verbose` remain unimplemented and optional (revisit only if asked).
 - _minor_ · **Folder mode** (`diet <dir>`, `--max-total`/`--to-total`) → **v0.3** (folders & budgets). Rejected with a clear message for now.
 - _nit_ · Diagnostics all go to stdout; the spec wants human logs on **stderr**, JSON on stdout. → post-v0.1 (needs a `{code, stdout, stderr}` shape).
 - _nit_ · `writeFileAtomic` doesn't `fsync` (post-crash the output could be zero-length; the original is always safe) and doesn't preserve the source's file mode; `--out` doesn't `mkdir -p`. → post-v0.1.

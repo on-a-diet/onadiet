@@ -69,8 +69,8 @@ originals.
 **Not supported (today):**
 
 - **Zip / archive in-out** (`diet archive.zip`) — a separate container concern.
-- **Folder `--in-place`** — folder output is always a new tree; `--in-place` stays single-file (a folder
-  in-place rewrite is too easy to lose data at scale, so it's refused).
+- **In-place folder rewrites** — folder output is always a **new tree**; onadiet never rewrites files in
+  place (a folder in-place rewrite is too easy to lose data at scale).
 - **Following symlinks** — symlinks are skipped (neither followed nor emitted), never dereferenced. Special
   files (FIFO / device / socket) are skipped too — only regular files are read.
 - **Cross-file dedup** (identical images shared across files) and **archive-aware** repacking.
@@ -201,8 +201,8 @@ smallest achievable (exit 1, like the single-file `TARGET_INFEASIBLE`).
 
 Folder mode holds every single-file safety invariant, plus the folder-specific ones:
 
-1. **Never overwrite an original.** Folder output is a **new tree** (`<dir>.diet/` by default, or `--out`). A
-   folder `--in-place` is refused (too easy to lose data at scale).
+1. **Never overwrite an original.** Folder output is a **new tree** (`<dir>.diet/` by default, or `--out`);
+   onadiet never rewrites files in place (too easy to lose data at scale).
 2. **Never write a bigger file** — per file: if no candidate beats the input, the original bytes are copied
    through (`keptOriginal`), never a larger re-encode.
 3. **Atomic per file** — temp + rename for each output; a crash mid-run never leaves a half-written file.

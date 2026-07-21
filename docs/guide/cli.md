@@ -76,10 +76,8 @@ The slim/analyze verbs share a common set of options. The highlights below cover
 
 **Output and writing**
 
-- `--out <dir>` — write results into `<dir>` instead of a sibling path.
-- `--in-place` (with `--backup`) — slim the file in place; `--backup` keeps a `.bak` of the original.
-- `--overwrite never|smaller|always` — when an output already exists (default `never`).
-- `--keep-tree` — preserve the input folder's structure in the output.
+- `--out <dir>` — write results into `<dir>` instead of the default sibling `<name>.diet.<ext>` (a file) or `<dir>.diet/` (a folder). A folder's structure is always preserved in the output tree.
+- `--format <keep|auto|jpeg|png|webp|avif>` — output format for images (default `keep`; `auto` may switch to a smaller format such as WebP/AVIF when it measurably wins). Ignored for PDFs.
 
 **Selecting files (folders)**
 
@@ -92,12 +90,11 @@ The slim/analyze verbs share a common set of options. The highlights below cover
 - `--fast` — a fixed-quality fast path: encode once at the plan's nominal quality and skip the size search. This is the biggest per-call latency win, trading the deeper savings of the full search. It also forgoes the lossless→JPEG recode tier, so a losslessly-stored PDF photo may honestly show no savings. It can't be combined with a byte target.
 - `--timeout <ms>` — abort a slim/plan that runs longer than `<ms>`. A single file writes nothing; a folder stops early and marks the unprocessed files `aborted` in the manifest. Either way it exits `2`.
 - `--max-input <size>` — skip or refuse any input larger than `<size>`. This is a fail-fast memory guard, checked by `stat` before the file is read: folder mode skips the file with a reason, a single file exits with an error, and `check` ignores it.
-- `--min-savings <pct>` — keep the slimmed result only if it saves at least this percentage; otherwise keep the original.
 
-**Output and verbosity**
+**Safety and output**
 
+- `--force` / `--allow-signed` — proceed on a signed PDF even though doing so invalidates the signature (blocked by default; exit `4`).
 - `--json` — emit a stable JSON object on stdout (logs stay on stderr).
-- `--quiet` / `--verbose` — turn logging down or up.
 
 For tuning throughput on large folders, see the [performance guide](./performance.md).
 
@@ -117,9 +114,8 @@ For tuning throughput on large folders, see the [performance guide](./performanc
 
 `diet` is safe by default:
 
-- **The original is never touched.** Output goes to a sibling `<name>.diet.<ext>` (or your `--out` directory).
-- **In-place edits are opt-in.** Use `--in-place`, and add `--backup` to keep a `.bak` of the original.
-- **Existing outputs are protected.** `--overwrite` defaults to `never`.
+- **The original is never touched.** Output goes to a sibling `<name>.diet.<ext>` (or your `--out` directory); onadiet never rewrites a file in place.
+- **A result that isn't smaller is discarded.** If nothing beats the input, onadiet keeps the original rather than writing a bigger file.
 - **Targets are honest.** If a goal size can't be met above the quality floor, `diet` says so instead of returning a degraded file.
 - **Signed PDFs are guarded.** An operation that would break a signed PDF is blocked (exit `4`) unless you pass `--force`. See the [PDF guide](./pdf.md).
 
@@ -132,5 +128,5 @@ diet ./client-files --to-total 25mb --out ./slim # folder: whole tree under a bu
 diet weigh brochure.pdf                          # "184 MB — 92% embedded images, 14 over 300dpi"
 diet plan invoice.pdf --to 5mb --json            # what it'd do, machine-readable, no writes
 diet check ./public --max 2mb --max-total 25mb   # CI gate
-diet report.pdf --in-place --backup              # slim in place, keep a .bak
+diet logo.png --format auto                      # let onadiet pick the smallest image format
 ```
