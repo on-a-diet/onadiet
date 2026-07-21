@@ -61,7 +61,7 @@
   "dependencies": {
     "@onadiet/core": "workspace:*",
     "pdf-lib": "^1.17.1",
-    "sharp": "^0.34.4"
+    "sharp": "^0.35.2"
   },
   "devDependencies": {
     "@onadiet/testkit": "workspace:*",
