@@ -88,9 +88,9 @@ Public-name + handle reservations.
       **The CLI ships unscoped as `onadiet`** (bin `diet`).
 - [x] **GitHub org** `on-a-diet` — created; home of the project (`on-a-diet/onadiet`).
 - [x] **GitHub repo** `on-a-diet/onadiet` — created + pushed.
-- [x] **Unscoped npm `onadiet`** — reserved (published `onadiet@0.0.0` placeholder). It will
-      **graduate into the real CLI package** (the CLI ships unscoped as `onadiet`, bin `diet`, so
-      `npx onadiet` / `npm i -g onadiet` work). _Decided: unscoped CLI over `@onadiet/cli` — better DX._
+- [x] **Unscoped npm `onadiet`** — **published at `0.1.0`** (graduated from the `0.0.0` placeholder). The
+      CLI ships unscoped as `onadiet`, bin `diet`, so `npx onadiet` / `npm i -g onadiet` work. _Decided:
+      unscoped CLI over `@onadiet/cli` — better DX._
 - [ ] **JSR scope** `@onadiet` — **deferred** (3-scope-at-a-time limit; scoped npm already protects the
       code names; do later).
 - [ ] **Domain** (`onadiet.dev` / `.sh`) — **deferred** (costs money; grab right before launch, not now).

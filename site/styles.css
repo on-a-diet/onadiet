@@ -460,7 +460,7 @@ section {
   border-top: 1px solid var(--line);
 }
 .sec-head {
-  max-width: 62ch;
+  max-width: 72ch;
   margin-bottom: 30px;
 }
 .sec-head h2 {
@@ -471,6 +471,7 @@ section {
   color: var(--ash);
   font-size: 16.5px;
   margin: 12px 0 0;
+  max-width: 62ch;
 }
 .sec-head p b {
   color: var(--ink);

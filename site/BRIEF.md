@@ -54,7 +54,7 @@ The creature does the eating; the label proves it was honest.
   motion is `aria-hidden`.
 - **No CDN / external fonts / remote images** — everything self-contained.
 - **Logo front and center** — the mascot leads the hero + sits in the header (returns home) + is the favicon.
-- **Honest copy** — a truthful **`pre-release`** badge (built & tested through v0.4, **not on npm yet**); every perf
+- **Honest copy** — a truthful status badge (**`npm · v0.1.0`**, early/`0.x`); every perf
   claim carries **measured numbers + method** (the benchmarks are real: SpaceX 9 MB deck, NASA photo corpus,
   the `test:perf` latency numbers).
 
@@ -63,7 +63,7 @@ The creature does the eating; the label proves it was honest.
 Cream + serif + terracotta; lone neon-on-near-black; purple→blue gradient hero; Inter/Space-Grotesk as the
 default; emoji section markers; everything centered; rounded-lg everywhere.
 
-## Pages (scoped to pre-release maturity)
+## Pages (scoped to current maturity)
 
 Landing (hero → install-from-source → live `diet` demo/receipt → measured benchmarks → the 5 plans → why-local
 → CTA) · Docs/Usage (commands, plans, targets) · Why onadiet (honest comparison vs upload-sites / Ghostscript,

@@ -11,7 +11,7 @@ Open-source project in the `on-a-diet` GitHub org; license is **Apache-2.0** (de
 Commit under your GitHub **noreply** email — the public history carries no personal address.
 
 - **npm:** the CLI ships **unscoped** as `onadiet` (bin `diet`, `onadiet` alias); the engine + adapters are
-  scoped `@onadiet/*` (`@onadiet/core`, `@onadiet/pdf`, …). The `@onadiet` org scope is reserved.
+  scoped `@onadiet/*` (`@onadiet/core`, `@onadiet/pdf`, …), published under the `@onadiet` org scope.
 - **GitHub:** repo lives at `on-a-diet/onadiet` in the `on-a-diet` GitHub org. Human wordmark is
   "on a diet"; every identifier uses `onadiet` (npm treats `on-a-diet` /
   `onadiet` as the same name).
