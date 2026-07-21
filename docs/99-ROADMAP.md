@@ -72,10 +72,12 @@ shipped:** open-source at `on-a-diet/onadiet` (Apache-2.0, noreply-only history,
 five packages live on npm at `0.1.0`** (unscoped `onadiet` + `@onadiet/{core,pdf,image,svg}`, one
 coordinated first release), and the marketing site live at
 [onadiet.pages.dev](https://onadiet.pages.dev) (Cloudflare Pages, auto-deploy — homepage demo + measured
-benchmarks, a Why/comparison page, a Docs/usage page). _(The repo sits at `0.1.1`, a README-refresh patch
-staged for publish.)_ **Remaining distribution:** a Homebrew tap, a Claude Code Skill wrapping the CLI, and
-the hardened publish workflow (OIDC Trusted Publishing + `--provenance` + automated `changeset publish`) —
-the `0.1.0` release was published by hand.
+benchmarks, a Why/comparison page, a Docs/usage page). All five packages are now at `0.1.1` on npm.
+**Remaining distribution:** a Homebrew tap and a Claude Code Skill wrapping the CLI. The automated publish
+workflow (`.github/workflows/release.yml`: Changesets auto release-PR + a gated publish job using **npm
+Trusted Publishing (OIDC)** + `--provenance`, no npm token) is added — replacing the by-hand `0.1.x`
+releases; activation needs a one-time per-package trusted-publisher config on npm + a required reviewer on
+the `release` environment.
 
 ## Decisions locked
 
@@ -231,8 +233,12 @@ version machinery now runs. `changeset status` confirms the accumulated v0.4 cha
 - [x] **npm publish — done.** All five packages published at `0.1.0` (unscoped `onadiet` CLI, bin `diet`;
       scoped `@onadiet/{core,pdf,image,svg}`) as one coordinated first release — run manually with
       `changeset publish`.
-- [ ] Homebrew formula (`brew install onadiet`) + the hardened publish workflow (OIDC Trusted Publishing +
-      `--provenance` + automated `changeset publish`) — the `0.1.0` release was published by hand.
+- [x] **Automated publish workflow** — [`.github/workflows/release.yml`](../.github/workflows/release.yml):
+      Changesets auto release-PR + a **gated** publish job (the `release` environment) that publishes
+      tokenlessly via **npm Trusted Publishing (OIDC)** with `--provenance`. Replaces the by-hand `0.1.x`
+      releases. Activation needs the one-time per-package trusted-publisher config + a required reviewer on
+      the `release` environment.
+- [ ] Homebrew formula (`brew install onadiet`).
 - [ ] A Claude Code **Skill** wrapping the CLI (the agent channel; MCP is a later thin wrapper).
 - [x] **Marketing site — live** at [onadiet.pages.dev](https://onadiet.pages.dev) (Cloudflare Pages,
       auto-deploy): homepage with on-device demo + measured benchmarks, a Why/comparison page, and a
