@@ -12,7 +12,7 @@ covers the common path; this is the exhaustive reference.
 | `diet weigh <file\|dir>`                                              | Report sizes. **No writes.**                              |
 | `diet plan <file\|dir> [--to/--to-each <size>]`                       | Dry-run — show what it _would_ do. **No writes.**         |
 | `diet check <file\|dir> --max <size> [--max-total <size>]`            | CI weigh-in. Exit `0` if within budget, nonzero if over.  |
-| `diet checkup`                                                        | Report which optional encoders are installed.             |
+| `diet checkup`                                                        | Print a static readiness report of the built-in engines.  |
 
 ## Options
 
@@ -59,8 +59,8 @@ Malformed-usage errors are **not** JSON — they print help text and exit `3`. C
 
 onadiet drives best-in-class **permissive** local encoders — sharp/libvips (images),
 pdf-lib + sharp (PDFs), and svgo (SVG). Copyleft engines (Ghostscript/pngquant) are
-**never bundled** — they're optional, PATH-detected opt-in adapters. `diet checkup`
-shows what's available.
+**never bundled**, and today they're **not wired in** — the shipped path is fully
+permissive. `diet checkup` prints a static readiness report of the built-in engines.
 
 ## Install (if the skill's `npx` fallback isn't wanted)
 

@@ -50,14 +50,14 @@ Build by these:
 **Project-specific conventions:**
 
 - **Orchestrate & measure, never fake the win.** The engine drives best-in-class local encoders
-  (sharp/libvips, qpdf, svgo; oxipng planned) and **verifies** the output; it never reports a saving it didn't
+  (sharp/libvips, pdf-lib, svgo; qpdf/oxipng planned) and **verifies** the output; it never reports a saving it didn't
   measure, and it keeps the original if it can't beat it. A "compression" that isn't verified is a bug.
 - **Pure core seam.** `@onadiet/core` holds detect · weigh · plan · slim · verify · report + the
   `FormatAdapter` / `QualityMetric` / `SizeSearch` interfaces, and imports **no** codec SDK and no raw I/O.
   Adapters depend on core, never the reverse (enforced by `.dependency-cruiser.cjs`).
 - **Permissive core; copyleft engines stay optional.** The shipped core is Apache-2.0 and depends only on
-  permissive engines. **Ghostscript (AGPL) and pngquant (GPL) are NEVER bundled** — they are optional,
-  PATH-detected, opt-in adapters behind the `keto`/`crash` plans. Prefer the in-house permissive
+  permissive engines. **Ghostscript (AGPL) and pngquant (GPL) are NEVER bundled** — if ever added they
+  stay optional, PATH-detected, opt-in adapters behind the `keto`/`crash` plans (not wired today). Prefer the in-house permissive
   extract→downsample→re-embed PDF path.
 - **Safe by default — a hard rule.** Never overwrite the original; never write output that's _larger_;
   write to a temp file then atomic-rename; **detect and refuse-or-warn on signed / form PDFs** rather than

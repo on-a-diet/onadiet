@@ -2,7 +2,7 @@
 
 `onadiet` puts your files on a diet — it shrinks PDFs, images, and whole folders to fit under a size limit, on your machine, with no uploads, safe by default, and with an honest before/after receipt. This guide takes you from install to the everyday commands.
 
-> **Status:** on npm (`v0.1.0`) — early (`0.x`), the API may still move.
+> **Status:** on npm (`v0.1.1`) — early (`0.x`), the API may still move.
 
 ## Table of contents
 
@@ -157,23 +157,35 @@ total fits — the budget picks the plan, so don't also pass `--plan`.
 
 ## In code (the library)
 
+The engine is **pure — bytes in, bytes out** (`@onadiet/core` never touches the filesystem), so you do the I/O and drive a format adapter (`@onadiet/pdf` / `@onadiet/image` / `@onadiet/svg`):
+
 ```ts
-import { diet, weigh } from '@onadiet/core'
+import { readFile, writeFile } from 'node:fs/promises'
+import { pdfAdapter } from '@onadiet/pdf'
+import { savedPercent } from '@onadiet/core'
 
-const r = await diet('report.pdf', { to: '5mb', plan: 'lowcarb', out: 'report.small.pdf' })
-r.outputBytes // 4_700_000
-r.savedPercent // 88.6
-r.quality.ssim // 0.981
-r.keptOriginal // false
+const bytes = new Uint8Array(await readFile('report.pdf'))
+const { outcome, output } = await pdfAdapter.slim(bytes, {
+  plan: 'lowcarb',
+  targetBytes: 5_000_000, // omit for plan-only (slim as far as the floor allows)
+})
 
-// Buffer in / Buffer out (e.g. slimming an upload before you store it)
-const out = await diet(inputBuffer, { inputType: 'application/pdf', to: '5mb' })
+// `output` is non-null only when a genuinely smaller file was produced
+if (output) await writeFile('report.small.pdf', output)
 
-// analysis only
-const w = await weigh('./folder')
+if (outcome.ok) {
+  outcome.keptOriginal // true = nothing smaller was possible; original kept
+  outcome.outputBytes // e.g. 4_700_000
+  savedPercent(outcome.inputBytes, outcome.outputBytes) // e.g. 88.6
+} else {
+  outcome.reason // 'SIGNED_PDF' | 'TARGET_INFEASIBLE' | … (an OnadietErrorCode)
+}
+
+// analysis only — what does it weigh, and what's heavy?
+const w = await pdfAdapter.weigh(bytes) // { bytes, causes: [{ label, bytes }, …] }
 ```
 
-The result is a discriminated union — `{ ok: true, … }` or `{ ok: false, reason: 'signed-pdf' | 'target-infeasible' | … }` — so you handle outcomes without try/catch guesswork.
+`outcome` is a discriminated union — `{ ok: true, … }` or `{ ok: false, reason: 'SIGNED_PDF' | 'TARGET_INFEASIBLE' | … }` — so you handle every case without try/catch guesswork.
 
 For the full library surface, see the [API reference](./api-reference.md).
 

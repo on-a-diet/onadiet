@@ -11,7 +11,7 @@ The **pure engine** behind [onadiet](https://github.com/on-a-diet/onadiet) — _
 
 ## What this package is
 
-The engine that both the [`onadiet` CLI](https://www.npmjs.com/package/onadiet) and (later) the format
+The engine that both the [`onadiet` CLI](https://www.npmjs.com/package/onadiet) and the format
 adapters build on. Its defining property: it is **pure** — no filesystem, network, clock, or randomness. It
 reaches the outside world only through injected ports, which keeps it deterministic, testable, and reusable
 across the CLI, a runtime library, CI, and agents. Purity is enforced two ways: ESLint bans
@@ -32,7 +32,7 @@ This package is the **pure core** of that loop — the seams + helpers below; th
 | `parseSize` · `formatBytes` · `savedPercent`                 | Size math (`"5mb"` ⇄ bytes, human formatting, % saved).               |
 | `DIET_PLANS` · `PLAN_SPECS` · `resolvePlan` · `DEFAULT_PLAN` | The quality contracts: `cleanse · balanced · lowcarb · keto · crash`. |
 | `OnadietError` (+ `OnadietErrorCode`)                        | Typed errors — callers branch on `.code`, never on message strings.   |
-| `FormatAdapter` · `Weight` · `Outcome` (types)               | The seams the format adapters (`@onadiet/pdf`, …) will implement.     |
+| `FormatAdapter` · `Weight` · `Outcome` (types)               | The seams the format adapters (`@onadiet/pdf`, …) implement.          |
 
 ## Usage
 
@@ -51,7 +51,7 @@ server can slim on every request with no locks and no per-request setup. A singl
 all; the only shared state anywhere is the folder API's read-mostly, **bounded** glob cache (irrelevant to
 per-file slims).
 
-The codecs (sharp/libvips, qpdf) run the heavy pixel/stream work on libuv's threadpool, but the SSIM-guided
+The codec (sharp/libvips) runs the heavy pixel work on libuv's threadpool, but the SSIM-guided
 size search is JS on the main thread — so on a busy server, move a slim onto a **worker thread** to keep the
 event loop free. Because a slim is a pure `(bytes, request) → SlimResult` call, it offloads cleanly and pools
 trivially. Runnable pattern (worker + a minimal, self-healing pool):

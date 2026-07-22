@@ -49,5 +49,5 @@ input files** (PDFs, images, SVGs) and write output to disk. The areas most in s
   copyleft engine without the user opting in is a licensing/security concern worth reporting.
 
 Out of scope: issues that require deliberately hostile local configuration or a malicious PATH the user
-controls, and vulnerabilities in the **upstream engines** onadiet drives (e.g. a libvips/sharp or qpdf CVE) —
+controls, and vulnerabilities in the **upstream engines** onadiet drives (e.g. a libvips/sharp or pdf-lib CVE) —
 those are upstream, not an onadiet vulnerability. Reports for those are still welcome, but they're upstream.

@@ -5,7 +5,7 @@
 > runtime environment. Kept in sync **in the same change** as anything that adds, renames, or removes a
 > public export, config field, CLI flag, or error code.
 
-**Status:** on npm (`v0.1.0`) — early (`0.x`); the surface below is what is safe to depend on.
+**Status:** on npm (`v0.1.1`) — early (`0.x`); the surface below is what is safe to depend on.
 Stability markers below say what's safe to depend on:
 
 - **public** — stable, intended for consumers.
@@ -29,7 +29,7 @@ Stability markers below say what's safe to depend on:
 
 ## Packages
 
-| Package              | Install _(once published)_         | Role                                                                                                                                                        |
+| Package              | Install                            | Role                                                                                                                                                        |
 | -------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`onadiet`**        | `npm i -g onadiet` · `npx onadiet` | The `diet` CLI (bin: `diet`, alias `onadiet`). **Re-exports the full `@onadiet/core` API**; also exposes a testable `run(argv, ports)` core.                |
 | **`@onadiet/core`**  | `npm i @onadiet/core`              | The **pure engine** — no I/O, clock, or randomness. Types, diet plans, typed errors, size math, the seam interfaces, the dual-constraint size search, SSIM. |

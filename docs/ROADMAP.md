@@ -69,8 +69,8 @@ pillar was hardened (bounded memory + fail-fast `--max-input` / temp-file output
 with published numbers — see [Performance](#performance-cross-cutting)); release-prep landed (per-package
 keywords, the two missing adapter READMEs, the canonical API reference). **Then the project went public and
 shipped:** open-source at `on-a-diet/onadiet` (Apache-2.0, noreply-only history, leak-scan gate) with **all
-five packages live on npm at `0.1.0`** (unscoped `onadiet` + `@onadiet/{core,pdf,image,svg}`, one
-coordinated first release), and the marketing site live at
+five packages live on npm** (unscoped `onadiet` + `@onadiet/{core,pdf,image,svg}`, a coordinated
+`0.1.0` first release, now `0.1.1`), and the marketing site live at
 [onadiet.pages.dev](https://onadiet.pages.dev) (Cloudflare Pages, auto-deploy — homepage demo + measured
 benchmarks, a Why/comparison page, a Docs/usage page). All five packages are now at `0.1.1` on npm.
 **Distribution:** npm, the Homebrew tap, and a Claude Code **Skill** (plugin + marketplace — `/plugin install onadiet`) are shipped; a cross-agent **MCP server** is the remaining channel. The automated publish
@@ -104,7 +104,7 @@ Public-name + handle reservations.
       **The CLI ships unscoped as `onadiet`** (bin `diet`).
 - [x] **GitHub org** `on-a-diet` — created; home of the project (`on-a-diet/onadiet`).
 - [x] **GitHub repo** `on-a-diet/onadiet` — created + pushed.
-- [x] **Unscoped npm `onadiet`** — **published at `0.1.0`** (graduated from the `0.0.0` placeholder). The
+- [x] **Unscoped npm `onadiet`** — **published at `0.1.0`** (graduated from the `0.0.0` placeholder; now `0.1.1`). The
       CLI ships unscoped as `onadiet`, bin `diet`, so `npx onadiet` / `npm i -g onadiet` work. _Decided:
       unscoped CLI over `@onadiet/cli` — better DX._
 - [ ] **JSR scope** `@onadiet` — **deferred** (3-scope-at-a-time limit; scoped npm already protects the
@@ -230,7 +230,7 @@ version machinery now runs. `changeset status` confirms the accumulated v0.4 cha
 - [x] **Release-readiness (standards) pass:** per-package `engines`/`bugs`/`sideEffects`, tsup target →
       node22, CI actions SHA-pinned, README CI badge + build-from-source (#40); the mandated **API reference**
       at [docs/guide/api-reference.md](guide/api-reference.md); `testkit` + `examples` READMEs added.
-- [x] **npm publish — done.** All five packages published at `0.1.0` (unscoped `onadiet` CLI, bin `diet`;
+- [x] **npm publish — done.** All five packages first published at `0.1.0`, now `0.1.1` (unscoped `onadiet` CLI, bin `diet`;
       scoped `@onadiet/{core,pdf,image,svg}`) as one coordinated first release — run manually with
       `changeset publish`.
 - [x] **Automated publish workflow** — [`.github/workflows/release.yml`](../.github/workflows/release.yml):

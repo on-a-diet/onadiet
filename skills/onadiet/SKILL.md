@@ -150,8 +150,9 @@ diet plan report.pdf --to 5mb
 diet check ./dist --max 2mb --max-total 20mb
 ```
 
-Quality plans, gentlest → most aggressive: `cleanse`, `balanced` (default),
-`lowcarb` (visually-lossless floor), `keto`, `crash`.
+Quality plans: `cleanse` (lossless tidy) and `lowcarb` (visually-lossless floor) are
+the gentle end; `balanced` (default) trades more quality for more shrink; `keto` and
+`crash` are the aggressive end.
 
 ## Safety — hold these guarantees
 
@@ -168,8 +169,8 @@ Quality plans, gentlest → most aggressive: `cleanse`, `balanced` (default),
 
 ## Troubleshooting
 
-- **An engine is missing / a format won't slim** → run `diet checkup` to see which
-  encoders are available and what to install.
+- **Check what's built in** → `diet checkup` prints a static readiness report of the
+  bundled engines (pdf / image / svg — all ship ready; nothing to install).
 - **`ok: false` (target infeasible)** → the target is too small to hit without
   visible loss. Report that honestly; suggest a larger `--to`, or `--plan crash` only
   if the user accepts more aggressive loss.
