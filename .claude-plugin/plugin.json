@@ -1,0 +1,9 @@
+{
+  "name": "onadiet",
+  "description": "Shrink PDFs, images, and folders under a size limit — locally, with no uploads. Wraps the onadiet (diet) CLI.",
+  "version": "0.1.0",
+  "author": { "name": "on-a-diet", "url": "https://github.com/on-a-diet" },
+  "homepage": "https://onadiet.pages.dev",
+  "license": "Apache-2.0",
+  "keywords": ["compression", "pdf", "image", "svg", "folder", "diet", "onadiet", "shrink"]
+}

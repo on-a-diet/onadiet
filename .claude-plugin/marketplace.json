@@ -1,0 +1,14 @@
+{
+  "name": "onadiet",
+  "owner": { "name": "on-a-diet", "url": "https://github.com/on-a-diet" },
+  "description": "onadiet — local, no-upload file-compression skills for AI agents.",
+  "plugins": [
+    {
+      "name": "onadiet",
+      "source": "./",
+      "description": "Shrink PDFs, images, and folders under a size limit — locally, with no uploads.",
+      "author": { "name": "on-a-diet" },
+      "license": "Apache-2.0"
+    }
+  ]
+}
