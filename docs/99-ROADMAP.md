@@ -73,7 +73,7 @@ five packages live on npm at `0.1.0`** (unscoped `onadiet` + `@onadiet/{core,pdf
 coordinated first release), and the marketing site live at
 [onadiet.pages.dev](https://onadiet.pages.dev) (Cloudflare Pages, auto-deploy — homepage demo + measured
 benchmarks, a Why/comparison page, a Docs/usage page). All five packages are now at `0.1.1` on npm.
-**Remaining distribution:** a Homebrew tap and a Claude Code Skill wrapping the CLI. The automated publish
+**Remaining distribution:** a Claude Code Skill wrapping the CLI (the Homebrew tap shipped). The automated publish
 workflow (`.github/workflows/release.yml`: Changesets auto release-PR + a gated publish job using **npm
 Trusted Publishing (OIDC)** + `--provenance`, no npm token) is added — replacing the by-hand `0.1.x`
 releases; activation needs a one-time per-package trusted-publisher config on npm + a required reviewer on
@@ -111,7 +111,7 @@ Public-name + handle reservations.
       code names; do later).
 - [ ] **Domain** (`onadiet.dev` / `.sh`) — **deferred** (costs money; grab right before launch, not now).
 - [ ] **crates.io `onadiet`** — only if a Rust core ever happens (low priority).
-- [ ] **Homebrew tap** — at distribution (v0.4).
+- [x] **Homebrew tap** — shipped: [`on-a-diet/homebrew-tap`](https://github.com/on-a-diet/homebrew-tap) (`brew tap on-a-diet/tap && brew install onadiet`); homebrew-core (bare `brew install`) once notable.
 
 Binary: `diet` (alias `onadiet`). Wordmark: "on a diet". Every identifier: `onadiet`.
 
@@ -238,7 +238,7 @@ version machinery now runs. `changeset status` confirms the accumulated v0.4 cha
       tokenlessly via **npm Trusted Publishing (OIDC)** with `--provenance`. Replaces the by-hand `0.1.x`
       releases. Activation needs the one-time per-package trusted-publisher config + a required reviewer on
       the `release` environment.
-- [ ] Homebrew formula (`brew install onadiet`).
+- [x] **Homebrew formula — shipped** in [`on-a-diet/homebrew-tap`](https://github.com/on-a-diet/homebrew-tap): `brew tap on-a-diet/tap && brew install onadiet` (verified installing on macOS; homebrew-core submission once notable).
 - [ ] A Claude Code **Skill** wrapping the CLI (the agent channel; MCP is a later thin wrapper).
 - [x] **Marketing site — live** at [onadiet.pages.dev](https://onadiet.pages.dev) (Cloudflare Pages,
       auto-deploy): homepage with on-device demo + measured benchmarks, a Why/comparison page, and a

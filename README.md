@@ -155,7 +155,7 @@ trivial. Copy-paste pattern: [`examples/worker-offload`](./examples/worker-offlo
 
 ## The commands (planned)
 
-Install with `brew install onadiet`, `npm i -g onadiet`, or run once with `npx onadiet …`. The binary is
+Install with `npm i -g onadiet`, Homebrew (`brew tap on-a-diet/tap && brew install onadiet`), or run once with `npx onadiet …`. The binary is
 `diet` (with `onadiet` as an alias). Full walkthrough: **[Getting started](./docs/guide/getting-started.md)**
 (and the rest of the [guides](./docs/guide/)). The vocabulary is the metaphor:
 
