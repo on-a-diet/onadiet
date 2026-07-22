@@ -31,12 +31,13 @@ Three names, one tool:
 
 ## Install
 
-Once published, pick one:
+Pick one:
 
 ```bash
-brew install onadiet        # macOS — installs the `diet` command
-npx onadiet report.pdf      # zero-install, one-off run
 npm i -g onadiet            # global install; then just `diet …`
+brew tap on-a-diet/tap      # one-time tap...
+brew install onadiet        # ...then macOS / Linux via Homebrew
+npx onadiet report.pdf      # zero-install, one-off run
 ```
 
 In code instead of the terminal: `npm i @onadiet/core`.

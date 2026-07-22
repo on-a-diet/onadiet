@@ -27,13 +27,13 @@ One witty command, safe by default, and it tells you exactly what it did._
 
 - [The pitch](#the-pitch)
 - [Before / after](#before--after)
-- [The commands (planned)](#the-commands-planned)
+- [The commands](#the-commands)
 - [Diet plans (quality contracts)](#diet-plans-quality-contracts)
 - [Why it exists](#why-it-exists)
 - [How it works](#how-it-works)
 - [What it is not](#what-it-is-not)
 - [The bigger vision](#the-bigger-vision)
-- [Packages (planned)](#packages-planned)
+- [Packages](#packages)
 - [Status & roadmap](#status--roadmap)
 - [License](#license)
 
@@ -153,7 +153,7 @@ server can call it from every request with no locks. The codecs run on libuv's t
 search off your event loop, offload a slim to a **worker thread** — the engine's statelessness makes pooling
 trivial. Copy-paste pattern: [`examples/worker-offload`](./examples/worker-offload).
 
-## The commands (planned)
+## The commands
 
 Install with `npm i -g onadiet`, Homebrew (`brew tap on-a-diet/tap && brew install onadiet`), or run once with `npx onadiet …`. The binary is
 `diet` (with `onadiet` as an alias). Full walkthrough: **[Getting started](./docs/guide/getting-started.md)**
@@ -255,7 +255,7 @@ databases, ML models, and LLM tokens** — one verb, many targets:
 
 Files/PDF is the launch wedge — v1 ships _only_ that, and earns each next rung by winning it first.
 
-## Packages (planned)
+## Packages
 
 | Package                                            | What it is                                                                                                     |
 | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
