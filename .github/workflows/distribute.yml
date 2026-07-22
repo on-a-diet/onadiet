@@ -1,0 +1,44 @@
+name: Distribute
+
+# Fan out a published release to downstream channels. Triggered by the GitHub Release that release.yml
+# creates on publish — npm is the source of truth; every channel here is DERIVED from it. Add a channel =
+# add a job keyed off the same event.
+#
+# Requires the HOMEBREW_TAP_TOKEN secret: a fine-grained PAT with contents:write + pull-requests on
+# on-a-diet/homebrew-tap (the built-in GITHUB_TOKEN is scoped to THIS repo and can't write to the tap).
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  # ── Homebrew: PR the tap formula's url + sha256 to the newly-published npm version. ─────────────
+  # bump-formula actions only handle GitHub-release-tarball formulae; onadiet's formula pulls from the npm
+  # registry, so we compute the tarball url + sha256 ourselves and open a PR to the tap (the tap's CI
+  # install-tests the bump before you merge; enable auto-merge on the tap for a zero-touch flow).
+  homebrew:
+    # A monorepo cuts a GitHub Release per package; react only to the CLI package's tag.
+    if: startsWith(github.event.release.tag_name, 'onadiet@')
+    runs-on: ubuntu-latest
+    steps:
+      - name: PR the formula bump to the tap
+        env:
+          GH_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+        run: |
+          set -euo pipefail
+          tag='${{ github.event.release.tag_name }}'
+          version="${tag##*@}"                                       # onadiet@1.2.3 -> 1.2.3
+          url="https://registry.npmjs.org/onadiet/-/onadiet-${version}.tgz"
+          sha="$(curl -fsSL "$url" | shasum -a 256 | cut -d' ' -f1)"
+          gh repo clone on-a-diet/homebrew-tap tap -- --depth 1
+          cd tap
+          git switch -c "bump-onadiet-${version}"
+          sed -i -E "s#^  url \".*\"#  url \"${url}\"#; s#^  sha256 \".*\"#  sha256 \"${sha}\"#" Formula/onadiet.rb
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "onadiet ${version}"
+          git push -u origin "bump-onadiet-${version}"
+          gh pr create --fill --head "bump-onadiet-${version}"
