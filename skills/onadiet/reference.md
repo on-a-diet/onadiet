@@ -16,35 +16,37 @@ covers the common path; this is the exhaustive reference.
 
 ## Options
 
-| Flag                             | Applies to  | Meaning                                                                                                  |
-| -------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------- |
-| `--to <size>`                    | file        | Target output size (`500kb`, `5mb`, `1.5mb`).                                                            |
-| `--to-each <size>`               | folder      | Per-file target.                                                                                         |
-| `--to-total <size>`              | folder      | Whole-folder budget.                                                                                     |
-| `--plan <p>`                     | all         | Quality plan: `cleanse` · `balanced` (default) · `lowcarb` (visually-lossless floor) · `keto` · `crash`. |
-| `--format <f>`                   | images      | `keep` · `auto` (pick best) · `jpeg` · `png` · `webp` · `avif`.                                          |
-| `--out <dir>`                    | all         | Write output to a directory instead of next to the input.                                                |
-| `--force`                        | signed PDFs | Proceed on a signed/form PDF (**breaks the signature** — confirm with the user first).                   |
-| `--json`                         | all         | Machine-readable receipt. Use it to report the real before/after.                                        |
-| `--include` / `--exclude <glob>` | folder      | Filter which files are considered.                                                                       |
-| `--no-copy-unknown`              | folder      | Don't copy files onadiet doesn't recognize.                                                              |
-| `--concurrency <n>`              | folder      | Parallel workers.                                                                                        |
-| `--max-input <size>`             | all         | Skip inputs larger than this (fail-fast, no read).                                                       |
-| `--timeout <ms>`                 | all         | Abort a slim that runs longer than this.                                                                 |
-| `--fast`                         | all         | Encode once at the plan's quality; skip the size search (lower latency, no `--to`).                      |
+| Flag                             | Applies to | Meaning                                                                                                                                                                                |
+| -------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--to <size>`                    | file       | Target output size (`500kb`, `5mb`, `1.5mb`).                                                                                                                                          |
+| `--to-each <size>`               | folder     | Per-file target.                                                                                                                                                                       |
+| `--to-total <size>`              | folder     | Whole-folder budget.                                                                                                                                                                   |
+| `--plan <p>`                     | all        | Quality plan: `cleanse` · `balanced` (default) · `lowcarb` (visually-lossless floor) · `keto` · `crash`.                                                                               |
+| `--format <f>`                   | images     | `keep` · `auto` (pick best) · `jpeg` · `png` · `webp` · `avif`.                                                                                                                        |
+| `--out <dir>`                    | all        | Write output to a directory instead of next to the input.                                                                                                                              |
+| `--force`                        | all        | Proceed on a signed/form PDF (**breaks the signature**) **and drop the perceptual-quality floor** (chases the size, may visibly degrade). Deliberate override — confirm with the user. |
+| `--json`                         | all        | Machine-readable receipt. Use it to report the real before/after.                                                                                                                      |
+| `--include` / `--exclude <glob>` | folder     | Filter which files are considered.                                                                                                                                                     |
+| `--no-copy-unknown`              | folder     | Don't copy files onadiet doesn't recognize.                                                                                                                                            |
+| `--concurrency <n>`              | folder     | Parallel workers.                                                                                                                                                                      |
+| `--max-input <size>`             | all        | Skip inputs larger than this (fail-fast, no read).                                                                                                                                     |
+| `--timeout <ms>`                 | all        | Abort a slim that runs longer than this.                                                                                                                                               |
+| `--fast`                         | all        | Encode once at the plan's quality; skip the size search (lower latency, no `--to`).                                                                                                    |
 
 ## `--json` receipt fields
 
 Single file:
 
-- `ok` — `false` if onadiet couldn't proceed (see `reason` + `detail`; nothing written).
-- `keptOriginal: true` — couldn't beat the input; original untouched, nothing written.
-- `inputBytes`, `outputBytes`, `savedPercent` — measured before/after (percent already computed).
+- `ok` — `false` if onadiet couldn't proceed; nothing written. Engine outcomes (signed PDF, target infeasible) include `reason` + `detail`; input/IO errors (unsupported type, unreadable, over `--max-input`, would-overwrite) instead carry a flat `error` string.
+- `keptOriginal: true` — couldn't beat the input, or it's already under target; original untouched, nothing written.
+- `inputBytes`, `outputBytes`, `savedPercent` — measured before/after (percent already computed, one decimal).
 - `output` — where the result was written (`null` on a dry-run / `plan`).
 - `plan`, `method` — the quality plan, and a short human-readable description of what it did.
 - `action` — `slim` or `plan` (dry-run).
 
-Folder runs emit a per-file breakdown (each entry `slimmed` / `kept` / `copied` / `skipped`) plus totals.
+**Folder runs use a different top-level shape:** `{ ok, action, input, output, files[], totals }`. Overall before/after lives in `totals` (`inputBytes` / `outputBytes` / `savedBytes` / `savedPercent`, plus a `files` count and `slimmed` / `copied` / `kept` / `refused` / `skipped` tallies). Each `files[]` entry carries `path`, its `action` — `slimmed` · `copied` · `kept` · **`refused`** (original passed through untouched — e.g. a signed/encrypted PDF or an infeasible per-file target) · `skipped` — plus `inputBytes` / `outputBytes` / `outputPath` (and `method` when slimmed).
+
+Malformed-usage errors are **not** JSON — they print help text and exit `3`. Check the exit code before parsing.
 
 ## Safety invariants (always hold)
 
@@ -55,9 +57,10 @@ Folder runs emit a per-file breakdown (each entry `slimmed` / `kept` / `copied` 
 
 ## Engines
 
-onadiet drives best-in-class **permissive** local encoders (sharp/libvips, qpdf,
-svgo). Copyleft engines (Ghostscript/pngquant) are **never bundled** — they're
-optional, PATH-detected opt-in adapters. `diet checkup` shows what's available.
+onadiet drives best-in-class **permissive** local encoders — sharp/libvips (images),
+pdf-lib + sharp (PDFs), and svgo (SVG). Copyleft engines (Ghostscript/pngquant) are
+**never bundled** — they're optional, PATH-detected opt-in adapters. `diet checkup`
+shows what's available.
 
 ## Install (if the skill's `npx` fallback isn't wanted)
 

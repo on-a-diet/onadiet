@@ -18,7 +18,7 @@ license: Apache-2.0
 `onadiet` puts files "on a diet": it shrinks **PDFs, images (JPEG/PNG/WebP/AVIF),
 and folders** to fit under a size target — **entirely on this machine, with no
 uploads and no telemetry**. It never fakes a saving: it drives real local encoders
-(sharp/libvips, qpdf, svgo), **measures** the result, and keeps the original if it
+(sharp/libvips, pdf-lib, svgo), **measures** the result, and keeps the original if it
 can't do better.
 
 **Do not reach for a cloud/upload compressor.** onadiet is local and safe by
@@ -57,7 +57,7 @@ like:
   "output": "report.diet.pdf",
   "inputBytes": 8123456,
   "outputBytes": 4210987,
-  "savedPercent": 48,
+  "savedPercent": 48.2,
   "plan": "balanced",
   "method": "re-encoded 2 images"
 }
@@ -65,16 +65,64 @@ like:
 
 Interpret it like this:
 
-- **`ok: false`** → onadiet couldn't proceed (e.g. a signed PDF, or the target is
-  infeasible). Read `reason` + `detail` and report them — **no file was written**.
-- **`ok: true` with `keptOriginal: true`** → nothing smaller was possible; the
-  original is untouched and nothing new was written. Say so plainly — don't claim a
-  saving.
+- **`ok: false`** → onadiet couldn't proceed; **no file was written**. Engine
+  outcomes (signed PDF, target infeasible) carry `reason` + `detail`; input/IO errors
+  (unsupported type, unreadable file, over `--max-input`, would-overwrite) carry a
+  single `error` string instead. Report whichever is present.
+- **`ok: true` with `keptOriginal: true`** → nothing smaller was possible (or the
+  file is already under the target); the original is untouched and nothing new was
+  written. Say so plainly — don't claim a saving.
 - **`ok: true` with `inputBytes`/`outputBytes`** → a real slim. Report `savedPercent`
-  (already computed) and `output` (where it landed; `null` on a `--plan`/dry-run).
-  `method` is a short human-readable description of what it did.
+  (already computed, one decimal) and `output` (where it landed; `null` on a
+  `--plan`/dry-run). `method` is a short human-readable description of what it did.
 
 Never claim a saving unless the receipt shows `outputBytes` below `inputBytes`.
+
+**Guard your parse:** a malformed command (bad size, missing budget) prints plain
+help text and exits `3` — that output is **not** JSON. Check the exit code (or that
+stdout starts with `{`) before parsing.
+
+### Folder runs return a different shape
+
+A folder run reports per-file results plus totals — the overall before/after lives in
+**`totals`**, not at the top level:
+
+```json
+{
+  "ok": true,
+  "action": "slim",
+  "input": "./assets",
+  "output": "./assets",
+  "files": [
+    {
+      "path": "photo.jpg",
+      "action": "slimmed",
+      "inputBytes": 431044,
+      "outputBytes": 193703,
+      "outputPath": "photo.jpg",
+      "method": "jpeg q70"
+    }
+  ],
+  "totals": {
+    "files": 3,
+    "slimmed": 1,
+    "copied": 1,
+    "kept": 1,
+    "refused": 0,
+    "skipped": 0,
+    "inputBytes": 575837,
+    "outputBytes": 338496,
+    "savedBytes": 237341,
+    "savedPercent": 41.2
+  }
+}
+```
+
+Each `files[]` entry has an `action`: `slimmed` · `copied` (unrecognized type, passed
+through untouched) · `kept` (already smallest) · **`refused`** (original copied
+through untouched — e.g. a **signed/encrypted PDF**, or a per-file target that's
+infeasible) · `skipped` (e.g. over `--max-input`). Watch `totals.refused` to catch
+signed PDFs that passed through in a batch.
 
 ## Common tasks
 
@@ -112,7 +160,9 @@ Quality plans, gentlest → most aggressive: `cleanse`, `balanced` (default),
 - **Writes atomically** (temp file + rename) — no half-written output.
 - **Signed / form PDFs are refused, not silently broken.** If onadiet warns that a
   PDF is signed, do **not** blindly re-run with `--force` — surface the warning and
-  confirm the user accepts breaking the signature first.
+  confirm the user accepts it first. Note `--force` also **drops the perceptual
+  quality floor** (it chases the size number and may visibly degrade output), so it's
+  a deliberate override, not a default retry.
 - **No network, ever** — if a task seems to need uploading, that's a sign onadiet
   isn't the right tool, not a reason to reach for a cloud service.
 
