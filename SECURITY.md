@@ -25,8 +25,9 @@ window to release a fix before any public disclosure.
 
 ## Scope notes
 
-onadiet runs **entirely locally** — it never uploads your files and makes no network calls, so there is no
-server, no upload endpoint, and no remote attack surface. It does, however, **parse and re-encode untrusted
+onadiet runs **entirely locally** — it never uploads your files, makes **no network calls, and sends no
+telemetry** (no usage analytics, no phone-home — ever), so there is no server, no upload endpoint, and no
+remote attack surface. It does, however, **parse and re-encode untrusted
 input files** (PDFs, images, SVGs) and write output to disk. The areas most in scope:
 
 - **The output-safety guarantees.** onadiet must **never overwrite the original**, **never write a file

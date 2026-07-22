@@ -54,7 +54,7 @@ Adapters depend on `@onadiet/core`, never the reverse (enforced by `.dependency-
 - **Types**: strict; discriminated unions; `readonly`; typed errors (`OnadietError`) over strings.
 - **Branch** off `main` (`feature/`/`fix/`/`chore/`); **squash-merge**; delete the branch after. Conventional
   commits; never `--no-verify`; never `Co-Authored-By`.
-- **Keep [`docs/99-ROADMAP.md`](./docs/99-ROADMAP.md) current** with every meaningful change.
+- **Keep [`docs/ROADMAP.md`](./docs/ROADMAP.md) current** with every meaningful change.
 
 ## Releasing
 

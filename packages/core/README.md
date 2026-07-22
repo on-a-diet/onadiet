@@ -7,7 +7,7 @@ The **pure engine** behind [onadiet](https://github.com/on-a-diet/onadiet) — _
 > `@onadiet/svg`) implement the target-size search against real-file golden corpora.
 > On npm: `npm i @onadiet/core`. See the
 > [API reference](https://github.com/on-a-diet/onadiet/blob/main/docs/guide/api-reference.md) and
-> [roadmap](https://github.com/on-a-diet/onadiet/blob/main/docs/99-ROADMAP.md).
+> [roadmap](https://github.com/on-a-diet/onadiet/blob/main/docs/ROADMAP.md).
 
 ## What this package is
 

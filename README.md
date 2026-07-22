@@ -21,7 +21,7 @@ One witty command, safe by default, and it tells you exactly what it did._
 > [!NOTE]
 > **On npm now — `npm i -g onadiet` (or `npx onadiet`).** PDF, image, SVG, and folder slimming
 > are built and working — driven end-to-end against real-file golden corpora (measured results below), with v0.4 engine-hardening (bounded memory, cancellation, a `--fast` path,
-> concurrent format search) done. It's **early (`0.x`)** — the API may still move; Homebrew + a Claude Code Skill are next. See [docs/99-ROADMAP.md](./docs/99-ROADMAP.md).
+> concurrent format search) done. It's **early (`0.x`)** — the API may still move; Homebrew + a Claude Code Skill are next. See [docs/ROADMAP.md](./docs/ROADMAP.md).
 
 ## Table of contents
 
@@ -266,7 +266,7 @@ Files/PDF is the launch wedge — v1 ships _only_ that, and earns each next rung
 ## Status & roadmap
 
 Planning. Build order: **PDF-to-a-target-size (safe) → images/SVG as table-stakes → folder budgets →
-agent Skill → the franchise**. See [docs/99-ROADMAP.md](./docs/99-ROADMAP.md).
+agent Skill → the franchise**. See [docs/ROADMAP.md](./docs/ROADMAP.md).
 
 ## License
 
