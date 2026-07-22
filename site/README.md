@@ -57,8 +57,8 @@ open site/index.html
 The **little-eater mascot** (the real icon) as personality; the **weigh-in / nutrition-label** treatment for
 the honest before→after numbers. Ink + pixel-red + warm paper. **Dark is the default**, light is a toggle —
 both designed and tested. Every claim is measured (the benchmark table is the real golden-corpus run), the
-status badge is truthful (`npm · v0.1.1`, early), and there are no dead links or external requests
-(no CDN, no remote fonts/images). Accessible: visible focus, `prefers-reduced-motion`, `aria-hidden` decor.
+status badge is truthful (`npm · v0.1.1`, early), and there are no dead links; the only external request is
+a privacy-first, cookieless analytics beacon (Cloudflare Web Analytics) — no CDN, no remote fonts/images. Accessible: visible focus, `prefers-reduced-motion`, `aria-hidden` decor.
 
 Sections: hero + weigh-in · **try it — live on-device demo** · measured benchmarks · diet plans · **embed / hot-path** (the engine in your
 server) · **the franchise vision** (_one verb, everything smaller_ — files shipped, the rest on the roadmap) ·
