@@ -21,7 +21,7 @@ One witty command, safe by default, and it tells you exactly what it did._
 > [!NOTE]
 > **On npm now — `npm i -g onadiet` (or `npx onadiet`).** PDF, image, SVG, and folder slimming
 > are built and working — driven end-to-end against real-file golden corpora (measured results below), with v0.4 engine-hardening (bounded memory, cancellation, a `--fast` path,
-> concurrent format search) done. It's **early (`0.x`)** — the API may still move; Homebrew + a Claude Code Skill are next. See [docs/ROADMAP.md](./docs/ROADMAP.md).
+> concurrent format search) done. Install via **npm, Homebrew, or as a Claude Code Skill** (below). It's **early (`0.x`)** — the API may still move. See [docs/ROADMAP.md](./docs/ROADMAP.md).
 
 ## Table of contents
 
@@ -172,6 +172,21 @@ diet checkup                        # is the kitchen stocked? (which codecs/engi
 
 Everything speaks `--json` for scripts and AI agents. Safe by default: never overwrites, skips anything
 it would make _bigger_, writes atomically, and warns loudly before anything irreversible.
+
+### Use it from an AI agent (Claude Code Skill)
+
+onadiet ships as a **Claude Code Skill**, so an agent can slim files on request ("get this PDF under
+10MB"). Install it once:
+
+```text
+/plugin marketplace add on-a-diet/onadiet
+/plugin install onadiet
+```
+
+The skill wraps the same `diet` CLI (falling back to `npx onadiet` if it isn't installed), so the agent
+gets identical **local, no-upload, measured-savings** behavior — same engine, no drift. The portable
+[`SKILL.md`](./skills/onadiet/SKILL.md) follows the open [Agent Skills](https://agentskills.io) standard,
+so it's reusable in other agent runtimes too.
 
 ### Build from source
 

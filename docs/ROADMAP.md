@@ -73,7 +73,7 @@ five packages live on npm at `0.1.0`** (unscoped `onadiet` + `@onadiet/{core,pdf
 coordinated first release), and the marketing site live at
 [onadiet.pages.dev](https://onadiet.pages.dev) (Cloudflare Pages, auto-deploy — homepage demo + measured
 benchmarks, a Why/comparison page, a Docs/usage page). All five packages are now at `0.1.1` on npm.
-**Remaining distribution:** a Claude Code Skill wrapping the CLI (the Homebrew tap shipped). The automated publish
+**Distribution:** npm, the Homebrew tap, and a Claude Code **Skill** (plugin + marketplace — `/plugin install onadiet`) are shipped; a cross-agent **MCP server** is the remaining channel. The automated publish
 workflow (`.github/workflows/release.yml`: Changesets auto release-PR + a gated publish job using **npm
 Trusted Publishing (OIDC)** + `--provenance`, no npm token) is added — replacing the by-hand `0.1.x`
 releases; activation needs a one-time per-package trusted-publisher config on npm + a required reviewer on
@@ -239,7 +239,7 @@ version machinery now runs. `changeset status` confirms the accumulated v0.4 cha
       releases. Activation needs the one-time per-package trusted-publisher config + a required reviewer on
       the `release` environment.
 - [x] **Homebrew formula — shipped** in [`on-a-diet/homebrew-tap`](https://github.com/on-a-diet/homebrew-tap): `brew tap on-a-diet/tap && brew install onadiet` (verified installing on macOS; homebrew-core submission once notable).
-- [ ] A Claude Code **Skill** wrapping the CLI (the agent channel; MCP is a later thin wrapper).
+- [x] A Claude Code **Skill** wrapping the CLI — shipped as a plugin + marketplace (`/plugin marketplace add on-a-diet/onadiet` → `/plugin install onadiet`); portable [`SKILL.md`](../skills/onadiet/SKILL.md) follows the open [Agent Skills](https://agentskills.io) standard. (A cross-agent **MCP server** is a later thin wrapper.)
 - [x] **Marketing site — live** at [onadiet.pages.dev](https://onadiet.pages.dev) (Cloudflare Pages,
       auto-deploy): homepage with on-device demo + measured benchmarks, a Why/comparison page, and a
       Docs/usage page. SEO intent pages (compress-pdf-locally, no-upload) still to come.
