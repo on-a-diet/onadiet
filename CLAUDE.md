@@ -6,9 +6,9 @@ default, with an honest before/after receipt. **Engine built through v0.4** — 
 slimming all work (detect · weigh · plan · slim · verify · report), driven end-to-end against real-file golden
 corpora, with v0.4 engine-hardening done. **Published to npm + open-source:** all five packages are live at
 `0.1.1` (unscoped `onadiet` + `@onadiet/{core,pdf,image,svg}`), the repo is public at `on-a-diet/onadiet`,
-and the marketing site is live at [onadiet.pages.dev](https://onadiet.pages.dev). **Remaining distribution:**
-a Homebrew tap, a Claude Code Skill, and the hardened publish workflow (OIDC Trusted Publishing +
-`--provenance`).
+and the marketing site is live at [onadiet.pages.dev](https://onadiet.pages.dev). **Distribution:** the
+automated OIDC release pipeline and the [Homebrew tap](https://github.com/on-a-diet/homebrew-tap) are live
+(`brew tap on-a-diet/tap && brew install onadiet`); a Claude Code Skill is the one remaining channel.
 
 Open-source project in the `on-a-diet` GitHub org; license is **Apache-2.0** (deliberate OSS choice).
 Commit under your GitHub **noreply** email — the public history carries no personal address.
