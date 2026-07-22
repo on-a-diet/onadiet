@@ -539,8 +539,8 @@
             <h2>The same measured engine, wherever you need it.</h2>
             <p>
               onadiet is one honest engine behind four front doors — the CLI you type, an importable
-              library for your hot path, a CI byte-budget gate, and (next) an agent Skill. Same
-              rules everywhere: local, measured, keeps your original.
+              library for your hot path, a CI byte-budget gate, and an agent Skill. Same rules
+              everywhere: local, measured, keeps your original.
             </p>
           </div>
           <div class="surfaces">
@@ -606,15 +606,17 @@ output               <span class="cm">// a smaller file (Uint8Array) — measure
             </div>
 
             <div class="panel surface">
-              <div class="dhead">4 · Agent Skill<span class="tag">planned</span></div>
+              <div class="dhead">4 · Agent Skill</div>
               <h3>The same binary, for agents.</h3>
               <p>
-                A Claude Code Skill wrapping the CLI — no separate server. It's the
-                <b>next milestone</b> (shipping with distribution: publish · Homebrew · Skill), not
-                shipped yet. The intended loop, all local and deterministic:
+                A Claude Code Skill wraps the CLI — no separate server, same binary, driven by an
+                agent. Install it with
+                <span class="mono">/plugin marketplace add on-a-diet/onadiet</span> then
+                <span class="mono">/plugin install onadiet</span>. The loop, all local and
+                deterministic:
               </p>
               <div class="code">
-                <div class="cbar"><i></i><i></i><i></i><span>agent-loop (planned)</span></div>
+                <div class="cbar"><i></i><i></i><i></i><span>agent-loop</span></div>
                 <pre><span class="cm"># 1 · see the problem (size + causes)</span>
 diet weigh big-deck.pdf <span class="kw">--json</span>
 <span class="cm"># 2 · fix it</span>

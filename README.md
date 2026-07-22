@@ -255,7 +255,7 @@ The same engine runs from the **CLI**, an **importable library** (`@onadiet/core
 - Not a web upload/cloud service — it never sends your file anywhere.
 - Not a clone of Ghostscript or TinyPNG — it's the decision + measurement layer over best-in-class local
   encoders, with an honest before/after.
-- Not a new codec — v1 orchestrates proven engines (sharp/libvips, qpdf, svgo; oxipng planned); a permissive
+- Not a new codec — v1 orchestrates proven engines (sharp/libvips, pdf-lib, svgo; qpdf/oxipng planned); a permissive
   in-house PDF image-downsampler is the one piece of real engineering.
 - Not image-only, PDF-only, or SVG-only — one tool, one mental model.
 

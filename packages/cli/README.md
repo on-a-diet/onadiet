@@ -10,22 +10,22 @@ default, and it tells you exactly what it did._
 </div>
 
 > [!NOTE]
-> **On npm now (`v0.1.0`).** `diet` slims PDFs, images, SVGs, and folders
+> **On npm now (`v0.1.1`).** `diet` slims PDFs, images, SVGs, and folders
 > end-to-end today (hit a target size, hold a quality floor, honest receipts) — proven against real-file
 > golden corpora. Install with **`npm i -g onadiet`** (or `npx onadiet`); it is **early (`0.x`)**, so the
-> API may still move. `brew install` is next.
+> API may still move. Also on **Homebrew** (see Install).
 
 ## Install
 
 ```bash
-brew install onadiet        # macOS — installs the `diet` command
+brew tap on-a-diet/tap && brew install onadiet   # macOS — installs `diet`
 npm i -g onadiet            # global; then just `diet …`
 npx onadiet report.pdf      # zero-install, one-off
 ```
 
 The command is **`diet`** (with `onadiet` as an alias).
 
-## Use (planned)
+## Use
 
 ```bash
 diet report.pdf --to 5mb            # hit a "goal weight" (--to / --under / --goal)

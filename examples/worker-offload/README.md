@@ -4,7 +4,7 @@ Run a slim **off the main event loop** so one compression can't add latency to a
 
 ## Why
 
-`onadiet`'s codecs (sharp/libvips, qpdf) already do the heavy pixel/stream work on libuv's threadpool. But the
+`onadiet`'s codec (sharp/libvips) already does the heavy pixel work on libuv's threadpool. But the
 SSIM-guided **size search** — the encode→decode→compare loop that finds the floor-holding minimum — is
 JavaScript on the **main thread**. On a busy server a large slim can therefore delay other requests. Moving the
 whole slim onto a worker thread keeps the event loop free.
