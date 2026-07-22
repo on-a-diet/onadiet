@@ -19,7 +19,7 @@
  * slow, governed by the hook timeout. Runs in the dedicated `test:integration` task, out of the fast inner
  * loop. Assertions use margins / relative comparisons, not exact byte counts, so a minor encoder change
  * (e.g. a future libvips/mozjpeg bump) doesn't make them brittle. Measured numbers are recorded in
- * [the PDF guide](../../../../docs/guide/pdf.md) and [the roadmap](../../../../docs/99-ROADMAP.md).
+ * [the PDF guide](../../../../docs/guide/pdf.md) and [the roadmap](../../../../docs/ROADMAP.md).
  */
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'

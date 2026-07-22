@@ -40,7 +40,7 @@ Build by these:
 - **Branching** off `main` (`feature/`/`fix/`/`chore/`); **squash-merge**; **delete the branch (remote +
   local) after merge**; code PRs wait for approval; docs-only may go straight to `main`. Never
   `--no-verify`; never `Co-Authored-By`.
-- **Docs** numbered in `docs/` (`00`–`02` product/plan, `03+` specs, `99-ROADMAP`); every doc has a TOC; **keep `docs/99-ROADMAP.md` current after every meaningful change**.
+- **Docs** numbered in `docs/` (`00`–`02` product/plan, `03+` specs, `ROADMAP`); every doc has a TOC; **keep `docs/ROADMAP.md` current after every meaningful change**.
   [`docs/guide/api-reference.md`](docs/guide/api-reference.md) is the canonical public surface —
   **update it in the same change** as any added/renamed/removed export, config field, CLI flag, or error code.
 - **Strict typing**; discriminated unions over class hierarchies; `readonly` state; ESM-first with
@@ -88,9 +88,9 @@ A fresh clone must pass `install → lint → format:check → typecheck → tes
 3. **Adversarial review gate — after every phase AND sub-phase.** Spawn parallel subagents across the
    review lenses (correctness/logic end-to-end · bug-hunt · security · scale/perf ·
    code-quality/standards · testing-quality · docs/spec-fidelity · anything-else). Fix real findings in
-   the same change or log them with a severity + deferral in `docs/99-ROADMAP.md`.
+   the same change or log them with a severity + deferral in `docs/ROADMAP.md`.
 4. **Commit and push always**; open/update the PR.
-5. **Update `docs/99-ROADMAP.md`** — it must never lag reality.
+5. **Update `docs/ROADMAP.md`** — it must never lag reality.
 
 ## Project-specific invariants
 
