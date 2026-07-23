@@ -111,7 +111,7 @@ Public-name + handle reservations.
       code names; do later).
 - [ ] **Domain** (`onadiet.dev` / `.sh`) — **deferred** (costs money; grab right before launch, not now).
 - [ ] **crates.io `onadiet`** — only if a Rust core ever happens (low priority).
-- [x] **Homebrew tap** — shipped: [`on-a-diet/homebrew-tap`](https://github.com/on-a-diet/homebrew-tap) (`brew tap on-a-diet/tap && brew install onadiet`); homebrew-core (bare `brew install`) once notable.
+- [x] **Homebrew tap** — shipped: [`on-a-diet/homebrew-tap`](https://github.com/on-a-diet/homebrew-tap) (`brew tap on-a-diet/tap && brew install onadiet`); homebrew-core (bare `brew install`) once notable. The tap **self-updates from npm** on a schedule (bumps its own formula via the built-in `GITHUB_TOKEN` — no PAT), so releases don't push to it.
 
 Binary: `diet` (alias `onadiet`). Wordmark: "on a diet". Every identifier: `onadiet`.
 
