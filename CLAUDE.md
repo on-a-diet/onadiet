@@ -69,6 +69,7 @@ Build by these:
   `diet plan`, `diet check`, `diet checkup`; target via `--to`/`--under`/`--goal`; quality via
   `--plan cleanse|balanced|lowcarb|keto|crash`. Everything supports `--json`.
 - **One engine, four surfaces:** CLI · importable library (`@onadiet/core`) · CI (`diet check`) · agent
+- **Agent history** is working history, not documentation — durable conclusions land in tracked docs. Keeping the transcripts themselves is machine setup, not project setup: set your agent's transcript retention explicitly and back the agent config directory up to a private remote.
   **Skill** (wrapping the CLI). MCP is a later thin wrapper, not a v1 differentiator.
 
 ## Commands
