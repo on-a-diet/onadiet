@@ -93,7 +93,7 @@ immutable outside a 72-hour window; every guard below is a read-only probe that 
 | **Package set**           | the publishable manifests under `packages/` are not exactly the names in `PUBLISHED_PACKAGES` | A glob that comes up short makes every per-package loop below it iterate **zero times and pass**. Naming the packages rather than counting them catches what a count cannot: a rename, or one package removed while another is added. A package present but _unlisted_ is refused because its npm name has almost certainly never been published, so no Trusted Publisher can exist for it and this tokenless pipeline cannot create one. |
 | **Unbootstrapped name**   | a publishable package does not exist on the registry at all                                   | A Trusted Publisher is a **per-package** setting that cannot be bound to a name that has never been published. See [Bootstrapping a new package name](#bootstrapping-a-new-package-name).                                                                                                                                                                                                                                                 |
 | **Nothing to publish**    | _every_ expected version is already on the registry                                           | `changeset publish` **silently skips** a version already there and exits 0. A re-run would go green having published nothing. (Skipping _some_ packages is normal: Changesets bumps only what changed, so an unchanged package keeps its version and must not be republished. Only "all of them" is the failure.)                                                                                                                         |
-| **Still-private package** | a listed package carries `private: true`                                                      | `changeset publish` filters private packages out with **no log line at all** and exits 0, while `changeset version` still bumps them — so the Version PR looks complete and the release ships the rest of the family depending on a package that never went up.                                                                                                                                                                           |
+| **Still-private package** | a listed package carries `private: true`                                                      | `changeset publish` filters private packages out with **no log line at all** and exits 0. Since `@changesets/cli` 3.0 `changeset version` no longer versions private packages either — so a package that went private by accident simply vanishes from the Version PR, with nothing to flag it.                                                                                                                                           |
 | **Missing release notes** | a package about to publish has no `CHANGELOG.md` section for its version                      | A changelog is a two-line edit; an npm tarball is immutable outside a 72-hour window. Checked _before_ the publish rather than in `github-release`, where it would surface with nothing left to do about it.                                                                                                                                                                                                                              |
 | **Approval gate present** | the `release` environment is missing or has no required reviewer                              | See the box above.                                                                                                                                                                                                                                                                                                                                                                                                                        |
 
@@ -120,11 +120,18 @@ placed after it reads the **bumped** versions, so an ordinary feature merge that
 looks like a pending release: the approval prompt fires, and the gate's whole value is that the prompt means
 something.
 
-**Why the family is published concurrently, and what that costs.** `changeset publish` publishes up to ten
-packages at once rather than in dependency order, so a transient failure on one does not stop the others —
-they land immutably while it does not. Cross-package dependencies use `workspace:^` (not `workspace:*`) so
-that pnpm publishes a **caret** range: a straggler can then be recovered with a patch bump, which an exact
-pin would not admit.
+**How the family is published, and what a failure leaves behind.** `changeset publish` (3.x) publishes in
+**dependency levels**, up to ten packages at a time inside a level, and stops at the first level with a
+failure. For this repo that is two levels: `core` and the `onadiet` CLI first — the CLI bundles its siblings
+at build time rather than depending on them at runtime — then `image`, `pdf` and `svg`, which depend on
+`core`. So a dependency always lands before anything that depends on it, and a failure leaves exactly this
+on the registry, immutably: every level below the failing one, plus the failing package's same-level
+siblings. Re-running after the fix publishes the rest; already-published versions are skipped.
+
+Cross-package dependencies use `workspace:^` (not `workspace:*`), so pnpm publishes a **caret** range rather
+than an exact pin. That matters after a release rather than during one: when `core` needs a patch, consumers
+of `image`, `pdf` and `svg` pick it up automatically. An exact pin would force a republish of every adapter to
+ship a one-line fix to `core`, and would stop consumers deduplicating the family.
 
 ## One-time setup
 
@@ -147,8 +154,8 @@ registry.
   > authenticated maintainer (`npm trust list <package>`), and nothing in CI or in `release.yml` has that
   > identity, so the pipeline cannot confirm its own authentication is configured. The failure is
   > fail-safe rather than silent — OIDC auth is rejected and the publish errors — but `changeset publish`
-  > publishes the family **concurrently**, so the packages whose bindings _were_ correct are already on the
-  > registry, immutably, while the one that failed is not. **Verify all five before the first pipeline
+  > stops only at the end of the failing dependency level, so every level below it, and that package's
+  > same-level siblings, are already on the registry, immutably. **Verify all five before the first pipeline
   > release**, since none of the bindings has ever been exercised.
 
 **GitHub:**
@@ -165,8 +172,8 @@ registry.
 **Adding a package to `packages/` will fail CI**, deliberately, until you do this — and the same applies to
 making `@onadiet/testkit` public. That is the guard working: this pipeline is tokenless, it authenticates
 against a **per-package** npm Trusted Publisher, and a Trusted Publisher **cannot be bound to a name that has
-never been published**. Because `changeset publish` publishes concurrently, releasing anyway would put the
-rest of the family on npm immutably and fail only on the new one.
+never been published**. Because `changeset publish` publishes level by level, releasing anyway would put
+every dependency level below the new package on npm, immutably, and then fail on it.
 
 The order is fixed:
 
@@ -251,8 +258,8 @@ Prefer the automated flow; this path exists so a broken pipeline never blocks a 
   deployments_).
 - **OIDC auth failed for a package** — its npm **Trusted Publisher** isn't set, or the repo / workflow /
   environment don't match. Fix it on npmjs.com → that package → Trusted Publisher. Nothing _incorrect_ is
-  published — but `changeset publish` publishes the family concurrently, so the packages that authenticated
-  successfully are already on the registry and cannot be unpublished. Fix the binding and re-run; the
+  published — but everything in the dependency levels below the failure, and the failing package's
+  same-level siblings, is already on the registry and cannot be unpublished. Fix the binding and re-run; the
   already-published packages are skipped.
 - **"is publishable but is not in PUBLISHED_PACKAGES"** — a package was added, or `@onadiet/testkit` lost its
   `private: true`. Follow [Bootstrapping a new package name](#bootstrapping-a-new-package-name) before adding
@@ -271,8 +278,8 @@ Prefer the automated flow; this path exists so a broken pipeline never blocks a 
   `changeset publish` exits non-zero. The packages that _did_ reach npm are there immutably; the
   `github-release` job still runs for exactly those, so they get their tag and Release rather than being
   left untracked. Fix whatever failed (usually a Trusted Publisher binding) and re-run: the already-published
-  packages are skipped. Because cross-package deps are published as **caret** ranges, a straggler can also be
-  recovered by a patch bump — an exact pin would not admit that.
+  packages are skipped. Because `changeset publish` goes level by level, nothing that depends on the failed
+  package was published, so no consumer can install a half-released family.
 - **"published WITHOUT a provenance attestation"** — the publish reached npm but unsigned. Check that the
   `publish` job still has `id-token: write` and ran on a GitHub-hosted runner; a self-hosted runner has no
   OIDC identity to attest to and costs the attestation silently.
