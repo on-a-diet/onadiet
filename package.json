@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/on-a-diet/onadiet.git"
   },
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@12.4.2",
   "engines": {
     "node": ">=22"
   },
