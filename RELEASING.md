@@ -241,6 +241,12 @@ Prefer the automated flow; this path exists so a broken pipeline never blocks a 
   closed** on purpose: a probe that could not answer is never read as "safe to publish". Re-run the job.
 - **"has no `release` environment" / "has NO required reviewers"** — the approval gate is gone. Recreate it
   under Settings → Environments before releasing; the workflow will not publish without it.
+- **A partial publish (some packages up, some not)** — the publish job goes red, because
+  `changeset publish` exits non-zero. The packages that _did_ reach npm are there immutably; the
+  `github-release` job still runs for exactly those, so they get their tag and Release rather than being
+  left untracked. Fix whatever failed (usually a Trusted Publisher binding) and re-run: the already-published
+  packages are skipped. Because cross-package deps are published as **caret** ranges, a straggler can also be
+  recovered by a patch bump — an exact pin would not admit that.
 - **"published WITHOUT a provenance attestation"** — the publish reached npm but unsigned. Check that the
   `publish` job still has `id-token: write` and ran on a GitHub-hosted runner; a self-hosted runner has no
   OIDC identity to attest to and costs the attestation silently.
