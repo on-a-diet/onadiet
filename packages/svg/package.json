@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "@onadiet/core": "workspace:^",
-    "svgo": "^4.0.2"
+    "svgo": "^4.1.0"
   },
   "devDependencies": {
     "@onadiet/testkit": "workspace:^",

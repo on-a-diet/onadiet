@@ -1,7 +1,7 @@
 /**
  * `run(argv, ports)` — parse, dispatch to the engine, write output, pick an exit code. All filesystem
  * contact goes through injected {@link CliPorts}, so this is fully testable with in-memory fakes; the bin
- * supplies {@link nodePorts}. Exit codes follow docs/03-CLI.md.
+ * supplies {@link nodePorts}. Exit codes follow docs/guide/cli.md.
  */
 import { availableParallelism } from 'node:os'
 import { basename, dirname, extname, join, resolve, sep } from 'node:path'
@@ -505,7 +505,7 @@ async function runFolderBudget(
 /**
  * Default folder concurrency: scale with cores but leave one free, and cap at 8 — since each in-flight file
  * can hold a full raster decode, an uncapped default on a many-core box would risk OOM. Users raise it with
- * `--concurrency <n>` when they have the memory. See docs/08-PERFORMANCE.
+ * `--concurrency <n>` when they have the memory. See docs/guide/performance.md.
  */
 function defaultConcurrency(): number {
   return Math.max(1, Math.min(availableParallelism() - 1, 8))

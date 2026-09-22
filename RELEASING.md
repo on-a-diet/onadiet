@@ -11,6 +11,7 @@ pipeline (which lives in [`.github/workflows/release.yml`](.github/workflows/rel
 - [Pre-flight guards](#pre-flight-guards)
 - [One-time setup](#one-time-setup)
 - [Bootstrapping a new package name](#bootstrapping-a-new-package-name)
+- [What the approval gate does not cover](#what-the-approval-gate-does-not-cover)
 - [Verifying a release](#verifying-a-release)
 - [Manual / break-glass release](#manual--break-glass-release)
 - [Troubleshooting](#troubleshooting)
@@ -23,9 +24,11 @@ pipeline (which lives in [`.github/workflows/release.yml`](.github/workflows/rel
    writes changelogs from the accumulated changesets.
 3. **Merge the "Version Packages" PR** when you're ready to release. The Release workflow runs and **pauses
    for approval** on the `release` environment.
-4. **Approve the deployment** (the run → _Review deployments_ → approve `release`). It publishes every
-   bumped package to npm — **tokenless via OIDC, with provenance** — then pushes git tags and opens a
-   GitHub Release per package.
+4. **Approve the deployment** (the run → _Review deployments_ → approve `release`). It publishes each
+   package whose version is not yet on the registry — **tokenless via OIDC, with provenance** — verifies
+   from the registry that they really landed, and then a separate job pushes the git tags and opens a
+   GitHub Release per published package. Packages whose version is unchanged are skipped, which is correct:
+   Changesets bumps only what changed.
 
 No local publish commands. Adding the changeset (step 1) is the only thing you do differently while coding.
 
@@ -140,18 +143,21 @@ registry.
 - A **Trusted Publisher** bound to repo `on-a-diet/onadiet`, workflow `release.yml`, environment `release`,
   action `npm publish`.
 
-  > **This one is a by-eye checklist item, per package name, and no gate can cover it.** There is no
-  > unauthenticated way to read whether a package has a Trusted Publisher bound, so nothing in CI or in
-  > `release.yml` can confirm it. The failure is fail-safe rather than silent — OIDC auth is rejected and
-  > the publish errors — but `changeset publish` publishes the family concurrently, so a missing binding on
-  > one package still leaves the others on the registry, immutably. **Verify all five by hand on npmjs.com
-  > before the first pipeline release**, since none of the bindings has ever been exercised.
+  > **No CI gate can cover this one — check it by hand, per package name.** Reading a binding needs an
+  > authenticated maintainer (`npm trust list <package>`), and nothing in CI or in `release.yml` has that
+  > identity, so the pipeline cannot confirm its own authentication is configured. The failure is
+  > fail-safe rather than silent — OIDC auth is rejected and the publish errors — but `changeset publish`
+  > publishes the family **concurrently**, so the packages whose bindings _were_ correct are already on the
+  > registry, immutably, while the one that failed is not. **Verify all five before the first pipeline
+  > release**, since none of the bindings has ever been exercised.
 
 **GitHub:**
 
 - A **`release` environment** with the maintainer as a **required reviewer** (this is the approval gate),
   deployments restricted to protected branches.
-- `main` **branch-protected**: PRs required, force-pushes and deletions blocked.
+- `main` **branch-protected**: PRs required, force-pushes and deletions blocked. A **required-status-check**
+  rule is not enabled today — the handbook's checklist asks for one, so that part is a known gap rather than
+  a description of the current setting.
 - Account 2FA — ideally a passkey / hardware key (the account is the root of trust once tokens are gone).
 
 ## Bootstrapping a new package name
@@ -188,6 +194,19 @@ Two traps that cost the sibling projects real time, both of which apply to step 
   versions the registry does not have yet. That is correct for the one job it does — _exist, so a Trusted
   Publisher has something to bind to_ — and wrong for every other use. Do not link it, document it, or
   suggest anyone install it.
+
+## What the approval gate does not cover
+
+The required reviewer approves a **run**, not an **artifact**. You click approve before the tarball exists,
+so the bytes that actually reach the registry are the one part of the release nobody has looked at. npm's
+staged-publish flow would move the approval onto the packed tarball; Changesets cannot drive it today, so
+this is **owed work, not done** — tracked in [the roadmap](docs/ROADMAP.md#release-hardening--owed-work).
+
+Two things narrow the gap in the meantime, both running before the publish: `scripts/verify-tarballs.mjs`
+packs every publishable package and scans the tarball contents — including `dist/` and the sourcemaps'
+`sourcesContent`, which carry every source comment verbatim — and `scripts/audit-release.mjs` re-runs the
+dependency audit against the release commit, scoped to advisories that reach a package this repo actually
+publishes. Neither is a human reading the artifact.
 
 ## Verifying a release
 

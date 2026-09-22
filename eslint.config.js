@@ -32,7 +32,6 @@ export default tseslint.config(
         // use both to probe the GitHub and npm registry APIs.
         fetch: 'readonly',
         setTimeout: 'readonly',
-        clearTimeout: 'readonly',
       },
     },
     rules: {
@@ -51,7 +50,6 @@ export default tseslint.config(
         navigator: 'readonly',
         matchMedia: 'readonly',
         setTimeout: 'readonly',
-        clearTimeout: 'readonly',
         IntersectionObserver: 'readonly',
         // the live on-device demo (demo/demo.js) — Canvas re-encode + SSIM + the no-upload proof
         fetch: 'readonly',
