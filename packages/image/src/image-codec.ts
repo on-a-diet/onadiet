@@ -8,7 +8,7 @@
  */
 import { OnadietError } from '@onadiet/core'
 import type { EncodeParams, ImageCodec, ImageFormat, RasterImage } from '@onadiet/core'
-import sharp from 'sharp'
+import sharp, { type Sharp } from 'sharp'
 
 /**
  * Cap decoded pixels so a small file can't claim huge dimensions and balloon memory (~400 MB worst case).
@@ -88,7 +88,7 @@ async function encode(image: RasterImage, params: EncodeParams): Promise<Uint8Ar
   }
 }
 
-async function finish(pipeline: sharp.Sharp): Promise<Uint8Array> {
+async function finish(pipeline: Sharp): Promise<Uint8Array> {
   const out = await pipeline.toBuffer()
   return new Uint8Array(out.buffer, out.byteOffset, out.byteLength)
 }

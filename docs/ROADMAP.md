@@ -5,6 +5,7 @@
 ## Table of contents
 
 - [Status](#status)
+- [Release hardening — owed work](#release-hardening--owed-work)
 - [Decisions locked](#decisions-locked)
 - [Names, handles & reservations](#names-handles--reservations)
 - [Phase 0 — scaffold](#phase-0--scaffold)
@@ -74,10 +75,41 @@ five packages live on npm** (unscoped `onadiet` + `@onadiet/{core,pdf,image,svg}
 [onadiet.pages.dev](https://onadiet.pages.dev) (Cloudflare Pages, auto-deploy — homepage demo + measured
 benchmarks, a Why/comparison page, a Docs/usage page). All five packages are now at `0.1.1` on npm.
 **Distribution:** npm, the Homebrew tap, and a Claude Code **Skill** (plugin + marketplace — `/plugin install onadiet`) are shipped; a cross-agent **MCP server** is the remaining channel. The automated publish
-workflow (`.github/workflows/release.yml`: Changesets auto release-PR + a gated publish job using **npm
-Trusted Publishing (OIDC)** + `--provenance`, no npm token) is added — replacing the by-hand `0.1.x`
-releases; activation needs a one-time per-package trusted-publisher config on npm + a required reviewer on
-the `release` environment.
+workflow (`.github/workflows/release.yml`) is in place — replacing the by-hand `0.1.x` releases. It is
+three jobs: Changesets keeps the release PR current, a publish job behind the `release` environment's
+required reviewer publishes tokenlessly via **npm Trusted Publishing (OIDC)** with `--provenance` and no npm
+token, and a downstream job cuts the tags and GitHub Releases. Pre-flight guards, a packed-artifact leak
+scan and a release-time dependency audit run before the irreversible step; the approval gate is verified on
+every run rather than assumed. The `release` environment **is** configured. What remains is in
+[Release hardening — owed work](#release-hardening--owed-work).
+
+## Release hardening — owed work
+
+The release pipeline is tokenless, provenance-signed and gated on a required reviewer, with pre-flight
+guards, a packed-artifact leak scan and a release-time dependency audit (see
+[`RELEASING.md`](../RELEASING.md)). These are the parts that are **not** done, recorded here rather than in a
+review thread so they survive it.
+
+- **Trusted Publisher bindings are unverified.** Every version on npm today (`0.1.1` and earlier) was
+  published by hand before the pipeline existed, so no binding has ever been exercised and none of the
+  packages carries a provenance attestation. Reading a binding needs an authenticated maintainer
+  (`npm trust list <package>`), so no CI gate can cover it. **Check all five before the first pipeline
+  release** — `changeset publish` uploads the family concurrently, so a single missing binding leaves the
+  others on the registry immutably.
+- **"Require 2FA and disallow tokens" is documented as configured and is not machine-checkable** either.
+  Same status, same one-time check.
+- **Staged publishing is not adopted.** The approval gate authorises a _run_, not an _artifact_ — a reviewer
+  approves before the tarball exists, so the bytes that reach the registry are the one part of the release
+  nobody saw. npm's staged-publish flow would move the approval onto the packed tarball; Changesets has no
+  support for it today. Treated as owed work, not as done.
+- **`main` has no required-status-check rule.** PRs are required and force-pushes and deletions are blocked;
+  the handbook's checklist also asks for required status checks.
+- **Public-repo security features are off.** Secret scanning, push protection and Dependabot security
+  updates are all disabled on this repo — the handbook says to turn them on at go-public, and this repo is
+  public and published. Free; nothing blocks it but doing it.
+- **No clean-room install of the published tarballs.** The smoke test loads the built packages by name from
+  the workspace, not from a packed tarball installed into an empty directory, so a broken `files` list or
+  `exports` map could still ship.
 
 ## Decisions locked
 
@@ -236,8 +268,8 @@ version machinery now runs. `changeset status` confirms the accumulated v0.4 cha
 - [x] **Automated publish workflow** — [`.github/workflows/release.yml`](../.github/workflows/release.yml):
       Changesets auto release-PR + a **gated** publish job (the `release` environment) that publishes
       tokenlessly via **npm Trusted Publishing (OIDC)** with `--provenance`. Replaces the by-hand `0.1.x`
-      releases. Activation needs the one-time per-package trusted-publisher config + a required reviewer on
-      the `release` environment.
+      releases. The `release` environment is configured; the per-package trusted-publisher bindings are
+      the remaining one-time step — see [Release hardening — owed work](#release-hardening--owed-work).
 - [x] **Homebrew formula — shipped** in [`on-a-diet/homebrew-tap`](https://github.com/on-a-diet/homebrew-tap): `brew tap on-a-diet/tap && brew install onadiet` (verified installing on macOS; homebrew-core submission once notable).
 - [x] A Claude Code **Skill** wrapping the CLI — shipped as a plugin + marketplace (`/plugin marketplace add on-a-diet/onadiet` → `/plugin install onadiet`); portable [`SKILL.md`](../skills/onadiet/SKILL.md) follows the open [Agent Skills](https://agentskills.io) standard. (A cross-agent **MCP server** is a later thin wrapper.)
 - [x] **Marketing site — live** at [onadiet.pages.dev](https://onadiet.pages.dev) (Cloudflare Pages,
