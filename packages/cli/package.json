@@ -75,11 +75,11 @@
     "svgo": "^4.0.2"
   },
   "devDependencies": {
-    "@onadiet/core": "workspace:*",
-    "@onadiet/pdf": "workspace:*",
-    "@onadiet/image": "workspace:*",
-    "@onadiet/svg": "workspace:*",
-    "@onadiet/testkit": "workspace:*",
+    "@onadiet/core": "workspace:^",
+    "@onadiet/pdf": "workspace:^",
+    "@onadiet/image": "workspace:^",
+    "@onadiet/svg": "workspace:^",
+    "@onadiet/testkit": "workspace:^",
     "tsup": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",

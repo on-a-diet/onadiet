@@ -124,19 +124,19 @@ importers:
         version: 4.0.2
     devDependencies:
       '@onadiet/core':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../core
       '@onadiet/image':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../image
       '@onadiet/pdf':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../pdf
       '@onadiet/svg':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../svg
       '@onadiet/testkit':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../testkit
       tsup:
         specifier: 'catalog:'
@@ -169,14 +169,14 @@ importers:
   packages/image:
     dependencies:
       '@onadiet/core':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../core
       sharp:
         specifier: ^0.34.4
         version: 0.34.5
     devDependencies:
       '@onadiet/testkit':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../testkit
       tsup:
         specifier: 'catalog:'
@@ -194,7 +194,7 @@ importers:
   packages/pdf:
     dependencies:
       '@onadiet/core':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../core
       pdf-lib:
         specifier: ^1.17.1
@@ -204,7 +204,7 @@ importers:
         version: 0.34.5
     devDependencies:
       '@onadiet/testkit':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../testkit
       tsup:
         specifier: 'catalog:'
@@ -222,14 +222,14 @@ importers:
   packages/svg:
     dependencies:
       '@onadiet/core':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../core
       svgo:
         specifier: ^4.0.2
         version: 4.0.2
     devDependencies:
       '@onadiet/testkit':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../testkit
       tsup:
         specifier: 'catalog:'
@@ -247,7 +247,7 @@ importers:
   packages/testkit:
     dependencies:
       '@onadiet/core':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../core
     devDependencies:
       typescript:

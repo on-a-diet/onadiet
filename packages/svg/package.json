@@ -59,11 +59,11 @@
     "test:integration": "vitest run --config vitest.integration.config.ts"
   },
   "dependencies": {
-    "@onadiet/core": "workspace:*",
+    "@onadiet/core": "workspace:^",
     "svgo": "^4.0.2"
   },
   "devDependencies": {
-    "@onadiet/testkit": "workspace:*",
+    "@onadiet/testkit": "workspace:^",
     "tsup": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
