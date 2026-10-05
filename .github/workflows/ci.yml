@@ -45,6 +45,17 @@ jobs:
       - run: pnpm run test
       - run: pnpm run build
       - run: pnpm run smoke
+      # Unit tests for the release gate itself (scripts/*.test.mjs). The root `test` script is
+      # `turbo run test`, which covers packages/ only — nothing under scripts/ is in it.
+      - run: pnpm run test:release
+      # The release setup is config that lives OUTSIDE this repo's diff — the `release` GitHub environment
+      # and its required reviewer. Nothing in a PR shows when they disappear, and the cost of noticing at
+      # release time is an unapproved publish to npm, which cannot be taken back. Checking it here means
+      # drift surfaces within a day, on an ordinary PR, instead of at the one moment it matters.
+      # `--environment` reads the public environments API; the token only raises the rate limit.
+      - run: node scripts/check-release.mjs --environment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # Golden-corpus integration tests slim REAL files through the full pipeline — minutes, not seconds, and
   # encoder-deterministic, so one Node version is enough. Kept off the PR matrix above to keep the fast gate

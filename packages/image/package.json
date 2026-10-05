@@ -63,11 +63,11 @@
     "test:perf": "vitest run --config vitest.perf.config.ts"
   },
   "dependencies": {
-    "@onadiet/core": "workspace:*",
-    "sharp": "^0.34.4"
+    "@onadiet/core": "workspace:^",
+    "sharp": "^0.35.4"
   },
   "devDependencies": {
-    "@onadiet/testkit": "workspace:*",
+    "@onadiet/testkit": "workspace:^",
     "tsup": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",

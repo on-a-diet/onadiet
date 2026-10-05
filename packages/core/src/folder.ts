@@ -1,7 +1,8 @@
 /**
  * Pure folder helpers — the decision + bookkeeping half of v0.3 folder mode. **No I/O**: the CLI does the
  * walking/reading/writing behind its ports and calls these to decide *what* to do and to aggregate the
- * result. Kept in the pure core so it's unit-tested with plain strings and numbers (see 07-FOLDERS.md).
+ * result. Kept in the pure core so it's unit-tested with plain strings and numbers (see
+ * docs/guide/folders.md).
  *
  * Three concerns: (1) `--include`/`--exclude` glob matching, (2) safe output-path mapping (Zip-Slip guard +
  * honest extension rename on a format switch), (3) manifest aggregation (per-file entries → folder totals).
@@ -16,7 +17,8 @@ function escapeLiteral(char: string): string {
 }
 
 /**
- * Compile a glob to an anchored RegExp source. Supported subset (documented in 07-FOLDERS): `*` = any run of
+ * Compile a glob to an anchored RegExp source. Supported subset (documented in docs/guide/folders.md):
+ * `*` = any run of
  * non-`/`; a doubled `*` (globstar) = any run including `/`; a globstar immediately before a `/` = zero or
  * more whole path segments; `?` = one non-`/`. Everything else is literal. (No brace `{a,b}` or char classes
  * in v0.3 — a comma list is split by the CLI.)
