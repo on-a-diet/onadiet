@@ -1,7 +1,7 @@
 /**
  * FOLDER PERF HARNESS (v0.4 P4) — LOCAL/manual `pnpm run test:perf`, NOT in CI.
  *
- * Measures the two folder-mode numbers the performance pillar ([docs/08-PERFORMANCE.md]) promises, driving
+ * Measures the two folder-mode numbers the performance pillar (docs/guide/performance.md) promises, driving
  * the real `diet ./dir` end-to-end (`run` + `nodePorts` + real adapters) over a temp-filesystem tree:
  *   1. throughput — sequential (`--concurrency 1`) vs the default parallel fan-out (a ~2.9× win here);
  *   2. bounded memory — peak process RSS stays ~flat as the tree size doubles (the P1 stream-to-disk claim:

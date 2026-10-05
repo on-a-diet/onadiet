@@ -1,7 +1,7 @@
 /**
  * IMAGE PERF HARNESS (v0.4 P4) — LOCAL/manual `pnpm run test:perf`, NOT in CI.
  *
- * Measures the two hot-path numbers the performance pillar ([docs/08-PERFORMANCE.md]) promises, on the real
+ * Measures the two hot-path numbers the performance pillar (docs/guide/performance.md) promises, on the real
  * golden-corpus photo:
  *   1. latency-by-plan — what a caller waits for `diet photo.jpg --plan X` (default mode per plan);
  *   2. the fixed-quality fast-path win — `--fast` (one nominal encode) vs the full ladder search.

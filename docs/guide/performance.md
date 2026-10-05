@@ -33,9 +33,9 @@ Measured on the folder engine with the `balanced` plan (numbers are from a devel
 - **The folder orchestration layer is ~free** — walk, glob matching, output-path mapping, and manifest
   aggregation are milliseconds even on a 60-file tree. It is _not_ the bottleneck.
 - **~All the cost is per-file adapter work** — dominated by the image path's SSIM-guided dual-constraint
-  search (multiple encode → decode → SSIM evaluations per image). ≈ **0.44 s per 700×500 JPEG**; a 60-JPEG /
+  search (multiple encode → decode → SSIM evaluations per image). ≈ **0.44 s per 700×500 JPEG**; a 60-file JPEG /
   11 MB tree took ≈ **26.6 s**.
-- **Folder mode fans out across files.** On an 11-core machine a 60-JPEG / 11 MB tree went
+- **Folder mode fans out across files.** On an 11-core machine a 60-file JPEG / 11 MB tree went
   **23.0 s → 6.4 s (≈3.6×)** at the default concurrency, with byte-identical output.
 
 This points to two levers: **parallelism across files** for bulk throughput, and an opt-in **fast path**

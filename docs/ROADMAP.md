@@ -22,7 +22,7 @@
 
 **Phase 0 complete** — monorepo scaffolded, full gate green (`install → lint → format:check → typecheck →
 test → build → smoke`). Planning + branding done; product / vision / CLI / usage / messaging specced
-([03-CLI](./guide/cli.md), [98-USAGE](./guide/getting-started.md)); franchise catalogued; original research
+([CLI guide](./guide/cli.md), [getting started](./guide/getting-started.md)); franchise catalogued; original research
 preserved. Repo `on-a-diet/onadiet`.
 
 **v0.1 — the PDF wedge, DONE** (see the [PDF guide](./guide/pdf.md)). Steps 1 (pure `@onadiet/core`
@@ -191,7 +191,7 @@ plan semantics, corpus, build order).
 
 ## v0.2 — images & SVG (table-stakes)
 
-**Design spec: [06-IMAGES](./guide/images.md)** (scope, permissive codec stack, the format-switch lever,
+**Design spec: [the images guide](./guide/images.md)** (scope, permissive codec stack, the format-switch lever,
 photo/flat heuristic, plan semantics, CLI, corpus, build order). The codec stack (JPEG/PNG/WebP/**AVIF**) is
 verified available + permissive in the pinned sharp; the SizeSearch kernel + SSIM metric are reused verbatim.
 
@@ -202,16 +202,16 @@ verified available + permissive in the pinned sharp; the SizeSearch kernel + SSI
       `FormatAdapter` / `ImageCodec` / `QualityMetric` conformance suites so `@onadiet/image` proves the same
       contract as `@onadiet/pdf`; SSIM test moved into `@onadiet/core` (self-contained, keeping core a
       dependency leaf); `@onadiet/pdf` re-exports `ssimMetric`. _(Step A — #19.)_
-- [x] **Image golden corpus + measured floor re-tune** (build step B — #21) — a license-clean corpus (NASA public-domain "Blue Marble" photo + the author's own graphic + RGBA card) drives the real `slim` pipeline in a dedicated `test:integration` job with measured before/after + up-direction SSIM. The v0.1 floors (0.96 / 0.90 / 0.80) were **re-measured on standalone images and left unchanged** — each plan holds its floor and binds sensibly on the photo (`lowcarb` 0.982 ≥ 0.96, `balanced` 0.944, `keto` 0.814), bytes _and_ quality monotonic across plans. (Confirms the floors are enforced + behave sensibly; not a claim they're provably optimal.) Benchmark in the README + docs/06-IMAGES.
+- [x] **Image golden corpus + measured floor re-tune** (build step B — #21) — a license-clean corpus (NASA public-domain "Blue Marble" photo + the author's own graphic + RGBA card) drives the real `slim` pipeline in a dedicated `test:integration` job with measured before/after + up-direction SSIM. The v0.1 floors (0.96 / 0.90 / 0.80) were **re-measured on standalone images and left unchanged** — each plan holds its floor and binds sensibly on the photo (`lowcarb` 0.982 ≥ 0.96, `balanced` 0.944, `keto` 0.814), bytes _and_ quality monotonic across plans. (Confirms the floors are enforced + behave sensibly; not a claim they're provably optimal.) Benchmark in the README + docs/guide/images.md.
 - [x] **SVG** (`@onadiet/svg`, `svgo`) — the vector sub-phase (step C — #22). A separate pipeline (no raster,
       no SSIM, no downscale): plans map to svgo aggressiveness with float precision as the quality knob;
       `cleanse` is genuinely lossless (real cruft removal, unlike the raster no-op). CLI routes `.svg`
       alongside PDF/image. Measured on a golden corpus: `cleanse` 58% → `crash` 78%, monotonic, always valid
-      SVG. See [docs/06-IMAGES § SVG](./guide/images.md#svg--the-vector-sub-phase-step-c).
+      SVG. See [the images guide § SVG](./guide/images.md#svg--the-vector-sub-phase-step-c).
 
 ## v0.3 — folders & budgets
 
-**Design spec: [07-FOLDERS](./guide/folders.md)** (scope, pipeline, purity boundary, the flag family, the
+**Design spec: [the folders guide](./guide/folders.md)** (scope, pipeline, purity boundary, the flag family, the
 uniform-quality `--to-total` design, safety, manifest, corpus, build order). `diet ./folder` fans out over
 the shipped per-file adapters (pdf/image/svg) into a structure-preserved output tree. Decisions locked:
 `--to-total` realizes the **uniform-quality** budget as a **plan-sweep** (apply the gentlest plan whose
@@ -280,7 +280,7 @@ version machinery now runs. `changeset status` confirms the accumulated v0.4 cha
 
 Performance is a **product pillar** — onadiet is both a local CLI and an embeddable engine meant to run in
 **hot paths** (a server slimming an upload, an API compressing a generated PDF, a build crunching an asset
-dir). Design of record: **[08-PERFORMANCE](./guide/performance.md)** (two workloads, fan-out design,
+dir). Design of record: **[the performance guide](./guide/performance.md)** (two workloads, fan-out design,
 concurrency-safety, embedded ergonomics, benchmark-as-a-gate). Measured baseline (v0.3 folder engine): the
 orchestration layer is ~free; ~all cost is the per-file SSIM search (≈0.44 s / 700×500 JPEG), and folder mode
 runs **sequentially** today — so parallelism is the top bulk lever.
@@ -606,7 +606,7 @@ can't produce) and the full search is strictly smaller. Also: the core "nominal 
 **quality** dimension (a future ascending-ladder edit would silently pick the most aggressive point) → now
 asserts `Math.max(...quality)`; added the missing **floor-fail-under-fast keeps-original**, **recode-tier-skip**
 (a discriminating fast-vs-full pair), and **fast-ignored-when-a-target-is-set** core tests; the non-fast contrast
-now asserts the full 32-point grid, not `> 1`; a **stale `08-PERFORMANCE.md` summary line** still framed the fast
+now asserts the full 32-point grid, not `> 1`; a **stale summary line in the performance guide** still framed the fast
 path as "skip the search when there's no target _(next)_" (contradicting the shipped opt-in) → reworded; and the
 recode-tier limitation (fast forgoes the lossless→JPEG recode, so a Flate-stored PDF photo may honestly show no
 savings) is now documented in the CLI + perf specs. Hardening: the budget sweep's `requestFor` now strips `fast`
