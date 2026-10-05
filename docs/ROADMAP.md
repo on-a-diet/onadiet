@@ -100,11 +100,13 @@ review thread so they survive it.
   Same status, same one-time check.
 - **Staged publishing is not adopted.** The approval gate authorises a _run_, not an _artifact_ — a reviewer
   approves before the tarball exists, so the bytes that reach the registry are the one part of the release
-  nobody saw. npm's staged-publish flow would move the approval onto the packed tarball; Changesets has no
-  support for it today. Treated as owed work, not as done.
-- **`main` has no required-status-check rule.** PRs are required and force-pushes and deletions are blocked,
-  but CI skips pull requests that touch only `site/` or `assets/`, so a required check would never report
-  on them and they could not merge. CI has to report on every pull request before the rule can be enabled.
+  nobody saw. npm's staged-publish flow would move the approval onto the packed tarball, and Changesets 3 now
+  has the pieces: `changeset pack --out-dir` in an unprivileged job, then `changeset publish --from-pack-dir`
+  after approval (changesets/action v2 ships matching `pack` and `publish` steps). Not adopted yet — owed work,
+  not done.
+- **`main` has no required-status-check rule yet.** PRs are required and force-pushes and deletions are
+  blocked. CI now runs on every pull request (a skipped required check never reports, so site-only PRs could
+  not have merged), so the rule can be enabled once this change is on `main`.
 - **No clean-room install of the published tarballs.** The smoke test loads the built packages by name from
   the workspace, not from a packed tarball installed into an empty directory, so a broken `files` list or
   `exports` map could still ship.
@@ -384,8 +386,8 @@ promotes on round-up; CLI not-implemented → exit 2 (not 1); smoke `await` fix;
 
 - ~~_minor_ · CI actions on floating tags → pin to commit SHAs~~ **DONE** — pinned (Dependabot actions + 30-day cooldown keeps them current).
 - _minor_ · no TS-7 forward-compat `--noEmit` gate (`typescript-next` dual-compiler, as in babystack/cloud-roaring); code is checked on stable TS 6. → v0.1.
-- _minor_ · publish provenance (OIDC + `--provenance`) not wired. → v0.4 (first publish).
-- _minor_ · `minimumReleaseAge` is a no-op on pnpm 9.x — either bump to pnpm ≥10.16 or rely on the Dependabot cooldown (current choice). → revisit at a pnpm-10 bump.
+- _done_ · publish provenance: every `pnpm publish` in the release job carries `--provenance`, over OIDC.
+- _done_ · `minimumReleaseAge`: pnpm 12 enforces the 7-day cooldown from pnpm-workspace.yaml on every install.
 - _nit_ · pure-core ESLint `process` selector misses destructuring/`globalThis`; add a `@/` path alias if import depth grows; golden-corpus harness → v0.1.
 
 **v0.1 step-1 review (core seams + SizeSearch, 3 parallel lenses).** Fixed in-phase: infeasibility now

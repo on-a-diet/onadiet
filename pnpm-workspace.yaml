@@ -4,7 +4,7 @@ packages:
 # Single source of truth for shared tooling versions — every package.json references these as
 # "catalog:". Bump here once; pnpm applies it everywhere.
 #
-# TypeScript is deliberately HELD at ~6.0: typescript-eslint 8.64 peers `typescript >=4.8.4 <6.1.0`, so
+# TypeScript is deliberately HELD at ~6.0: typescript-eslint 8.70 peers `typescript >=4.8.4 <6.1.0`, so
 # TS 7 breaks the type-aware lint stack. Taking TS 7 needs a coordinated typescript-eslint major bump —
 # do that as its own change, not a routine dependency bump.
 catalog:
@@ -41,3 +41,7 @@ minimumReleaseAge: 10080
 # time for a job this repo does not need.
 allowBuilds:
   esbuild: false
+
+# `pnpm run` / `pnpm exec` must never install on their own: a manifest that drifted from the lockfile
+# fails loudly instead of being silently re-resolved (and the lockfile rewritten) inside a commit hook.
+verifyDepsBeforeRun: error

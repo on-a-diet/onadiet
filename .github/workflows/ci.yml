@@ -3,15 +3,15 @@ name: CI
 on:
   push:
     branches: [main]
-    # The public site (site/) and brand assets are static — they must never trigger the library's
-    # build/test/corpus pipeline. Changes touching ONLY these paths skip CI entirely (it's just a site).
+    # The public site (site/) and brand assets are static, so a push to main touching ONLY those paths skips
+    # the library's build/test/corpus pipeline — nothing waits on that run.
     paths-ignore:
       - 'site/**'
       - 'assets/**'
+  # Every pull request runs CI, even one that touches only site/ or assets/: a required status check that
+  # is skipped never reports, and a PR waiting on it can never merge. (Pushes to main still skip site-only
+  # changes — nothing waits on those.)
   pull_request:
-    paths-ignore:
-      - 'site/**'
-      - 'assets/**'
 
 # Actions are pinned to full commit SHAs (supply-chain hardening); the trailing "# vX" comment is the
 # human-readable version. Dependabot (github-actions, monthly) bumps both the SHA and the comment.
@@ -45,7 +45,7 @@ jobs:
       - run: pnpm run test
       - run: pnpm run build
       - run: pnpm run smoke
-      # Unit tests for the release gate itself (scripts/*.test.mjs). The root `test` script is
+      # Unit tests for the release gate itself (tests/scripts/*.test.mjs). The root `test` script is
       # `turbo run test`, which covers packages/ only — nothing under scripts/ is in it.
       - run: pnpm run test:release
       # The release setup is config that lives OUTSIDE this repo's diff — the `release` GitHub environment

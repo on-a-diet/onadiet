@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: monthly
     # Supply-chain cooldown — let new releases settle (30d) before we pick them up, which also batches a
-    # month's churn into one PR. (pnpm's minimumReleaseAge is a no-op on the pinned pnpm 9.x; see .npmrc.)
+    # month's churn into one PR. (pnpm separately enforces its own 7-day minimumReleaseAge on every install.)
     cooldown:
       default-days: 30
     open-pull-requests-limit: 1
