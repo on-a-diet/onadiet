@@ -120,8 +120,8 @@ times vary by machine, so the **ratios** are the point (reproduce them yourself;
 | `cleanse`              | ~instant | 0% — lossless no-op            |
 | `lowcarb`              | 1.4 s    | 24% smaller (keep format)      |
 | `balanced` _(default)_ | 2.2 s    | 55% smaller (keep format)      |
-| `keto`                 | 5.8 s    | 88% smaller (auto → WebP/AVIF) |
-| `crash`                | 4.0 s    | 98% smaller (auto → WebP/AVIF) |
+| `keto`                 | 5.8 s    | 91% smaller (auto → WebP/AVIF) |
+| `crash`                | 4.0 s    | 99% smaller (auto → WebP/AVIF) |
 
 The multi-format plans (`keto`, `crash`, `--format auto`) search their candidate formats **concurrently**, so
 they land **~1.6× faster** than a serial search (measured back-to-back: `keto` 9.0 s → 5.8 s) — same bytes

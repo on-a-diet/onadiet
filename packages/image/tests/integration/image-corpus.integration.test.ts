@@ -22,7 +22,7 @@
  * FLOOR RE-TUNE — what this proves, and what it doesn't: the provisional floors (lowcarb 0.96 · balanced
  * 0.90 · keto 0.80), first set on the v0.1 PDF corpus, were re-measured here on standalone images. Each plan
  * HOLDS its floor and BINDS SENSIBLY on the photo (up-direction SSIM lowcarb 0.982 · balanced 0.944 · keto
- * 0.814 — each just above its floor; both bytes AND quality monotonic across plans), so we found no reason to
+ * 0.803 — each just above its floor; both bytes AND quality monotonic across plans), so we found no reason to
  * change the thresholds. This validates the floors are *enforced* and *behave sensibly on real content* — it
  * does NOT claim the specific numbers are provably optimal (the machinery holds whatever floor it's handed).
  * The suite pins the invariants that must not regress; it does NOT pin exact byte counts (a future libvips
