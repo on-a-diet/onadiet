@@ -10,18 +10,18 @@ packages:
 catalog:
   typescript: ~6.0.3
   tsup: ^8.5.1
-  vite: ^8.3.0
-  vitest: ^5.0.1
-  '@types/node': ^22.20.2
-  eslint: ^10.10.0
+  vite: ^8.3.1
+  vitest: ^5.0.2
+  '@types/node': ^22.20.4
+  eslint: ^10.11.0
   '@eslint/js': ^10.0.1
-  typescript-eslint: ^8.70.0
-  prettier: ^3.9.6
-  dependency-cruiser: ^18.3.1
-  turbo: ^2.10.13
+  typescript-eslint: ^8.71.0
+  prettier: ^3.9.9
+  dependency-cruiser: ^18.4.0
+  turbo: ^2.11.5
   '@changesets/cli': ^3.0.3
   husky: ^9.1.7
-  lint-staged: ^17.5.1
+  lint-staged: ^17.6.0
 
 # @types/node follows the RUNTIME FLOOR (engines: >=22, .nvmrc 22), not the newest Node. It was on 26, which
 # type-checks calls to APIs that do not exist on Node 22 — code that compiles cleanly and then fails at
