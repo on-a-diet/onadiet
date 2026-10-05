@@ -122,14 +122,14 @@ Floor-limited minimum per plan; indicative — exact bytes shift with encoder ve
 
 | Image (original)              | mode | `lowcarb` (floor 0.96) | `balanced` (0.90)    | `keto` (0.80) †        |
 | ----------------------------- | ---- | ---------------------- | -------------------- | ---------------------- |
-| `earth-apollo17.jpg` (421 KB) | keep | 319 KB, SSIM 0.982     | 189 KB, 0.944        | 49 KB, 0.814 (→webp) † |
+| `earth-apollo17.jpg` (421 KB) | keep | 319 KB, SSIM 0.982     | 189 KB, 0.944        | 38 KB, 0.803 (→avif) † |
 | `illustration.png` (1.0 MB)   | keep | 534 KB, 0.988          | 210 KB, 0.983        | 4 KB, 0.975 (→avif) †  |
-| `illustration.png`            | auto | 25 KB, 0.986 (→webp)   | 8 KB, 0.982 (→avif)  | 4 KB, 0.975 (→avif)    |
-| `card.png` (141 KB)           | auto | 26 KB, 0.983 (→webp)   | 10 KB, 0.979 (→webp) | 5 KB, 0.969 (→avif)    |
+| `illustration.png`            | auto | 25 KB, 0.986 (→webp)   | 9 KB, 0.982 (→webp)  | 4 KB, 0.975 (→avif)    |
+| `card.png` (141 KB)           | auto | 26 KB, 0.983 (→webp)   | 10 KB, 0.979 (→webp) | 5 KB, 0.968 (→avif)    |
 
 † `keto` and `crash` enable the format switch implicitly, so they may change format even in `keep` mode — the `mode` column governs only the `lowcarb`/`balanced` cells.
 
-The photo is where the floors bind: `lowcarb` holds 0.982 (≥ 0.96) at ~24% smaller, `balanced` holds 0.944 (≥ 0.90) at ~55%, and `keto` holds 0.814 (just above its 0.80 floor) at ~88% — both bytes and quality stay monotonic across plans. On palette-friendly graphics, near-lossless quantization plus the WebP/AVIF switch dominate, so savings run to 95–99% while SSIM stays around 0.98.
+The photo is where the floors bind: `lowcarb` holds 0.982 (≥ 0.96) at ~24% smaller, `balanced` holds 0.944 (≥ 0.90) at ~55%, and `keto` holds 0.803 (just above its 0.80 floor) at ~91% — both bytes and quality stay monotonic across plans. On palette-friendly graphics, near-lossless quantization plus the WebP/AVIF switch dominate, so savings run to 95–99% while SSIM stays around 0.98.
 
 ## Honest caveats
 

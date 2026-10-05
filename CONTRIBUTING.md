@@ -19,7 +19,7 @@ Requires Node ≥ 22 (see `.nvmrc`) and `pnpm` (via Corepack).
 
 ```bash
 pnpm install
-pnpm run check   # lint · format:check · typecheck · test · build · smoke
+pnpm run check   # lint · format:check · typecheck · test · test:release · build · smoke · check:release
 ```
 
 ## The bar

@@ -13,7 +13,7 @@
  * **RE-MEASURED on standalone images (v0.2 step B).** The same table is shared with `@onadiet/image`, so it
  * was re-measured on a real photo + flat graphic + RGBA card. Each plan HOLDS its floor and BINDS SENSIBLY on
  * the photo (up-direction SSIM, i.e. counting downscale cost): `lowcarb` 0.982 (≥ 0.96) @ ~24% smaller,
- * `balanced` 0.944 (≥ 0.90) @ ~55%, `keto` 0.814 (just above 0.80) @ ~88% — bytes AND quality monotonic
+ * `balanced` 0.944 (≥ 0.90) @ ~55%, `keto` 0.803 (just above 0.80) @ ~91% — bytes AND quality monotonic
  * across plans. So there's no reason to move the thresholds. (This confirms the floors are *enforced* and
  * *behave sensibly on real content* — it does not claim the numbers are provably optimal.) The floor is
  * codec-agnostic, so the format-switch lever (WebP/AVIF) changes the *savings*, not the guaranteed quality.
