@@ -136,6 +136,11 @@ than an exact pin. That matters after a release rather than during one: when `co
 of `image`, `pdf` and `svg` pick it up automatically. An exact pin would force a republish of every adapter to
 ship a one-line fix to `core`, and would stop consumers deduplicating the family.
 
+The `onadiet` CLI is the exception. It bundles `core`, `image`, `pdf` and `svg` into itself at build time, so a
+caret range does nothing for CLI users: a fix in any of those four reaches people who install the CLI — from
+npm or Homebrew — only when the CLI itself is republished. **A changeset for such a fix must name `onadiet`
+too**, or the CLI keeps shipping the old code.
+
 ## One-time setup
 
 Already configured for this repo; documented here so the pipeline can be rebuilt or audited. **Every version
