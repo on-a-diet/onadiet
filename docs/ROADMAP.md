@@ -1,6 +1,6 @@
 # Roadmap
 
-> The build plan + living status log. **Keep this current after every meaningful change** (handbook rule).
+> The build plan + living status log. **Keep this current after every meaningful change.**
 
 ## Table of contents
 
