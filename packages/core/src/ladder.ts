@@ -17,7 +17,7 @@
  * across plans. So there's no reason to move the thresholds. (This confirms the floors are *enforced* and
  * *behave sensibly on real content* — it does not claim the numbers are provably optimal.) The floor is
  * codec-agnostic, so the format-switch lever (WebP/AVIF) changes the *savings*, not the guaranteed quality.
- * See [docs/06-IMAGES](../../../docs/06-IMAGES.md) and the image golden-corpus integration test.
+ * See docs/guide/images.md and the image golden-corpus integration test.
  */
 import { OnadietError } from './types'
 import type { DietPlan } from './types'

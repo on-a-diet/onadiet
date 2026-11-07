@@ -4,8 +4,9 @@
  * callback (which owns the classify + slim logic, so this stays adapter-agnostic + testable), and writes the
  * results into a mirrored output tree. Returns the pure {@link FolderManifest} for the reporter.
  *
- * Safety (see 07-FOLDERS): never follows symlinks, bounds depth + entry count, refuses any output path that
- * would escape the output root (Zip-Slip), writes each file atomically, and never touches the input tree.
+ * Safety (see docs/guide/folders.md): never follows symlinks, bounds depth + entry count, refuses any
+ * output path that would escape the output root (Zip-Slip), writes each file atomically, and never touches
+ * the input tree.
  */
 import { dirname, join } from 'node:path'
 import {

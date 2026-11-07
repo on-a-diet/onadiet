@@ -27,6 +27,11 @@ export default tseslint.config(
         exports: 'writable',
         __dirname: 'readonly',
         __filename: 'readonly',
+        // Node globals the hand-maintained list above predates: `fetch` landed in Node 18, and the
+        // timers are globals in every Node. scripts/check-release.mjs and scripts/verify-published.mjs
+        // use both to probe the GitHub and npm registry APIs.
+        fetch: 'readonly',
+        setTimeout: 'readonly',
       },
     },
     rules: {
@@ -45,7 +50,6 @@ export default tseslint.config(
         navigator: 'readonly',
         matchMedia: 'readonly',
         setTimeout: 'readonly',
-        clearTimeout: 'readonly',
         IntersectionObserver: 'readonly',
         // the live on-device demo (demo/demo.js) — Canvas re-encode + SSIM + the no-upload proof
         fetch: 'readonly',

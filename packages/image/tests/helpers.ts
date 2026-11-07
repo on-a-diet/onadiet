@@ -1,5 +1,5 @@
 /** Deterministic synthetic image fixtures (no disk, no randomness) for the image-adapter tests. */
-import sharp from 'sharp'
+import sharp, { type Sharp } from 'sharp'
 
 function u8(b: Buffer): Uint8Array {
   return new Uint8Array(b.buffer, b.byteOffset, b.byteLength)
@@ -36,11 +36,7 @@ function rawRaster(
   return { buf, channels }
 }
 
-function pipe(
-  width: number,
-  height: number,
-  opts: { alpha?: boolean; noise?: boolean },
-): sharp.Sharp {
+function pipe(width: number, height: number, opts: { alpha?: boolean; noise?: boolean }): Sharp {
   const { buf, channels } = rawRaster(width, height, opts)
   return sharp(buf, { raw: { width, height, channels } })
 }
